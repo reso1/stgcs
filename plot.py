@@ -70,8 +70,7 @@ def plot_stats():
                 soc_total, makespan_total, runtime_total = [], [], []
                 for seed in seeds:
                     sum_cost, max_cost = 0, 0
-                    for pi in raw_data[n_robots][seed][0]:
-                        cost = pi[-1][-1] - pi[0][2]
+                    for cost in raw_data[n_robots][seed][0]:
                         sum_cost += cost
                         max_cost = max(max_cost, cost)
                     
@@ -102,13 +101,13 @@ def plot_stats():
         # c1: map
         ax = axes[row, 0]
         if row == 0:
-            istc, name = ex.EMPTY2D, "empty"
+            env, name = ex.EMPTY2D, "empty"
         elif row == 1:
-            istc, name = ex.SIMPLE2D, "simple"
+            env, name = ex.SIMPLE2D, "simple"
         elif row == 2:
-            istc, name = ex.COMPLEX2D, "complex"
+            env, name = ex.COMPLEX2D, "complex"
 
-        istc.draw_static(ax, alpha=1.0, draw_CSpace=True)
+        env.draw_static(ax, alpha=1.0, draw_CSpace=True)
         ax.axis("off")
         ax.axis("equal")
         ax.set_title(f"{name}", fontsize=title_fontsize)
@@ -269,8 +268,7 @@ def plot_constrained_sampling():
                 soc_total, makespan_total, runtime_total = [], [], []
                 for seed in seeds:
                     sum_cost, max_cost = 0, 0
-                    for pi in raw_data[n_robots][seed][0]:
-                        cost = pi[-1][-1] - pi[0][2]
+                    for cost in raw_data[n_robots][seed][0]:
                         sum_cost += cost
                         max_cost = max(max_cost, cost)
                     
@@ -332,8 +330,8 @@ def plot_constrained_sampling():
         # y_labels = np.linspace(max(0, MIN), MAX, 4)
         # ax.set_yticks(y_labels)
         # ax.set_yticklabels([f"{_val:.1f}" for _val in y_labels], fontsize=axis_fontsize)
-        ax.set_yticks([3, 9, 30])
-        ax.set_yticklabels([3, 9, 30])
+        ax.set_yticks([4, 8, 16])
+        ax.set_yticklabels([4, 8, 16])
 
         # c4: sum of costs
         ax = axes[1]
@@ -347,8 +345,8 @@ def plot_constrained_sampling():
 
         # ax.set_yscale('log', base=2)
         # ax.yaxis.set_major_formatter(FormatStrFormatter('%.1f'))
-        ax.set_yticks([0, 33, 66, 99])
-        ax.set_yticks([0, 33, 66, 99])
+        ax.set_yticks([0, 20, 40, 60])
+        ax.set_yticks([0, 20, 40, 60])
         # ax.set_ylim(MIN - 0.1 * (MAX-MIN), MAX + 0.2 * (MAX-MIN))
         # y_labels = np.linspace(max(0, MIN), MAX, 4)
         # ax.set_yticks(y_labels)

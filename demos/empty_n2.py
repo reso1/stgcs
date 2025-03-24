@@ -17,21 +17,19 @@ except:
 
 
 if __name__ == "__main__":
-    env = ex.EMPTY2D
-    env.robot_radius = 0.05
+    env = ex.EMPTY2D_4DynamicSPHERE
     seed = 0
-    vlimit = 1.0
-    tf = 10
+    vlimit = 0.5
+    tf = 50
 
-    starts = [np.array([0.5, 0.05]), np.array([0.5, 0.95]), np.array([0.05, 0.5]), np.array([0.95, 0.5])]
-    goals = [np.array([0.5, 0.95]), np.array([0.5, 0.05]), np.array([0.95, 0.5]), np.array([0.05, 0.5])]
+    starts = [np.array([0.0, 0.0]), np.array([1.0, 1.0])]
+    goals = [np.array([1.0, 1.0]), np.array([0.0, 0.0])]
     T0s =  [0.0, 0.0, 0.0, 0.0]
     sets = [make_hpolytope(V) for V in env.C_Space]
     
     ts = time.perf_counter()
-    sol, _ = PBS(env, tf, vlimit, starts, goals, T0s, 150, scaler_multiplier=5)
-    # sol = SP_STRRTSTAR(env, tf, vlimit, starts, goals, T0s, seed=seed, timeout_secs=150, use_CSpace=True)
-    # sol = SP_TPRM(env, tf, vlimit, starts, goals, T0s, seed=seed, timeout_secs=150, use_CSpace=True, cost_edge_threshold=0.05)
+    # sol, _ = PBS(env, tf, vlimit, starts, goals, T0s, 150, scaler_multiplier=3)
+    sol = SP_STRRTSTAR(env, tf, vlimit, starts, goals, T0s, seed=seed, timeout_secs=150, use_CSpace=True)
     print("solution time", time.perf_counter() - ts)
     print("SoC", sum([p.cost for p in sol]), "makespan", max([p.itvl.end for p in sol]))
 

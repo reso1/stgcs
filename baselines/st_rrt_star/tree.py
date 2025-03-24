@@ -6,7 +6,7 @@ import numpy as np
 
 from enum import IntEnum
 
-from environment.instance import Instance
+from environment.env import Env
 from baselines.st_rrt_star.state import State, lerp, cost_func, distance, time_to_reach
 
 
@@ -113,19 +113,19 @@ class Tree:
                 x_nearest = (c, node)
         return x_nearest[1]
     
-    def extend(self, x:State, istc:Instance, epsilon:float, vlimit:float, lambda_nn:float, robot_radius:float) -> Tuple[GrowState, TreeNode|None]:
+    def extend(self, x:State, env:Env, epsilon:float, vlimit:float, lambda_nn:float) -> Tuple[GrowState, TreeNode|None]:
         node_near = self.nearest_neighbor(x, vlimit, lambda_nn)
         if node_near is None:
             return GrowState.TRAPPED, None
         
         x_near = node_near.state
         dist = distance(x_near, x, vlimit, is_start_tree = self._type == Tree.START_TREE)
-        if dist < epsilon and not istc.collision_checking_seg(x_near.pos, x.pos, x_near.time, x.time, robot_radius):
+        if dist < epsilon and not env.collision_checking_seg(x_near.pos, x.pos, x_near.time, x.time):
             node = self.add_node(x, parent=node_near, is_goal=False)
             return GrowState.REACHED, node
 
         x_new = lerp(x_near, x, epsilon / np.linalg.norm(x.pos - x_near.pos))
-        if istc.collision_checking_seg(x_near.pos, x_new.pos, x_near.time, x_new.time, robot_radius):
+        if env.collision_checking_seg(x_near.pos, x_new.pos, x_near.time, x_new.time):
             return GrowState.TRAPPED, None
         elif x_new in self._explored:
             return GrowState.REACHED, None
@@ -142,7 +142,7 @@ class Tree:
                 elif self._type == Tree.GOAL_TREE and not _parent.is_dummy:
                     assert _child.state.time < _parent.state.time
 
-    def rewire(self, node_new:TreeNode, istc:Instance, vlimit:float, robot_radius:float) -> int:
+    def rewire(self, node_new:TreeNode, env:Env, vlimit:float) -> int:
         # assert self._type == Tree.GOAL_TREE
         # check each node in the GOAL_TREE
         # rewire if node.time < node_new.time < node.parent.time (shortcutting node<-node.parent to node<-node_new)
@@ -150,7 +150,7 @@ class Tree:
         for node in self._nodes:
             if not node.parent.is_dummy and node.state.time < node_new.state.time < node.parent.state.time: 
                 t = time_to_reach(node_new.state, node.state, vlimit, is_start_tree = False)
-                if t != np.inf and not istc.collision_checking_seg(node_new.state.pos, node.state.pos, node_new.state.time, node.state.time, robot_radius):
+                if t != np.inf and not env.collision_checking_seg(node_new.state.pos, node.state.pos, node_new.state.time, node.state.time):
                     self._children[node.parent].remove(node)
                     self._children[node_new].append(node)
                     node.parent = node_new
@@ -158,21 +158,21 @@ class Tree:
 
         return rewire_count
 
-    def connect(self, x:State, Tother:Tree, vlimit:float, istc:Instance, epsilon:float, lambda_nn:float, robot_radius:float) -> Tuple[GrowState, List[State]]:
+    def connect(self, x:State, Tother:Tree, vlimit:float, env:Env, epsilon:float, lambda_nn:float) -> Tuple[GrowState, List[State]]:
         while True:
-            gs, node = self.extend(x, istc, epsilon, vlimit, lambda_nn, robot_radius)
+            gs, node = self.extend(x, env, epsilon, vlimit, lambda_nn)
             if gs != GrowState.ADVANCED:
                 return GrowState.TRAPPED, []
-            path = self.check_solution(node, Tother, vlimit, istc, lambda_nn, robot_radius)
+            path = self.check_solution(node, Tother, vlimit, env, lambda_nn)
             if path != []:
                 return GrowState.CONNECTED, path
     
-    def check_solution(self, node:TreeNode, Tother:Tree, vlimit:float, istc:Instance, lambda_nn:float, robot_radius:float) -> List[State]:
+    def check_solution(self, node:TreeNode, Tother:Tree, vlimit:float, env:Env, lambda_nn:float) -> List[State]:
         # check if node (in current tree) can be connected to the other tree
         node_near = Tother.nearest_neighbor(node.state, vlimit, lambda_nn)
         x_near = node_near.state
         t = time_to_reach(x_near, node.state, vlimit, is_start_tree = Tother._type == Tree.START_TREE)
-        if t != np.inf and not istc.collision_checking_seg(x_near.pos, node.state.pos, x_near.time, node.state.time, robot_radius):
+        if t != np.inf and not env.collision_checking_seg(x_near.pos, node.state.pos, x_near.time, node.state.time):
             pi_this = self.reconstruct_path(node)
             pi_other = Tother.reconstruct_path(node_near)
             return pi_this + pi_other if self._type == Tree.START_TREE else pi_other + pi_this

@@ -11,7 +11,7 @@ try:
     from mrmp.stgcs import STGCS
     from mrmp.utils import make_hpolytope
     from environment import examples as ex
-    from environment.instance import Instance, _animate_func_2d
+    from environment.env import Env, _animate_func_2d
 except:
     raise ImportError("You should run this script from the root directory")
 
@@ -29,8 +29,8 @@ S = [np.array([0.5, 0.2]), np.array([0.38, 0.25]), np.array([0.63, 0.3]), np.arr
      np.array([0.45, 0.55]), np.array([0.37, 0.7]), np.array([0.62, 0.75]), np.array([0.5, 0.8])]
 
 T0s =  np.zeros(8)
-istc = ex.EMPTY2D
-
+env = ex.EMPTY2D
+env.robot_radius = 0.05
 
 if __name__ == "__main__":
     vlimit = 0.2
@@ -40,9 +40,9 @@ if __name__ == "__main__":
     t0 = 0
     Pi_total = [list() for _ in range(8)]
     for starts, goals in [(I, R), (R, O), (O, S)]:
-        sets = [make_hpolytope(V) for V in istc.C_Space]
+        sets = [make_hpolytope(V) for V in env.C_Space]
         ts = time.perf_counter()
-        sol, _ = PBS(istc, tf, vlimit, robot_radius, starts, goals, T0s, 150, scaler_multiplier=5)
+        sol, _ = PBS(env, tf, vlimit, starts, goals, T0s, 150, scaler_multiplier=5)
         
         T = np.linspace(0, max([p.cost for p in sol]), 100)
         Pi = []
@@ -62,7 +62,7 @@ if __name__ == "__main__":
     ax.set_aspect('equal')
     
     dt = 0.02
-    anim = _animate_func_2d(ax, istc.lb, istc.ub, Pi, dt=dt)
+    anim = _animate_func_2d(ax, env.robot_radius, env.lb, env.ub, Pi, dt=dt)
     anim.save(f"rearange.mp4", writer='ffmpeg', fps=1/dt, dpi=1000)
     plt.show()
 

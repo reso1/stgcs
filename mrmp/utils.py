@@ -46,6 +46,10 @@ def timeit(func):
 """ convex set operations """
 
 def make_hpolytope(V) -> HPolyhedron:
+    dim = V.shape[-1]
+    if dim == 1:
+        return HPolyhedron.MakeBox([V[0]], [V[1]])
+
     ch = ConvexHull(V)
     return HPolyhedron(ch.equations[:, :-1], -ch.equations[:, -1])
 
@@ -55,23 +59,6 @@ def time_extruded(hpoly:HPolyhedron, t0:float, tf:float) -> HPolyhedron|None:
         return hpoly.CartesianProduct(HPolyhedron.MakeBox([t0], [tf]))
     
     return None
-
-
-def crop_time_extruded(
-    hpoly:HPolyhedron, t_low:float=-np.inf, t_high:float=np.inf
-) -> HPolyhedron|None:
-    if t_low >= t_high:
-        return None
-
-    if t_low == -np.inf and t_high == np.inf:
-        return hpoly
-    
-    cropping_halfspace = HPolyhedron(
-        A = np.block([np.zeros((hpoly.ambient_dimension()-1, 2)), np.array([[-1], [1]])]),
-        b = np.array([[-t_low], [t_high]])
-    )
-    
-    return hpoly.Intersection(cropping_halfspace)
 
 
 def get_hpoly_bounds(
@@ -159,9 +146,19 @@ def find_space_time_intersecting_pts(
     return lb, ub
 
 
-def is_lineseg_colliding(hpoly:HPolyhedron, xp:np.ndarray, xq:np.ndarray) -> bool:
+def is_lineseg_colliding(hpoly:HPolyhedron, xp:np.ndarray, xq:np.ndarray, robot_radius:float) -> bool:
     prog = MathematicalProgram()
     dim = hpoly.ambient_dimension()
+    assert dim == 2
+    if np.allclose(xp, xq):
+        for bounding_v in [[xp[0] - robot_radius, xp[1] - robot_radius],
+                           [xp[0] + robot_radius, xp[1] - robot_radius],
+                           [xp[0] + robot_radius, xp[1] + robot_radius],
+                           [xp[0] - robot_radius, xp[1] + robot_radius]]:
+            if hpoly.PointInSet(bounding_v):
+                return True
+        return False
+
     t = prog.NewContinuousVariables(1, "t")
     # x(t) = (1-t)\cdot xp + t\cdot xq 
     # t \in [0, 1]
@@ -172,16 +169,27 @@ def is_lineseg_colliding(hpoly:HPolyhedron, xp:np.ndarray, xq:np.ndarray) -> boo
         vars = t
     )
    
-    # x(t) must be in the hpoly
-    prog.AddLinearConstraint(
-        A = hpoly.A() @ (xq - xp),
-        lb = -np.inf * np.ones_like(hpoly.b()),
-        ub = hpoly.b() - hpoly.A() @ xp,
-        vars = t
-    )
+    dx = xq - xp
+    dir = dx / np.linalg.norm(dx)
+    for normal in [[-dx[1], dx[0]], [dx[1], -dx[0]]]:
+        normal = np.array(normal) / np.linalg.norm(normal)
+        _xp = (xp - robot_radius * dir) + robot_radius * normal
+        _xq = (xq + robot_radius * dir) + robot_radius * normal
+        # x(t) must be in the hpoly
+        cstr = prog.AddLinearConstraint(
+            A = hpoly.A() @ (_xq - _xp),
+            lb = -np.inf * np.ones_like(hpoly.b()),
+            ub = hpoly.b() - hpoly.A() @ _xp,
+            vars = t
+        )
+        
+        res = solver.Solve(prog, solver_options=solver_options)
+        if res.is_success():
+            return True
+        
+        prog.RemoveConstraint(cstr)
     
-    res = solver.Solve(prog, solver_options=solver_options)
-    return res.is_success() 
+    return False
 
 
 def is_hpoly_pos_fixed(hpoly:HPolyhedron, dim:int) -> bool:
@@ -214,29 +222,29 @@ def squash_multi_points(hpoly:HPolyhedron, dim:int) -> HPolyhedron:
 
 """ visualization """
 
-def draw_2d_space_set(obj:np.ndarray|HPolyhedron, ax:Axes, color='k', marker='o', linestyle='-', label=False) -> None:
+def draw_2d_set(obj:np.ndarray|HPolyhedron, ax:Axes, color='k', marker='o', linestyle='-', alpha:float=0.3, label=False) -> None:
     if isinstance(obj, HPolyhedron):
         obj = VPolytope(obj).vertices().T
 
     assert obj.shape[-1] == 2, "2D sets are supported"
     
-    for idx, v in enumerate(obj):
-        ax.plot(v[0], v[1], f'{color}{marker}')
-        if label:
+    if label:
+        for idx, v in enumerate(obj):
+            ax.plot(v[0], v[1], f'{color}{marker}')
             ax.text(v[0], v[1], str(idx))
 
     if collinear(obj):
         min_x, min_y = np.min(obj, axis=0)
         max_x, max_y = np.max(obj, axis=0)
-        plt.plot([min_x, max_x], [min_y, max_y], 'r-', label='Line')
-        ax.plot(obj[:, 0], obj[:, 1], f'{linestyle}{color}')
+        plt.plot([min_x, max_x], [min_y, max_y], 'r-', alpha=alpha)
+        ax.plot(obj[:, 0], obj[:, 1], f'{linestyle}{color}', alpha=alpha)
     else:
         hull = ConvexHull(obj)
-        for simplex in hull.simplices:
-            ax.plot(obj[simplex, 0], obj[simplex, 1], f'{linestyle}{color}')
+        verts = obj[hull.vertices]
+        ax.fill(verts[:, 0], verts[:, 1], f'{color}', ec='k', alpha=alpha)
             
 
-def draw_3d_space_time_set(obj:np.ndarray|HPolyhedron, ax:Axes3D, 
+def draw_3d_set(obj:np.ndarray|HPolyhedron, ax:Axes3D, 
     alpha:float=0.5, fc='lightgray', ec='k', time_scaler:float=1.0) -> None:
     if isinstance(obj, HPolyhedron):
         obj = VPolytope(obj).vertices().T
@@ -259,8 +267,8 @@ def draw_3d_space_time_set(obj:np.ndarray|HPolyhedron, ax:Axes3D,
         
         ax.add_collection3d(hull_surface)
 
-        for simplex in hull.simplices:
-            ax.plot(obj[simplex, 0], obj[simplex, 1], obj[simplex, 2], 'k--', alpha=alpha)
+        # for simplex in hull.simplices:
+        #     ax.plot(obj[simplex, 0], obj[simplex, 1], obj[simplex, 2], 'k--', alpha=alpha)
     except:
         vertices = [order_points(obj)]
         plane = Poly3DCollection(vertices, alpha=0.5)
@@ -282,7 +290,7 @@ def draw_cuboid(ax:Axes3D, xp:np.ndarray, xq:np.ndarray, halfsize:float=0.05, co
     
     # draw cuboid
     cuboid = np.array(p_facet_verts + q_facet_verts)
-    draw_3d_space_time_set(cuboid, ax, alpha=alpha, fc=color)
+    draw_3d_set(cuboid, ax, alpha=alpha, fc=color)
 
     # draw xp --- xq
     vec = xq - xp
@@ -366,3 +374,10 @@ def anim_rotating_camera(stgcs, sol, name="video") -> None:
     # fp = os.path.join(os.getcwd(), f'{name}.mp4')
     # anim.save(fp, writer=FFwriter, dpi=200,
     #             progress_callback=lambda i, n: print(f'saving frame {i}/{n}'))
+
+
+def draw_parallelpiped(ax:Axes, xp:np.ndarray, xq:np.ndarray, halfsize:float):
+    P = np.array([[xp[0] - halfsize, xp[1]], [xp[0] + halfsize, xp[1]],
+                  [xq[0] + halfsize, xq[1]], [xq[0] - halfsize, xq[1]]])
+    
+    ax.fill(P[:, 0], P[:,1], color='k', alpha=0.5)

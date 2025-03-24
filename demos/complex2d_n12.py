@@ -15,23 +15,22 @@ except:
 
 
 if __name__ == "__main__":
-    istc = ex.COMPLEX2D
+    env = ex.COMPLEX2D
     seed = 0
     vlimit = 1
     tf = 30
     num_agents = 12
-    robot_radius = 0.1
 
-    starts, goals, T0s = zip(*random_objectives(istc, seed, num_agents))
-    sets = [make_hpolytope(V) for V in istc.C_Space]
+    starts, goals, T0s = zip(*random_objectives(env, seed, num_agents))
+    sets = [make_hpolytope(V) for V in env.C_Space]
     
     ts = time.perf_counter()
-    sol_pbs_stgcs, _ = PBS(istc, tf, vlimit, robot_radius, starts, goals, T0s, 150, scaler_multiplier=3)
+    sol_pbs_stgcs, _ = PBS(env, tf, vlimit, starts, goals, T0s, 150, scaler_multiplier=3)
     print("STGCS solution time", time.perf_counter() - ts)
     print("SoC", sum([p.cost for p in sol_pbs_stgcs]), "makespan", max([p.itvl.end for p in sol_pbs_stgcs]))
 
 
     fig, ax = plt.subplots()
-    istc.animate_2d(ax, sol_pbs_stgcs, save_anim=True)
+    env.animate_2d(ax, sol_pbs_stgcs, draw_CSpace=True, save_anim=True)
     # plt.show()
 

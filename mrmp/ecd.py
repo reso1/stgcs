@@ -6,85 +6,91 @@ from dataclasses import dataclass
 
 from copy import deepcopy
 import numpy as np
+import matplotlib.pyplot as plt
 import networkx as nx
 
 from pydrake.all import HPolyhedron
 
 from mrmp.stgcs import STGCS
 from mrmp.graph import ShortestPathSolution, Edge, Graph, Vertex
-from mrmp.interval import Interval
+from mrmp.interval import Interval, AABB
 from mrmp.utils import (
-    timeit, crop_time_extruded, get_hpoly_bounds, squash_multi_points, find_space_time_intersecting_pts,
-    draw_2d_space_set, draw_3d_space_time_set, draw_cuboid
+    timeit, get_hpoly_bounds, squash_multi_points, find_space_time_intersecting_pts,
+    draw_2d_set, draw_3d_set, draw_cuboid, draw_parallelpiped,
 )
-
-
-""" reserve a shortest path solution class in STGCS, from which the solution is produced 
-    (use it for prioritized planning) """
 
 
 @dataclass
 class ECDPair:
-    v_name: str
-    xp: np.ndarray
-    xq: np.ndarray
-    reserve_xp_to_tmin: bool
-    reserve_xq_to_tmax: bool
+    bottom_halfspace: HPolyhedron
+    top_halfspace: HPolyhedron
+    mid_halfspaces: List[HPolyhedron]
+    bounds: List[Interval]
 
 
-# @timeit
 def reserve(
-    stgcs:STGCS, ecd_pairs:List[ECDPair], safe_radius:float, t_padding=1e-3,
+    stgcs:STGCS, trajectory:List[np.ndarray], safe_radius:float, 
+    x0_staying:bool=True, xt_staying:bool=True, debug:bool=False
 ) -> STGCS:
-    """ reserve a shortest path solution class in STGCS, from which the solution is produced """
     new = stgcs.copy()
     adj_graph = nx.Graph()
     for u, V in stgcs.G._adjacency_list.items():
         adj_graph.add_edges_from([(u, v) for v in V])
-
-    ##### DEBUG Code #####
-    # import matplotlib.pyplot as plt
-    # c = ['r', 'c', 'b', 'y', 'g', 'm', 'k']
-    # ax = plt.gca()
-    # fig = plt.figure()
-    # ax = fig.add_subplot(111, projection='3d')
-    ######################
     
-    split_map = defaultdict(list)
-    vertex_path = set([p.v_name for p in ecd_pairs])
-    split_map.update({v:[v] for v in stgcs.G.vertex_names if v not in vertex_path})
-    
-    for item in ecd_pairs:
-        v_name, xp, xq = item.v_name, item.xp, item.xq
-        v = new.remove_vertex(v_name) # remove old vertex
+    split_list = defaultdict(list)
+    tmin = stgcs.t0 if x0_staying else None
+    tmax = stgcs.tmax if xt_staying else None
+    for ecd_pair in generate_all_ECD_pairs(stgcs, trajectory, safe_radius, tmin, tmax):
+        for v_name in stgcs.G.vertex_names:
+            v = stgcs.G.vertices[v_name]
+            v_bounds = v.space_bounds + [v.itvl]
+            if AABB(ecd_pair.bounds, v_bounds):
+                split_list[v_name].append(ecd_pair)
 
-        ##### DEBUG Code #####
-        # draw_cuboid(ax, xp, xq, safe_radius * 0.6)
-        # idx = 0
-        ######################
-
-        res = reserve_cuboid_2d(
-            v, xp, xq, safe_radius, 
-            rsv_to_t0 = item.reserve_xp_to_tmin, 
-            rsv_to_tf = item.reserve_xq_to_tmax,
-            t_padding = t_padding
-        )
-        
-        # add new vertices
-        for hpoly, itvl in res:
-            new_v = new.add_vertex(hpoly, itvl)
-            split_map[v_name].append(new_v.name)
-            
-            ##### DEBUG Code #####
-            # draw_3d_space_time_set(hpoly, ax, fc=c[idx%len(c)])
-            # ax.axis('off')
-            # ax.set_aspect('equal')
-            # idx += 1
-            ######################
+    split_map = {v_name:set([v_name]) for v_name in stgcs.G.vertex_names}
+    for v_name, ecd_pairs in split_list.items():
+        v = new.remove_vertex(v_name)
+        hpoly = squash_multi_points(v.convex_set.set, dim=stgcs.dim)
+        for res in slice(hpoly, ecd_pairs, v.itvl.start, v.itvl.end):
+            new_v = new.try_add_vertex(*res)
+            if new_v is not None:
+                split_map[v_name].add(new_v.name)
     
-    """ updating edges """
+    new = update_edge(new, adj_graph, split_map)
+
+    if debug:
+        if stgcs.dim == 2:
+            fig, ax = plt.subplots(1, 2)
+            ax[0].axis("equal")
+            stgcs.draw(ax[0])
+            ax[1].axis("equal")
+            for x in trajectory:
+                xp, xq = x[:2], x[2:]
+                ax[0].plot([xp[0], xq[0]], [xp[1], xq[1]], "-.k")
+                draw_parallelpiped(ax[1], xp, xq, 0.8 * safe_radius)
+            new.draw(ax[1], edges=True)
+        elif stgcs.dim == 3:
+            fig = plt.figure()
+            ax = fig.add_subplot(111, projection='3d')
+            ax.axis("equal")
+            stgcs.draw(ax)
+            ax.axis("off")
+            for x in trajectory:
+                xp, xq = x[:3], x[3:]
+                draw_cuboid(ax, xp, xq, 0.9 * safe_radius)
+            new.draw(ax, edges=False)
+
+        plt.show()
+    
+    return new
+
+
+def update_edge(
+    stgcs:STGCS, adj_graph:nx.DiGraph, split_map:Dict[str, List[str]]
+) -> STGCS:
+    """ update the edge between u and v in STGCS """
     edge_key = lambda u_name, v_name: (u_name, v_name) if u_name < v_name else (v_name, u_name)
-    edge_checked = set([edge_key(e.u, e.v) for e in new.G.edges.values()])
+    edge_checked = set([edge_key(e.u, e.v) for e in stgcs.G.edges.values()])
 
     # build new edges between previously neighboring vertices
     for old_u, old_v in adj_graph.edges:
@@ -92,7 +98,7 @@ def reserve(
             key = edge_key(u_name, v_name)
             if key not in edge_checked:
                 edge_checked.add(key)
-                new.try_build_edge(u_name, v_name)
+                stgcs.try_build_edge(u_name, v_name)
 
     # build edges within the split map
     for v_name, new_verts in split_map.items():
@@ -100,87 +106,150 @@ def reserve(
             key = edge_key(u_name, v_name)
             if key not in edge_checked:
                 edge_checked.add(key)
-                new.try_build_edge(u_name, v_name)
-
-    # print(f"\nCreated |V|={new.G.n_vertices}, |E|={new.G.n_edges}")
-
-    return new
-
-
-def reserve_solution(
-    stgcs:STGCS, sol:ShortestPathSolution, safe_radius:float, t_padding=1e-3
-) -> STGCS:
-    ecd_pairs = []
-    for i, v_name in enumerate(sol.vertex_path):
-        xp, xq = sol.trajectory[i][:3], sol.trajectory[i][-3:]
-        rsv_to_t0 = i == 0
-        rsv_to_tf = i == len(sol.vertex_path) - 1
-        ecd_pairs.append(ECDPair(v_name, xp, xq, rsv_to_t0, rsv_to_tf))
-
-    return reserve(stgcs, ecd_pairs, safe_radius, t_padding)
-
-""" core functions """
-
-
-def reserve_cuboid_2d(
-    v:Vertex, xp:np.ndarray, xq:np.ndarray, halfsize:float, t_padding,
-    rsv_to_t0=False, rsv_to_tf=False
-) -> List[Tuple[HPolyhedron, Interval]]:
+                stgcs.try_build_edge(u_name, v_name)
     
-    ret: List[Tuple[HPolyhedron, Interval]] = []
-    
-    # project vertex set from (dim * num_pts) to dim
-    hpoly = squash_multi_points(v.convex_set.set, dim=xp.shape[-1])
-    t0, tf = v.itvl.start, v.itvl.end
-    tp, tq = xp[-1], xq[-1]
+    return stgcs
 
-    top = crop_time_extruded(hpoly, t0, tp)
-    if rsv_to_t0:
-        _x0 = np.hstack([xp[:-1], [t0]])
-        top_sliced = slice_cuboid_2d(top, _x0, xp, halfsize)
-        ret.extend(top_sliced)
-    elif t_padding:
-        _x0 = np.hstack([xp[:-1], [tp - t_padding]])
-        top_sliced = slice_cuboid_2d(top, _x0, xp, halfsize)
-        ret.extend(top_sliced)
-    elif top is not None and not top.IsEmpty():
-        ret.append((top, Interval(t0, tp)))
-        
-    bot = crop_time_extruded(hpoly, tq, tf)
-    if rsv_to_tf:
-        _xt = np.hstack([xq[:-1], [tf]])
-        bot_sliced = slice_cuboid_2d(bot, xq, _xt, halfsize)
-        ret.extend(bot_sliced)
-    elif t_padding:
-        _xt = np.hstack([xq[:-1], [tq + t_padding]])
-        bot_sliced = slice_cuboid_2d(bot, xq, _xt, halfsize)
-        ret.extend(bot_sliced)
-    elif bot is not None and not bot.IsEmpty():
-        ret.append((bot, Interval(tq, tf)))
+
+def generate_all_ECD_pairs(
+    stgcs:STGCS, trajectory:List[np.ndarray], safe_radius:float, 
+    staying_tmin:float=None, staying_tmax:float=None
+) -> List[ECDPair]:
+    ret: List[ECDPair] = []
     
-    mid = crop_time_extruded(hpoly, tp, tq)
-    ret.extend(slice_cuboid_2d(mid, xp, xq, halfsize))
+    dim = stgcs.dim
+    if dim == 2:
+        halfspace_func = parallelepiped_side_halfspace_1d
+    elif dim == 3:
+        halfspace_func = parallelepiped_side_halfspace_2d
+    else:
+        raise ValueError(f"Unsupported dimension {dim}")
     
+    # add start/end staying trajectory points if necessary
+    if staying_tmin is not None and trajectory[0][dim-1] != staying_tmin:
+        x0t0 = np.hstack([trajectory[0][:dim-1], [staying_tmin], trajectory[0][:dim]]) 
+        trajectory.insert(0, x0t0)
+    
+    if staying_tmax is not None and trajectory[-1][-1] != staying_tmax:
+        xttf = np.hstack([trajectory[-1][-dim:], trajectory[-1][-dim:-1], [staying_tmax]])
+        trajectory.append(xttf)
+    
+    # merge pieces with the same direction
+    i = 0
+    while i < len(trajectory) - 1:
+        dx = trajectory[i][dim:] - trajectory[i][:dim]
+        dx_next = trajectory[i+1][dim:] - trajectory[i+1][:dim]
+        if np.allclose(dx/np.linalg.norm(dx), dx_next/np.linalg.norm(dx_next)):
+            trajectory[i][dim:] = trajectory[i+1][dim:]
+            trajectory.pop(i+1)
+        else:
+            i += 1
+
+    for comp_x in trajectory: 
+        xp, xq = comp_x[:dim], comp_x[-dim:]
+        bounds = []
+        for d in range(dim-1):
+            left, right = (xp[d], xq[d]) if xp[d] < xq[d] else (xq[d], xp[d])
+            bounds.append(Interval(left - safe_radius, right + safe_radius))
+        bounds.append(Interval(xp[-1], xq[-1]))
+        bot_hs, top_hs = time_cropping_bot_top(dim, xp[-1], xq[-1])
+        mid_hs_list = halfspace_func(xp, xq, safe_radius)
+        ret.append(ECDPair(bot_hs, top_hs, mid_hs_list, bounds))
     return ret
 
 
-def slice_cuboid_2d(hpoly:HPolyhedron|None, xp:np.ndarray, xq:np.ndarray, halfsize:float) -> List[HPolyhedron]:
+def slice(hpoly:HPolyhedron|None, ecd_pairs:List[ECDPair], tlow:float, thigh:float) -> List[HPolyhedron]:    
+    # note: the ecd_pairs must be collected from a continuous piece-wise linear trajectory 
+    #       otherwise the slicing would be incorrect 
+    
     ret = []
-    for out_halfspace, in_halfspace in cuboid_side_halfspace_kd(xp, xq, halfsize):
-        if hpoly is None or hpoly.IsEmpty():
-            break
+    bot = ecd_pairs[0].bottom_halfspace.Intersection(hpoly)
+    if bot is not None and not bot.IsEmpty():
+        ret.append((bot, Interval(tlow, ecd_pairs[0].bounds[-1].start)))
+    top = ecd_pairs[-1].top_halfspace.Intersection(hpoly)
+    if top is not None and not top.IsEmpty():
+        ret.append((top, Interval(ecd_pairs[-1].bounds[-1].end, thigh)))
 
-        region = hpoly.Intersection(out_halfspace)
-        if not region.IsEmpty():
-            hpoly = hpoly.Intersection(in_halfspace)
-            itvl = Interval(*get_hpoly_bounds(region, dim=-1))
-            ret.append((region, itvl))
-    
+    # merge pairs if they have the same direction
+    sorted_pairs = sorted(ecd_pairs, key=lambda x: x.bounds[-1].start)
+
+
+    for ecd_pair in sorted_pairs:
+        mid_tlow, mid_thigh = ecd_pair.bounds[-1].start, ecd_pair.bounds[-1].end
+        mid = time_cropping_mid(hpoly, mid_tlow, mid_thigh)
+        
+        for out_halfspace in ecd_pair.mid_halfspaces:
+            if mid is None or mid.IsEmpty():
+                break
+
+            in_halfspace = HPolyhedron(-out_halfspace.A(), -out_halfspace.b())
+            new_set = mid.Intersection(out_halfspace)
+            if not new_set.IsEmpty():
+                mid = mid.Intersection(in_halfspace)
+                itvl = Interval(*get_hpoly_bounds(new_set, dim=-1))
+                ret.append((new_set, itvl))
+
+    if len(ret) == 1:
+        # TODO: do not slice if the set is not split
+        pass
+
     return ret
 
 
-def cuboid_side_halfspace_kd(
-    xp:np.ndarray, xq:np.ndarray, halfsize:float
+def time_cropping_bot_top(dim:int, t_low:float, t_high:float) -> List[HPolyhedron]:
+    # [0, 0, 1] @ [x, y, t] <= t_low ----> t <= t_low
+    bottom = HPolyhedron(
+        A = np.hstack([np.zeros(dim-1), 1]).reshape(1, -1),
+        b = np.array([[t_low]])
+    )
+
+    # [0, 0, -1] @ [x, y, t] <= -t_high ----> t >= t_high
+    top = HPolyhedron(
+        A = np.hstack([np.zeros(dim-1), -1]).reshape(1, -1),
+        b = np.array([[-t_high]])
+    )
+
+    return [bottom, top]
+
+
+def time_cropping_mid(hpoly:HPolyhedron, t_low:float, t_high:float) -> HPolyhedron|None:
+    if t_low >= t_high:
+        return None
+
+    if t_low == -np.inf and t_high == np.inf:
+        return hpoly
+    
+    cropping_halfspace = HPolyhedron(
+        A = np.block([np.zeros((2, hpoly.ambient_dimension()-1)), np.array([[-1], [1]])]),
+        b = np.array([[-t_low], [t_high]])
+    )
+    
+    return hpoly.Intersection(cropping_halfspace)
+
+
+def parallelepiped_side_halfspace_1d(
+    xp:np.ndarray, xq:np.ndarray, halfsize:float,
+) -> List[Tuple[HPolyhedron, HPolyhedron]]:
+    p_line = np.array([[xp[0] - halfsize, xp[1]], [xp[0] + halfsize, xp[1]]])
+    q_line = np.array([[xq[0] - halfsize, xq[1]], [xq[0] + halfsize, xq[1]]])
+
+    center = (xp + xq) / 2
+    halfspaces = []
+    for p1, p2 in zip(p_line, q_line):
+        vec = p2 - p1
+        normal = np.hstack([vec[1], -vec[0]]).reshape(1, -1)
+        c = -np.dot(normal, p1)
+        A, b = normal, np.array([-c])
+        if np.dot(center, A[0]) + c > 0:
+            halfspaces.append(HPolyhedron(A, b))
+        else:
+            halfspaces.append(HPolyhedron(-A, -b))
+    
+    return halfspaces
+
+
+def parallelepiped_side_halfspace_2d(
+    xp:np.ndarray, xq:np.ndarray, halfsize:float,
 ) -> List[Tuple[HPolyhedron, HPolyhedron]]:
     p_facet_verts = np.array(                                       # 3 -- e2 -- 2                      
                     [[xp[0] - halfsize, xp[1] - halfsize, xp[2]],   # |          |
@@ -207,87 +276,9 @@ def cuboid_side_halfspace_kd(
         # if A·center > b then the halfspace without center is A·x <= b - eps; otherwise -A·x <= -(b - eps)
         A, b = np.array([[a, b, c]]), np.array([[-d]])
         if np.dot(center, A[0]) + d > 0:
-            halfspaces.append((HPolyhedron(A, b), HPolyhedron(-A, -b)))
+            halfspaces.append(HPolyhedron(A, b))
         else:
-            halfspaces.append((HPolyhedron(-A, -b), HPolyhedron(A, b)))
+            halfspaces.append(HPolyhedron(-A, -b))
     
     return halfspaces
 
-
-""" reserve any piecewise linear trajectory in STGCS, where the trajectory is not necessarily resulte
-    (use it for PBS) """
-
-
-def reconstruct_ECD_pairs(stgcs:STGCS, trajectory:List[np.ndarray]) -> List[ECDPair]:
-    """ reconstruct a dictionary of v -> (xp, xq) segment pairs, assuming: 
-        - each set contains at most one segment; 
-        - while the segment is not necessarily completely contained in any set """
-    dim = 3
-    OPEN = [(wp[:3], wp[-3:]) for wp in trajectory]
-    ecd_pairs = []
-    V = set(stgcs.G.vertex_names)
-    x0, xt = trajectory[0][:3], trajectory[-1][-3:]
-    
-    while OPEN:
-        xp, xq = OPEN.pop()
-        itvl = Interval(xp[-1], xq[-1])
-        # print(f"Checking {xp} -> {xq} with time interval {itvl}")
-        for v_name in V:
-            v = stgcs.G.vertices[v_name]
-            if itvl.intersects(v.itvl): # only check vertices with overlapping time intervals
-                hpoly = squash_multi_points(v.convex_set.set, dim=dim)
-                itsc = find_space_time_intersecting_pts(hpoly, xp, xq, dim)
-                if itsc is not None and not np.allclose(itsc[0], itsc[1]):
-                    V.remove(v_name)
-                    ecd_pairs.append(ECDPair(
-                        v.name, itsc[0], itsc[1],
-                        reserve_xp_to_tmin = np.allclose(itsc[0], x0),
-                        reserve_xq_to_tmax = np.allclose(itsc[1], xt)
-                    ))
-                    if not np.allclose(xp, itsc[0]):
-                        OPEN.append((xp, itsc[0]))
-                    if not np.allclose(itsc[1], xq):
-                        OPEN.append((itsc[1], xq))
-                    break
-    
-    return ecd_pairs
-
-
-def reconstruct_SSP(
-    stgcs:STGCS, xp:np.ndarray, xq:np.ndarray, set_p_name:str, set_q_name:str
-) -> Tuple[List[str], List[np.ndarray]]:
-        """ reconstruct the vertex_path and trajectory in GCS sets,
-            assuming each line segment is contained completely in one or multiple sets """
-        
-        if set_p_name == set_q_name:
-            return [set_q_name], [np.hstack([xp, xq])]
-        
-        found = False
-        vertex_path, trajectory, visited = [], [], set()
-        dim = len(xp)
-        stack, visited = [(set_p_name, xp)], set()
-        while stack:
-            vc, xc = stack.pop()
-            visited.add(vc)
-            
-            itsc = find_space_time_intersecting_pts(
-                hpoly = squash_multi_points(stgcs.G.vertices[vc].convex_set.set, dim),
-                xp = xc, xq = xq, dim = dim
-            )
-            if itsc is not None:
-                stack = [] # empty the stack since we have stepped forward
-                vertex_path.append(vc)
-                trajectory.append(np.hstack([itsc[0], itsc[1]]))
-                
-                if stgcs.G.is_neighbor(vc, set_q_name):
-                    found = True
-                    vertex_path.append(set_q_name)
-                    trajectory.append(np.hstack([itsc[1], xq]))
-                    break
-
-                for vn in stgcs.G.successors(vc):
-                    if vn not in visited:
-                        stack.append((vn, itsc[1]))
-        
-        # assert found, "Failed to find a path from set_p to set_q"
-        return vertex_path, trajectory

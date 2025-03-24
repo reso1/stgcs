@@ -26,17 +26,17 @@ def exp_PBS_STGCS(ps: Dict[int, List[MRMP]]) -> None:
     for num_agents, problems in ps.items():
         for seed, p in enumerate(problems):
             ts = time.perf_counter()
-            solution, _ = PBS(p.istc, p.tmax, p.vlimit, p.robot_radius, p.starts, p.goals, p.T0s, timeout_secs=TIMEOUT)
+            solution, _ = PBS(p.env, p.tmax, p.vlimit, p.starts, p.goals, p.T0s, timeout_secs=TIMEOUT, scaler_multiplier=1)
             time_elapsed = time.perf_counter() - ts
-            res[num_agents].append(([sol.trajectory for sol in solution], time_elapsed))
+            res[num_agents].append(([sol.cost for sol in solution], time_elapsed))
             num_problems += 1
             if solution != []:
                 num_suceeds += 1
-
+        
         # input(f"Finished {num_agents} agents. Success rate: {num_suceeds / len(problems)}. Press enter to continue.")
     
     print(f"Success rate: {num_suceeds / (len(ps) * len(problems))}")
-    pickle.dump(res, open(f"{ps[1][0].istc.name}-PBS+STGCS.pkl", "wb"))
+    pickle.dump(res, open(f"{ps[1][0].env.name}-PBS+STGCS.pkl", "wb"))
 
 
 def exp_PP_STGCS(ps: Dict[int, List[MRMP]]) -> None:
@@ -44,9 +44,9 @@ def exp_PP_STGCS(ps: Dict[int, List[MRMP]]) -> None:
     for num_agents, problems in ps.items():
         for seed, p in enumerate(problems):
             ts = time.perf_counter()
-            solution, _ = PP_STGCS(p.istc, p.tmax, p.vlimit, p.robot_radius, p.starts, p.goals, p.T0s, seed=seed, max_ordering_trials=1000, timeout_secs=TIMEOUT)
+            solution, _ = PP_STGCS(p.env, p.tmax, p.vlimit, p.starts, p.goals, p.T0s, seed=seed, max_ordering_trials=1000, timeout_secs=TIMEOUT)
             time_elapsed = time.perf_counter() - ts
-            res[num_agents].append(([sol.trajectory for sol in solution], time_elapsed))
+            res[num_agents].append(([sol.cost for sol in solution], time_elapsed))
             num_problems += 1
             if solution != []:
                 num_suceeds += 1
@@ -54,7 +54,7 @@ def exp_PP_STGCS(ps: Dict[int, List[MRMP]]) -> None:
         # input(f"Finished {num_agents} agents. Success rate: {num_suceeds / len(problems)}. Press enter to continue.")
     
     print(f"Success rate: {num_suceeds / (len(ps) * len(problems))}")
-    pickle.dump(res, open(f"{ps[1][0].istc.name}-PP+STGCS.pkl", "wb"))
+    pickle.dump(res, open(f"{ps[1][0].env.name}-PP+STGCS.pkl", "wb"))
 
 
 def exp_SP_STGCS(ps: Dict[int, List[MRMP]]) -> None:
@@ -62,9 +62,9 @@ def exp_SP_STGCS(ps: Dict[int, List[MRMP]]) -> None:
     for num_agents, problems in ps.items():
         for seed, p in enumerate(problems):
             ts = time.perf_counter()
-            solution, _ = SP_STGCS(p.istc, p.tmax, p.vlimit, p.robot_radius, p.starts, p.goals, p.T0s, TIMEOUT)
+            solution, _ = SP_STGCS(p.env, p.tmax, p.vlimit, p.starts, p.goals, p.T0s, TIMEOUT)
             time_elapsed = time.perf_counter() - ts
-            res[num_agents].append(([sol.trajectory for sol in solution], time_elapsed))
+            res[num_agents].append(([sol.cost for sol in solution], time_elapsed))
             num_problems += 1
             if solution != []:
                 num_suceeds += 1
@@ -74,7 +74,7 @@ def exp_SP_STGCS(ps: Dict[int, List[MRMP]]) -> None:
         # input(f"Finished {num_agents} agents. Success rate: {num_suceeds / len(problems)}. Press enter to continue.")
     
     print(f"Success rate: {num_suceeds / (len(ps) * len(problems))}")
-    pickle.dump(res, open(f"{ps[1][0].istc.name}-SP+STGCS.pkl", "wb"))
+    pickle.dump(res, open(f"{ps[1][0].env.name}-SP+STGCS.pkl", "wb"))
 
 
 def exp_SP_TPRM_C(ps: Dict[int, List[MRMP]]) -> None:
@@ -82,9 +82,9 @@ def exp_SP_TPRM_C(ps: Dict[int, List[MRMP]]) -> None:
     for num_agents, problems in ps.items():
         for seed, p in enumerate(problems):
             ts = time.perf_counter()
-            solution = SP_TPRM(p.istc, p.tmax, p.vlimit, p.robot_radius, p.starts, p.goals, p.T0s, seed, TIMEOUT, True)
+            solution = SP_TPRM(p.env, p.tmax, p.vlimit, p.starts, p.goals, p.T0s, seed, TIMEOUT, True)
             time_elapsed = time.perf_counter() - ts
-            res[num_agents].append(([sol.trajectory for sol in solution], time_elapsed))
+            res[num_agents].append(([sol.cost for sol in solution], time_elapsed))
             num_problems += 1
             if solution != []:
                 num_suceeds += 1
@@ -94,7 +94,7 @@ def exp_SP_TPRM_C(ps: Dict[int, List[MRMP]]) -> None:
         # input(f"Finished {num_agents} agents. Success rate: {num_suceeds / len(problems)}. Press enter to continue.")
     
     print(f"Success rate: {num_suceeds / (len(ps) * len(problems))}")
-    pickle.dump(res, open(f"{ps[1][0].istc.name}-SP+TPRM-C.pkl", "wb"))
+    pickle.dump(res, open(f"{ps[1][0].env.name}-SP+TPRM-C.pkl", "wb"))
 
 
 def exp_SP_TPRM(ps: Dict[int, List[MRMP]]) -> None:
@@ -102,9 +102,9 @@ def exp_SP_TPRM(ps: Dict[int, List[MRMP]]) -> None:
     for num_agents, problems in ps.items():
         for seed, p in enumerate(problems):
             ts = time.perf_counter()
-            solution = SP_TPRM(p.istc, p.tmax, p.vlimit, p.robot_radius, p.starts, p.goals, p.T0s, seed, TIMEOUT, False)
+            solution = SP_TPRM(p.env, p.tmax, p.vlimit, p.starts, p.goals, p.T0s, seed, TIMEOUT, False)
             time_elapsed = time.perf_counter() - ts
-            res[num_agents].append(([sol.trajectory for sol in solution], time_elapsed))
+            res[num_agents].append(([sol.cost for sol in solution], time_elapsed))
             num_problems += 1
             if solution != []:
                 num_suceeds += 1
@@ -114,7 +114,7 @@ def exp_SP_TPRM(ps: Dict[int, List[MRMP]]) -> None:
         # input(f"Finished {num_agents} agents. Success rate: {num_suceeds / len(problems)}. Press enter to continue.")
     
     print(f"Success rate: {num_suceeds / (len(ps) * len(problems))}")
-    pickle.dump(res, open(f"{ps[1][0].istc.name}-SP+TPRM.pkl", "wb"))
+    pickle.dump(res, open(f"{ps[1][0].env.name}-SP+TPRM.pkl", "wb"))
 
 
 def exp_SP_STRRTStar(ps: Dict[int, List[MRMP]]) -> None:
@@ -122,9 +122,9 @@ def exp_SP_STRRTStar(ps: Dict[int, List[MRMP]]) -> None:
     for num_agents, problems in ps.items():
         for seed, p in enumerate(problems):
             ts = time.perf_counter()
-            solution = SP_STRRTStar(p.istc, p.tmax, p.vlimit, p.robot_radius, p.starts, p.goals, p.T0s, seed, TIMEOUT, use_CSpace=False)
+            solution = SP_STRRTStar(p.env, p.tmax, p.vlimit, p.starts, p.goals, p.T0s, seed, TIMEOUT, use_CSpace=False)
             time_elapsed = time.perf_counter() - ts
-            res[num_agents].append(([sol.trajectory for sol in solution], time_elapsed))
+            res[num_agents].append(([sol.cost for sol in solution], time_elapsed))
             num_problems += 1
             if solution != []:
                 num_suceeds += 1
@@ -134,7 +134,7 @@ def exp_SP_STRRTStar(ps: Dict[int, List[MRMP]]) -> None:
         # input(f"Finished {num_agents} agents. Success rate: {num_suceeds / len(problems)}. Press enter to continue.")
     
     print(f"Success rate: {num_suceeds / (len(ps) * len(problems))}")
-    pickle.dump(res, open(f"{ps[1][0].istc.name}-SP+ST-RRTStar.pkl", "wb"))
+    pickle.dump(res, open(f"{ps[1][0].env.name}-SP+ST-RRTStar.pkl", "wb"))
 
 
 def exp_SP_STRRTStar_C(ps: Dict[int, List[MRMP]]) -> None:
@@ -142,9 +142,9 @@ def exp_SP_STRRTStar_C(ps: Dict[int, List[MRMP]]) -> None:
     for num_agents, problems in ps.items():
         for seed, p in enumerate(problems):
             ts = time.perf_counter()
-            solution = SP_STRRTStar(p.istc, p.tmax, p.vlimit, p.robot_radius, p.starts, p.goals, p.T0s, seed, TIMEOUT, use_CSpace=True)
+            solution = SP_STRRTStar(p.env, p.tmax, p.vlimit, p.starts, p.goals, p.T0s, seed, TIMEOUT, use_CSpace=True)
             time_elapsed = time.perf_counter() - ts
-            res[num_agents].append(([sol.trajectory for sol in solution], time_elapsed))
+            res[num_agents].append(([sol.cost for sol in solution], time_elapsed))
             num_problems += 1
             if solution != []:
                 num_suceeds += 1
@@ -154,21 +154,21 @@ def exp_SP_STRRTStar_C(ps: Dict[int, List[MRMP]]) -> None:
         # input(f"Finished {num_agents} agents. Success rate: {num_suceeds / len(problems)}. Press enter to continue.")
     
     print(f"Success rate: {num_suceeds / (len(ps) * len(problems))}")
-    pickle.dump(res, open(f"{ps[1][0].istc.name}-SP+ST-RRTStar-C.pkl", "wb"))
+    pickle.dump(res, open(f"{ps[1][0].env.name}-SP+ST-RRTStar-C.pkl", "wb"))
 
 
 def exp_STGCS_graph_size(ps: Dict[int, List[MRMP]]) -> None:
     graph_size = {"SP": defaultdict(list), "PP": defaultdict(list), "PBS": defaultdict(list)}
     for num_agents, problems in ps.items():
         for seed, p in enumerate(problems):
-            solution, num_edges = SP_STGCS(p.istc, p.tmax, p.vlimit, p.robot_radius, p.starts, p.goals, p.T0s, TIMEOUT)
+            solution, num_edges = SP_STGCS(p.env, p.tmax, p.vlimit, p.starts, p.goals, p.T0s, TIMEOUT)
             graph_size["SP"][num_agents].append(num_edges)
-            solution, num_edges = PP_STGCS(p.istc, p.tmax, p.vlimit, p.robot_radius, p.starts, p.goals, p.T0s, seed, max_ordering_trials=1000, timeout_secs=TIMEOUT)
+            solution, num_edges = PP_STGCS(p.env, p.tmax, p.vlimit, p.starts, p.goals, p.T0s, seed, max_ordering_trials=1000, timeout_secs=TIMEOUT)
             graph_size["PP"][num_agents].append(num_edges)
-            solution, num_edges = PBS(p.istc, p.tmax, p.vlimit, p.robot_radius, p.starts, p.goals, p.T0s, timeout_secs=TIMEOUT)
+            solution, num_edges = PBS(p.env, p.tmax, p.vlimit, p.starts, p.goals, p.T0s, timeout_secs=TIMEOUT)
             graph_size["PBS"][num_agents].append(num_edges)
 
-    pickle.dump(graph_size, open(f"data/{ps[1][0].istc.name}.gs", "wb"))
+    pickle.dump(graph_size, open(f"data/{ps[1][0].env.name}.gs", "wb"))
 
 
 if __name__ == "__main__":

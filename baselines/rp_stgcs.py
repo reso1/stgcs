@@ -4,15 +4,15 @@ from typing import List, Dict, Tuple
 import time
 import numpy as np
 
-from environment.instance import Instance
+from environment.env import Env
 from mrmp.stgcs import STGCS, BASE_MAX_ROUNDED_PATHS, BASE_MAX_ROUNDING_TRIALS
-from mrmp.ecd import ECDPair, reserve_solution
+from mrmp.ecd import reserve as ecd_reserve
 from mrmp.utils import timeit, make_hpolytope
 from mrmp.graph import ShortestPathSolution
 
 
 def randomized_prioritized_planning(
-    istc:Instance, tmax:float, vlimit:float, safe_radius:float,
+    env:Env, tmax:float, vlimit:float,
     starts:List[np.ndarray], goals:List[np.ndarray], t0s:List[float],
     seed:int, max_ordering_trials:int, timeout_secs:float, scaler_multiplier:float=1.0
 ) -> Tuple[List[ShortestPathSolution], int]:
@@ -33,11 +33,10 @@ def randomized_prioritized_planning(
         print(f"-> PP: using total ordering: {ordering}. time elapsed={time.perf_counter() - ts}")
         visited.add(ordering_tuple)
 
-        stgcs = STGCS.from_instance(
-            istc, robot_radius=safe_radius, t0=0.0, tmax=tmax, vlimit=vlimit)
+        stgcs = STGCS.from_env(env, t0=0.0, tmax=tmax, vlimit=vlimit)
         
         sol, num_edges_stgcs = prioritized_planning(
-            stgcs, ordering, safe_radius, starts, goals, t0s,
+            stgcs, ordering, env.robot_radius, starts, goals, t0s,
             timeout_secs = timeout_secs - (time.perf_counter() - ts),
             scaler_multiplier = scaler_multiplier
         )
@@ -52,18 +51,17 @@ def randomized_prioritized_planning(
 
 
 def sequential_planning(
-    istc:Instance, tmax:float, vlimit:float, safe_radius:float,
+    env:Env, tmax:float, vlimit:float, 
     starts:List[np.ndarray], goals:List[np.ndarray], t0s:List[float],
     timeout_secs:float, scaler_multiplier:float=1.0
 ) -> Tuple[List[ShortestPathSolution], int]:
     
     ts = time.perf_counter()
-    stgcs = STGCS.from_instance(
-        istc, robot_radius=safe_radius, t0=0.0, tmax=tmax, vlimit=vlimit)
+    stgcs = STGCS.from_env(env, t0=0.0, tmax=tmax, vlimit=vlimit)
     
     ordering = [int(i) for i in range(len(starts))]
     sol, num_edges_stgcs = prioritized_planning(
-        stgcs, ordering, safe_radius, starts, goals, t0s,
+        stgcs, ordering, env.robot_radius, starts, goals, t0s,
         timeout_secs = timeout_secs - (time.perf_counter() - ts),
         scaler_multiplier = scaler_multiplier
     )
@@ -75,7 +73,7 @@ def sequential_planning(
 
 
 def prioritized_planning(
-    stgcs:STGCS, ordering:List[int], safe_radius:float,
+    stgcs:STGCS, ordering:List[int], robot_radius:float,
     starts:List[np.ndarray], goals:List[np.ndarray], t0s:List[float],
     timeout_secs:float, scaler_multiplier:float
 ) -> Tuple[Dict[int, ShortestPathSolution], int]:
@@ -86,7 +84,7 @@ def prioritized_planning(
         print(f"\tplanning for agent {i}, STGCS: |V|={stgcs.G.n_vertices}, |E|={stgcs.G.n_edges}")
         start, goal, t0 = starts[i], goals[i], t0s[i]
         scaler = np.clip(np.log(stgcs.G.n_edges), 1, 10) * scaler_multiplier
-        sol = stgcs.solve(start, goal, t0, 
+        sol = stgcs.solve(start, goal, t0,
                             relaxation=True, 
                             max_rounded_paths = int(BASE_MAX_ROUNDED_PATHS * scaler),
                             max_rounding_trials = int(BASE_MAX_ROUNDING_TRIALS * scaler))
@@ -102,7 +100,7 @@ def prioritized_planning(
         if len(solution) == num_agents:
             break
         
-        stgcs = reserve_solution(stgcs, sol, safe_radius)
+        stgcs = ecd_reserve(stgcs, sol.trajectory, 2*robot_radius)
 
     if len(solution) == num_agents:
         return solution, stgcs.G.n_edges

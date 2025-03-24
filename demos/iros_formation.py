@@ -10,7 +10,7 @@ try:
     from baselines.sp_tprm import sequential_planning as SP_TPRM
     from mrmp.stgcs import STGCS
     from mrmp.utils import make_hpolytope
-    from environment.instance import Instance, _animate_func_2d
+    from environment.env import Env, _animate_func_2d
 except:
     raise ImportError("You should run this script from the root directory")
 
@@ -45,20 +45,19 @@ S = np.array([3.0, 0.0]) + [np.array([0.5, 0.2]), np.array([0.38, 0.25]), np.arr
                             np.array([0.45, 0.55]), np.array([0.37, 0.7]), np.array([0.62, 0.75]), np.array([0.5, 0.8])]
 
 T0s =  np.zeros(8)
-istc = Instance(name="formation", CSpace = [np.array([[0.0, 0.0], [4.0, 0.0], [4.0, 1.0], [0.0, 1.0]])])
+env = Env(name="formation", robot_radius=0.05, CSpace = [np.array([[0.0, 0.0], [4.0, 0.0], [4.0, 1.0], [0.0, 1.0]])])
 
 
 if __name__ == "__main__":
     vlimit = 0.2
     tf = 50
-    robot_radius = 0.1
 
     t0 = 0
     Pi_total = [list() for _ in range(8)]
     for starts, goals in [(I, R), (R, O), (O, S)]:
-        sets = [make_hpolytope(V) for V in istc.C_Space]
+        sets = [make_hpolytope(V) for V in env.C_Space]
         ts = time.perf_counter()
-        sol, _ = PBS(istc, tf, vlimit, robot_radius, starts, goals, T0s, 150, scaler_multiplier=5)
+        sol, _ = PBS(env, tf, vlimit, starts, goals, T0s, 150, scaler_multiplier=5)
         
         T = np.linspace(0, max([p.cost for p in sol]), 100)
         Pi = []
@@ -88,7 +87,7 @@ if __name__ == "__main__":
             ax.plot(x[0], x[1], 'ok', markersize=8, mfc='none')
 
     dt = 0.02
-    anim = _animate_func_2d(ax, istc.lb, istc.ub, Pi, dt=dt)
-    anim.save(f"{istc.name}.mp4", writer='ffmpeg', fps=1/dt, dpi=1000)
+    anim = _animate_func_2d(ax, env.robot_radius, env.lb, env.ub, Pi, dt=dt)
+    anim.save(f"{env.name}.mp4", writer='ffmpeg', fps=1/dt, dpi=1000)
     plt.show()
 

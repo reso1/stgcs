@@ -15,11 +15,11 @@ from pydrake.all import HPolyhedron, VPolytope
 from mrmp.interval import Interval
 from mrmp.utils import (
     find_space_time_intersecting_pts, is_lineseg_colliding, squash_multi_points,
-    draw_cylinder, draw_3d_space_time_set, timeit
+    draw_cylinder, draw_3d_set, timeit
 )
 
 from mrmp.stgcs import STGCS
-from mrmp.ecd import reconstruct_SSP, reconstruct_ECD_pairs, ECDPair, reserve as ecd_reserve
+from mrmp.ecd import ECDPair, reserve as ecd_reserve
 from mrmp.graph import ShortestPathSolution
 
 
@@ -78,17 +78,21 @@ class StaticPolygon(StaticObstacle):
         self.hpoly = HPolyhedron(VPolytope(vertices.T))
     
     def is_colliding(self, point:np.ndarray, robot_radius:float) -> bool:
-        return self.hpoly.PointInSet(point) # TODO: add robot_radius
+        assert len(point) == 2
+        for xc, yc in [[-1, -1], [1, -1], [1, 1], [-1, 1]]:
+            if self.hpoly.PointInSet(point + robot_radius * np.array([xc, yc])):
+                return True
+        return False
 
     def is_colliding_lineseg(self, p:np.ndarray, q:np.ndarray, robot_radius:float) -> bool:
-        return is_lineseg_colliding(self.hpoly, p, q) # TODO: add robot_radius
+        return is_lineseg_colliding(self.hpoly, p, q, robot_radius)
 
     def draw(self, ax:Axes, alpha=0.8, color='k') -> None:
         ax.fill(self.vertices[:, 0], self.vertices[:, 1], alpha=alpha, fc=color, ec='black')
 
     def draw_with_time(self, ax:Axes3D, tmax:float, color='k', alpha:float=1.0) -> None:
         hpoly = self.hpoly.CartesianProduct(HPolyhedron.MakeBox([0], [tmax]))
-        draw_3d_space_time_set(hpoly, ax, alpha=alpha, fc=color)
+        draw_3d_set(hpoly, ax, alpha=alpha, fc=color)
 
 
 """ Dynamic Obstacles (assuming uniform speed) """
@@ -184,26 +188,8 @@ class DynamicSphere(DynamicObstacle):
         return self.x0 + self.velocity * (t - self.itvl.start)
 
     def reserve(self, stgcs:STGCS, robot_radius:float, reserve_first_to_t0:bool=True, reserve_last_to_tf:bool=True) -> STGCS:
-        x0_set_name, xt_set_name = None, None
-        x0, xt = np.hstack([self.x0, self.itvl.start]), np.hstack([self.xt, self.itvl.end])
-        for v in stgcs.G.vertices.values():
-            hpoly = squash_multi_points(v.convex_set.set, len(x0))
-            if x0_set_name is None and hpoly.PointInSet(x0):
-                x0_set_name = v.name
-            if xt_set_name is None and hpoly.PointInSet(xt):
-                xt_set_name = v.name
-            if x0_set_name is not None and xt_set_name is not None:
-                break
-
-        if x0_set_name is None or xt_set_name is None:
-            raise ValueError("Either x0 or xt is not contained in any GCS sets")
-
-        ecd_pairs = []
-        for v_name, wp in zip(*reconstruct_SSP(stgcs, x0, xt, x0_set_name, xt_set_name)):
-            xp, xq = wp[:3], wp[-3:]
-            ecd_pairs.append(ECDPair(v_name, xp, xq, reserve_first_to_t0, reserve_last_to_tf))
-
-        return ecd_reserve(stgcs, ecd_pairs, robot_radius + self.radius, t_padding=0.0)
+        trajectory = [np.hstack([self.x0, self.itvl.start, self.xt, self.itvl.end])]
+        return ecd_reserve(stgcs, trajectory, robot_radius + self.radius, reserve_first_to_t0, reserve_last_to_tf)
  
     def draw(self, ax:Axes3D) -> None:
         p = np.hstack([self.x0, self.itvl.start])
@@ -220,7 +206,7 @@ class ConcatDynamicSphere(DynamicObstacle):
             self.segments.append(DynamicSphere(x0, xt, radius, itvl))
 
     @staticmethod
-    def from_solution(sol:ShortestPathSolution, safe_radius:float) -> ConcatDynamicSphere:
+    def from_solution(sol:ShortestPathSolution, radius:float) -> ConcatDynamicSphere:
         X0, Xt, itvls = [], [], []
 
         for i in range(len(sol.trajectory)):
@@ -228,7 +214,7 @@ class ConcatDynamicSphere(DynamicObstacle):
             Xt.append(sol.trajectory[i][sol.dim:-1])
             itvls.append(Interval(sol.trajectory[i][sol.dim-1], sol.trajectory[i][-1]))
 
-        return ConcatDynamicSphere(X0, Xt, itvls, safe_radius)
+        return ConcatDynamicSphere(X0, Xt, itvls, radius)
 
     def collision_intervals(self, point:np.ndarray, robot_radius:float) -> List[Interval]:
         ret = []
@@ -255,17 +241,15 @@ class ConcatDynamicSphere(DynamicObstacle):
                 return seg.x(t)
         return self.segments[-1].x(t)
     
+    def reserve(self, stgcs, robot_radius, reserve_first_to_t0=True, reserve_last_to_tf=True):
+        trajectory = []
+        for seg in self.segments:
+            trajectory.append(np.hstack([seg.x0, seg.itvl.start, seg.xt, seg.itvl.end]))
+        return ecd_reserve(stgcs, trajectory, robot_radius + self.radius, reserve_first_to_t0, reserve_last_to_tf)
+
     def draw(self, ax:Axes3D) -> None:
         for seg in self.segments:
             seg.draw(ax)
-
-    def reserve(self, stgcs:STGCS, robot_radius:float) -> STGCS:
-        for i, seg in enumerate(self.segments):
-            reserve_first_to_t0 = i == 0
-            reserve_last_to_tf = i == len(self.segments) - 1
-            stgcs = seg.reserve(stgcs, robot_radius, reserve_first_to_t0, reserve_last_to_tf)
-
-        return stgcs
 
 
 def lerp(p:np.ndarray, q:np.ndarray, tp:float, tq:float, t:float) -> np.ndarray:

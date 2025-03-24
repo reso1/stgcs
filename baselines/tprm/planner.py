@@ -9,22 +9,21 @@ from mrmp.interval import Interval
 
 from pydrake.all import RandomGenerator
 
-from environment.instance import Instance
+from environment.env import Env
 from environment.obstacle import DynamicSphere, ConcatDynamicSphere
 from baselines.tprm.temporal_graph import TemporalGraph, TemporalGraphNode, TemporalGraphEdge
 
 from mrmp.graph import ShortestPathSolution
-from mrmp.pbs import collision_checking_inner
+from mrmp.pbs import min_dist_squared
 
 
 class TemporalPRM:
 
-    def __init__(self, istc:Instance, seed:int, v:float, robot_radius:float, cost_edge_threshold:float=0.25) -> None:
-        self.istc, self.seed = istc, seed
+    def __init__(self, env:Env, seed:int, v:float, cost_edge_threshold:float=0.25) -> None:
+        self.env, self.seed = env, seed
         self.np_rng = np.random.RandomState(seed)
         self.drake_rng = RandomGenerator(seed)
         self.graph = TemporalGraph(v)
-        self.robot_radius = robot_radius
         self.cost_edge_threshold = cost_edge_threshold
     
     def build(self, num_nodes:int, use_CSpace:bool=True, timeout_secs:float=np.inf) -> None:
@@ -34,16 +33,16 @@ class TemporalPRM:
                 break
 
             if use_CSpace:
-                sample = self.istc.sample_CSpace(self.np_rng, self.drake_rng)
+                sample = self.env.sample_CSpace(self.np_rng, self.drake_rng)
             else:
                 is_blocked = True
-                sample = self.istc.sample_bounding_box(self.np_rng)
+                sample = self.env.sample_bounding_box(self.np_rng)
                 while is_blocked:
                     is_blocked = False
-                    for obstacle in self.istc.O_Static:
-                        if obstacle.is_colliding(sample, self.robot_radius):
+                    for obstacle in self.env.O_Static:
+                        if obstacle.is_colliding(sample, self.env.robot_radius):
                             is_blocked = True
-                            sample = self.istc.sample_bounding_box(self.np_rng)
+                            sample = self.env.sample_bounding_box(self.np_rng)
                             break
 
             node = TemporalGraphNode(sample, self.get_time_availability(sample))
@@ -57,8 +56,8 @@ class TemporalPRM:
                     continue
 
                 is_blocked = False
-                for obstacle in self.istc.O_Static:
-                    if obstacle.is_colliding_lineseg(node.pos, other.pos, self.robot_radius):
+                for obstacle in self.env.O_Static:
+                    if obstacle.is_colliding_lineseg(node.pos, other.pos, self.env.robot_radius):
                         is_blocked = True
                         break
                 
@@ -68,16 +67,16 @@ class TemporalPRM:
 
     def add_sample(self, use_CSpace:bool=True) -> None:
         if use_CSpace:
-            sample = self.istc.sample_CSpace(self.np_rng, self.drake_rng)
+            sample = self.env.sample_CSpace(self.np_rng, self.drake_rng)
         else:
             is_blocked = True
-            sample = self.istc.sample_bounding_box(self.np_rng)
+            sample = self.env.sample_bounding_box(self.np_rng)
             while is_blocked:
                 is_blocked = False
-                for obstacle in self.istc.O_Static:
-                    if obstacle.is_colliding(sample, self.robot_radius):
+                for obstacle in self.env.O_Static:
+                    if obstacle.is_colliding(sample, self.env.robot_radius):
                         is_blocked = True
-                        sample = self.istc.sample_bounding_box(self.np_rng)
+                        sample = self.env.sample_bounding_box(self.np_rng)
                         break
 
         node = TemporalGraphNode(sample, self.get_time_availability(sample))
@@ -91,8 +90,8 @@ class TemporalPRM:
                 continue
 
             is_blocked = False
-            for obstacle in self.istc.O_Static:
-                if obstacle.is_colliding_lineseg(node.pos, other.pos, self.robot_radius):
+            for obstacle in self.env.O_Static:
+                if obstacle.is_colliding_lineseg(node.pos, other.pos, self.env.robot_radius):
                     is_blocked = True
                     break
             
@@ -101,12 +100,12 @@ class TemporalPRM:
                 self.graph.add_edge(TemporalGraphEdge(i, j))
 
     def get_time_availability(self, pos:np.ndarray) -> List[Interval]:
-        if len(self.istc.O_Dynamic) == 0:
+        if len(self.env.O_Dynamic) == 0:
             return [Interval(0.0, np.inf)]
         
         hit_infos = []
-        for obs in self.istc.O_Dynamic:
-            hit_infos.extend(obs.collision_intervals(pos, self.robot_radius))
+        for obs in self.env.O_Dynamic:
+            hit_infos.extend(obs.collision_intervals(pos, self.env.robot_radius))
         
         if len(hit_infos) == 0:
             return [Interval(0.0, np.inf)]
@@ -155,8 +154,8 @@ class TemporalPRM:
         goal_node = self.graph.get_node(closest_goal_id)
 
         failure_ret = ShortestPathSolution(False, -1.0, -1.0, [], [])
-        for obstacle in self.istc.O_Static:
-            if obstacle.is_colliding_lineseg(goal, goal_node.pos, self.robot_radius):
+        for obstacle in self.env.O_Static:
+            if obstacle.is_colliding_lineseg(goal, goal_node.pos, self.env.robot_radius):
                 return failure_ret
         
         tmp_start = TemporalGraphNode(start, self.get_time_availability(start))
@@ -185,12 +184,12 @@ class TemporalPRM:
 
         sol = ShortestPathSolution(True, trajectory[-1][-1] - time_start, time.perf_counter() - ts, [], trajectory)
         sol.itvl = Interval(time_start, trajectory[-1][-1])
-        sol.dim = self.istc.dim + 1
+        sol.dim = self.env.dim + 1
         return sol
 
     def edge_collision_checking(self, xp:np.ndarray, xq:np.ndarray) -> bool:
         # edge collision checking to fix the issue
-        for obs in self.istc.O_Dynamic:
+        for obs in self.env.O_Dynamic:
             segments = []
             if isinstance(obs, DynamicSphere):
                 x0 = np.hstack([obs.x0, obs.itvl.start])
@@ -207,7 +206,8 @@ class TemporalPRM:
 
             for seg in segments:
                 x0, xt = seg
-                if collision_checking_inner(x0, xt, xp, xq, self.robot_radius + obs.radius):
+                val = min_dist_squared(x0, xt, xp, xq) - (self.env.robot_radius + obs.radius) ** 2
+                if not np.allclose(val, 0) and val < 0:
                     return True
         
         return False

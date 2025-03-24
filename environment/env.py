@@ -16,27 +16,47 @@ from mrmp.interval import Interval
 from mrmp.utils import make_hpolytope
 
 from pydrake.all import (
-    HPolyhedron, RandomGenerator,
+    HPolyhedron, RandomGenerator
 )
 
 
+class Env:
 
-class Instance:
-
-    def __init__(self, name, CSpace: List[np.ndarray], OStatic: List[StaticObstacle] = [], ODynamic: List[DynamicObstacle] = []) -> None:
+    def __init__(self, name, CSpace:List[np.ndarray], robot_radius:float, OStatic:List[StaticObstacle]=[], ODynamic:List[DynamicObstacle]=[]) -> None:
         self.name = name
         self.C_Space = CSpace       # list of polyhedrons defined by vertices w/o colliding O_Static
+        self.robot_radius = robot_radius
         self.O_Static = OStatic
         self.O_Dynamic = ODynamic
         self.lb: np.ndarray = np.min(np.vstack(CSpace), axis=0)
         self.ub: np.ndarray = np.max(np.vstack(CSpace), axis=0)
         self.dim: int = len(self.lb)
         self._CSpace_hpoly: List[HPolyhedron] = [make_hpolytope(C) for C in CSpace]
+
+    def copy(self) -> Env:
+        return Env(self.name, deepcopy(self.C_Space), self.robot_radius, deepcopy(self.O_Static), deepcopy(self.O_Dynamic))
     
-    def copy(self) -> Instance:
-        return Instance(self.name, deepcopy(self.C_Space), deepcopy(self.O_Static), deepcopy(self.O_Dynamic))
-    
-    def animate_2d(self, ax:Axes, sols:List[ShortestPathSolution]=[], dt:float=0.02, save_anim:bool=False) -> None:
+    def animate_1d(self, ax:Axes, sols:List[ShortestPathSolution]=[], dt:float=0.02, draw_CSpace=False, save_anim:bool=False) -> None:
+        tmax = 5
+        if sols != []:
+            Pi = []
+            tmax = max([s.itvl.end for s in sols])
+            T = np.arange(0, tmax + dt, dt)
+            for sol in sols:
+                traj = np.array([np.hstack([sol.lerp(t)[0], 0]) for t in T])
+                Pi.append(traj)
+        else:
+            Pi = []
+
+        ax.set_aspect('equal')
+
+        anim = _animate_func_2d(ax, self.robot_radius, np.hstack([self.lb, -0.5]), np.hstack([self.ub, 0.5]), Pi, self.O_Dynamic, dt=dt)
+        
+        if save_anim:
+            anim.save(f"{self.name}.mp4", writer='ffmpeg', fps=1/dt, dpi=1000)
+        plt.show()
+
+    def animate_2d(self, ax:Axes, sols:List[ShortestPathSolution]=[], dt:float=0.02, draw_CSpace=False, save_anim:bool=False) -> None:
         if sols != []:
             Pi = []
             tmax = max([s.itvl.end for s in sols])
@@ -49,9 +69,9 @@ class Instance:
 
         ax.set_aspect('equal')
 
-        self.draw_static(ax)
+        self.draw_static(ax, draw_CSpace=draw_CSpace)
 
-        anim = _animate_func_2d(ax, self.lb, self.ub, Pi, self.O_Dynamic, dt=dt)
+        anim = _animate_func_2d(ax, self.robot_radius, self.lb, self.ub, Pi, self.O_Dynamic, dt=dt)
         if save_anim:
             anim.save(f"{self.name}.mp4", writer='ffmpeg', fps=1/dt, dpi=1000)
         plt.show()
@@ -61,10 +81,10 @@ class Instance:
             obs.draw(ax, alpha=alpha)
         
         bounding_box_verts = np.array([
-            [self.lb[0], self.lb[1]],
-            [self.ub[0], self.lb[1]],
-            [self.ub[0], self.ub[1]],
-            [self.lb[0], self.ub[1]],
+            [self.lb[0] - self.robot_radius, self.lb[1] - self.robot_radius],
+            [self.ub[0] + self.robot_radius, self.lb[1] - self.robot_radius],
+            [self.ub[0] + self.robot_radius, self.ub[1] + self.robot_radius],
+            [self.lb[0] - self.robot_radius, self.ub[1] + self.robot_radius],
         ])
         for u, v in zip(bounding_box_verts, np.roll(bounding_box_verts, 1, axis=0)):
             ax.plot([u[0], v[0]], [u[1], v[1]], '-k')
@@ -74,10 +94,10 @@ class Instance:
             for i, C in enumerate(self.C_Space):
                 ax.fill(C[:, 0], C[:, 1], alpha=alpha, fc=colors(i/len(self.C_Space)), ec='black')
 
-    def collision_checking_seg(self, p:np.ndarray, q:np.ndarray, tp:float, tq:float, robot_radius:float) -> bool:
+    def collision_checking_seg(self, p:np.ndarray, q:np.ndarray, tp:float, tq:float) -> bool:
         # collision checking w/ static obstacles
         for o in self.O_Static:
-            if o.is_colliding_lineseg(p, q, robot_radius):
+            if o.is_colliding_lineseg(p, q, self.robot_radius):
                 return True
         
         if tp > tq:
@@ -88,12 +108,12 @@ class Instance:
             if isinstance(o, DynamicSphere):
                 start_occ = DynamicSphere(o.x0, o.x0, o.radius, Interval(0, o.itvl.start))
                 end_occ = DynamicSphere(o.xt, o.xt, o.radius, Interval(o.itvl.end, 1e9))
-                if o.is_colliding_lineseg(p, q, tp, tq, robot_radius) or \
-                start_occ.is_colliding_lineseg(p, q, tp, tq, robot_radius) or \
-                end_occ.is_colliding_lineseg(p, q, tp, tq, robot_radius):
+                if o.is_colliding_lineseg(p, q, tp, tq, self.robot_radius) or \
+                start_occ.is_colliding_lineseg(p, q, tp, tq, self.robot_radius) or \
+                end_occ.is_colliding_lineseg(p, q, tp, tq, self.robot_radius):
                     return True
             elif isinstance(o, ConcatDynamicSphere):
-                if o.is_colliding_lineseg(p, q, tp, tq, robot_radius):
+                if o.is_colliding_lineseg(p, q, tp, tq, self.robot_radius):
                     return True
 
         return False
@@ -108,6 +128,7 @@ class Instance:
 
 def _animate_func_2d(
     ax: Axes,
+    robot_radius: float,
     lb: np.ndarray,
     ub: np.ndarray,
     trajectories: List[np.ndarray],
@@ -116,7 +137,7 @@ def _animate_func_2d(
     labels: List[str] = None,
     colors: List[str] = None,
     interval: int = 30,
-    robot_tail_length: int = 30,
+    robot_tail_length: int = 10,
     obs_tail_length: int = 10,
 ) -> FuncAnimation:
     
@@ -153,14 +174,16 @@ def _animate_func_2d(
     
     # draw robot trajectories
     footprint_itvl = int(interval / robot_tail_length)
-    footprints, points, texts = [None] * (robot_tail_length * k), [None] * k, [None] * k
-    robot_size = 6
+    footprints, robots, texts = [None] * (robot_tail_length * k), [None] * k, [None] * k
+
     for i in range(k):
         for j in range(robot_tail_length):
             idx = i * robot_tail_length + j
-            footprints[idx], = ax.plot([], [], '.', color=colors[i], markersize=robot_size, mfc='none', alpha = 1 - (j / robot_tail_length))
+            footprints[idx] = ax.add_patch(Circle(xy=trajectories[i][0], radius=robot_radius, color=colors[i], fill=False, alpha = 1 - (j / robot_tail_length)))
+            # footprints[idx], = ax.plot([], [], '.', color=colors[i], markersize=robot_size, mfc='none', alpha = 1 - (j / robot_tail_length))
         
-        points[i], = ax.plot([], [], '.', color=colors[i], markersize=robot_size, mfc=colors[i])
+        robots[i] = ax.add_patch(Circle(xy=trajectories[i][0], radius=robot_radius, color=colors[i], fill=True))
+        # robots[i], = ax.plot([], [], '.', color=colors[i], markersize=robot_size, mfc=colors[i])
         texts[i] = ax.text(0, 0, '', color='k', fontsize=12)    
 
     # animation function
@@ -173,19 +196,21 @@ def _animate_func_2d(
                 prev_frame = max(0, frame - footprint_itvl * j)
                 obs_footprints[idx].set_center(ODynamic[i].x(prev_frame * dt))
 
-        for i, (trajectory, point, text) in enumerate(zip(trajectories, points, texts)):
+        for i, (trajectory, point, text) in enumerate(zip(trajectories, robots, texts)):
             if frame < len(trajectory):
-                point.set_data([trajectory[frame, 0]], [trajectory[frame, 1]])
+                point.set_center(trajectory[frame])
+                # point.set_data([trajectory[frame, 0]], [trajectory[frame, 1]])
                 text.set_position((trajectory[frame, 0], trajectory[frame, 1]))
                 text.set_text(i)
                 
                 for j in range(robot_tail_length-1, -1, -1):
                     idx = i * robot_tail_length + j
                     prev_frame = max(0, frame - footprint_itvl * j)
-                    x, y = trajectory[prev_frame, 0], trajectory[prev_frame, 1]
-                    footprints[idx].set_data([x], [y])
+                    # x, y = trajectory[prev_frame, 0], trajectory[prev_frame, 1]
+                    # footprints[idx].set_data([x], [y])
+                    footprints[idx].set_center(trajectory[prev_frame])
             
-        return footprints + points + texts + obs_markers + obs_footprints
+        return footprints + robots + texts + obs_markers + obs_footprints
     
     fig = plt.gcf()
     if trajectories == []:

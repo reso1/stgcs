@@ -1,8 +1,9 @@
 from __future__ import annotations
 from typing import List, Tuple, Dict, Set
-from itertools import combinations
+from itertools import combinations, product
 from copy import deepcopy
 
+from matplotlib.axes import Axes
 from mpl_toolkits.mplot3d.axes3d import Axes3D
 
 import numpy as np
@@ -11,7 +12,8 @@ import networkx as nx
 from pydrake.all import (
     Binding, HPolyhedron, VPolytope, Constraint,
     Point as DrakePoint,
-    LinearConstraint, LinearEqualityConstraint, LinearCost, L2NormCost,
+    LinearConstraint, LinearEqualityConstraint,
+    L2NormCost,
 )
 
 from mrmp.geometry.polyhedron import Polyhedron
@@ -20,7 +22,7 @@ from mrmp.graph import ShortestPathSolution, Edge, Graph, Vertex
 from mrmp.interval import Interval, AABB
 from mrmp.utils import (
     timeit, time_extruded, get_hpoly_bounds, make_hpolytope,
-    squash_multi_points, draw_3d_space_time_set
+    squash_multi_points, draw_3d_set, draw_2d_set
 )
 
 
@@ -52,6 +54,7 @@ class STGCS:
         A_time = np.vstack([A_vmax, A_vmin, A_dt])
         b_time = np.hstack([np.zeros(self.dim-1), np.zeros(self.dim-1), -dt])
         self.time_constraint = LinearConstraint(A_time, -np.inf*np.ones_like(b_time), b_time)
+        
         self.time_cost = L2NormCost(A_dt.reshape(1, -1), np.zeros(1))
 
         # define the continuity constraint for each edge
@@ -72,50 +75,33 @@ class STGCS:
             ret.G.add_edge(e)
         
         return ret
-
-    @staticmethod
-    def from_space_sets(
-        sets:List[HPolyhedron], t0:float=0, tmax:float=1e2, vlimit:float=1.0, dt:float=1e-6
-    ) -> STGCS:
-        
-        stgcs = STGCS(1 + sets[0].ambient_dimension(), t0=t0, tmax=tmax, vlimit=vlimit, dt=dt)
-
-        for s in sets:
-            stgcs.add_vertex(time_extruded(s, t0, tmax), Interval(t0, tmax))
-
-        for u_name, v_name in combinations(stgcs.G.vertex_names, 2):
-            stgcs.try_build_edge(u_name, v_name)
-
-        return stgcs
     
     @staticmethod
-    def from_instance(
-        istc, robot_radius:float, t0:float=0, tmax:float=1e2, vlimit:float=1.0, dt:float=1e-6
+    def from_env(
+        env, t0:float=0, tmax:float=1e2, vlimit:float=1.0, dt:float=1e-6
     ) -> STGCS:
-        sets = [make_hpolytope(V) for V in istc.C_Space]
+        sets = [make_hpolytope(V) for V in env.C_Space]
         dim = 1 + sets[0].ambient_dimension()
 
         stgcs = STGCS(dim, t0=t0, tmax=tmax, vlimit=vlimit, dt=dt)
 
-        for s in sets:
+        for i, s in enumerate(sets):
             t_set = time_extruded(s, t0, tmax)
-            stgcs.add_vertex(t_set, Interval(t0, tmax))
+            lb = np.min(env.C_Space[i], axis=0)
+            ub = np.max(env.C_Space[i], axis=0)
+            space_bounds = [Interval(l, u) for l, u in zip(lb, ub)]
+            stgcs.add_vertex(t_set, Interval(t0, tmax), space_bounds)
 
         for u_name, v_name in combinations(stgcs.G.vertex_names, 2):
             stgcs.try_build_edge(u_name, v_name)
         
-        for obs in istc.O_Dynamic:
-            stgcs = obs.reserve(stgcs, robot_radius, True, True)
+        for obs in env.O_Dynamic:
+            stgcs = obs.reserve(stgcs, env.robot_radius, True, True)
 
         return stgcs
 
-    def add_vertex(self, hpoly:HPolyhedron, itvl:Interval) -> Vertex:
+    def add_vertex(self, hpoly:HPolyhedron, itvl:Interval, space_bounds:List[Interval]) -> Vertex:
         name = self.get_new_vertex_name()
-        space_bounds = []
-        dims = [int(_i) for _i in range(self.dim - 1)]
-        for lb, ub in zip(*get_hpoly_bounds(hpoly, dim=dims)):
-            space_bounds.append(Interval(lb, ub))
-
         comp_hpoly = hpoly.CartesianPower(self.num_pts_per_verts)
         ply = Polyhedron(comp_hpoly.A(), comp_hpoly.b(), should_compute_vertices=False)
         vertex = Vertex(ply, costs=[self.time_cost], constraints=[self.time_constraint], name=name, itvl=itvl)
@@ -123,6 +109,19 @@ class STGCS:
         self.G.add_vertex(vertex, name=name)
         return vertex
 
+    def try_add_vertex(self, hpoly:HPolyhedron, itvl:Interval, tol:float=1e-6) -> Vertex|None:
+        if itvl.duration <= tol:
+            return
+
+        space_bounds = []
+        dims = [int(_i) for _i in range(self.dim - 1)]
+        for lb, ub in zip(*get_hpoly_bounds(hpoly, dim=dims)):
+            if ub - lb <= tol:
+                return
+            space_bounds.append(Interval(lb, ub))
+
+        return self.add_vertex(hpoly, itvl, space_bounds)
+        
     def add_edge(self, u_name:str, v_name:str) -> None:
         self.G.add_edge(Edge(u_name, v_name, constraints=[self.cont_constraint]))
         assert len(self.G._gcs.Edges()) == self.G.n_edges
@@ -140,17 +139,21 @@ class STGCS:
         
         return self._vertex_names.pop()
     
-    def try_build_edge(self, u_name:str, v_name:str) -> bool:
-        if u_name == v_name:
-            return False
+    def try_build_edge(self, u_name:str, v_name:str) -> None:
+        if u_name == v_name or u_name not in self.G.vertices or v_name not in self.G.vertices:
+            return
         
         u, v = self.G.vertices[u_name], self.G.vertices[v_name]
         if not u.convex_set.set.IntersectsWith(v.convex_set.set):
-            return False
+            return
         
-        self.add_edge(u_name, v_name)
-        self.add_edge(v_name, u_name)
-        return True
+        if np.allclose(u.itvl.end, v.itvl.start) and u.itvl.start <= v.itvl.end:
+            self.add_edge(u_name, v_name)
+        elif np.allclose(v.itvl.end, u.itvl.start) and v.itvl.start <= u.itvl.end:
+            self.add_edge(v_name, u_name)
+        else:
+            self.add_edge(u_name, v_name)
+            self.add_edge(v_name, u_name)
 
     def build_source_vertex(self, source:np.ndarray, t_start:float) -> str:
         # assume source is contained in only one convex set of a vertex
@@ -258,6 +261,10 @@ class STGCS:
         self.G.set_source(GCS_SOURCE_NAME)
         self.G.set_target(GCS_TARGET_NAME)
 
+        if not self.G.check_feasiblity():
+            print("STGCS solving failed: No feasible path found")
+            return failure_ret
+       
         if relaxation:
             sol = self.G.solve_shortest_path(
                 max_rounded_paths = max_rounded_paths,
@@ -283,39 +290,71 @@ class STGCS:
         
         return sol
 
-    def draw(self, ax:Axes3D, edges=False, set_labels=True) -> None:
-        c = ['r', 'c', 'b', 'y', 'g', 'm', 'k']
-        for i, v in enumerate(self.G.vertices.values()):
-            if v.name[0] != 'v':
-                continue
-            hpoly = squash_multi_points(v.convex_set.set, dim=self.dim)
-            center = np.mean(VPolytope(hpoly).vertices(), axis=1)
-            draw_3d_space_time_set(hpoly, ax, fc=c[i%len(c)], alpha=0.25)
-            if set_labels:
-                ax.text(center[0], center[1], center[2], v.name, color='k')
-        
-        if edges:
-            for e in self.G.edges.values():
-                u, v = self.G.vertices[e.u], self.G.vertices[e.v]
-                if u.name[0] != 'v' or v.name[0] != 'v':
+    def draw(self, ax:Axes|Axes3D, edges=False, set_labels=True, bounds:List[Interval]=[]) -> None:
+        if isinstance(ax, Axes3D):
+            assert self.dim == 3, "3D plotting is only supported for 3D STGCS"
+            c = ['r', 'c', 'b', 'y', 'g', 'm']
+            for i, v in enumerate(self.G.vertices.values()):
+                if v.name[0] != 'v' or (bounds != [] and not AABB(v.space_bounds + [v.itvl], bounds)):
                     continue
+                hpoly = squash_multi_points(v.convex_set.set, dim=self.dim)
+                center = np.mean(VPolytope(hpoly).vertices(), axis=1)
+                draw_3d_set(hpoly, ax, fc=c[i%len(c)], alpha=0.2)
+                if set_labels:
+                    ax.text(center[0], center[1], center[2], v.name, color='k')
+            
+            if edges:
+                for e in self.G.edges.values():
+                    u, v = self.G.vertices[e.u], self.G.vertices[e.v]
+                    if u.name[0] != 'v' or v.name[0] != 'v':
+                        continue
 
-                u_hpoly = squash_multi_points(u.convex_set.set, dim=self.dim)
-                v_hpoly = squash_multi_points(v.convex_set.set, dim=self.dim)
-                P = VPolytope(u_hpoly).vertices()
-                Q = VPolytope(v_hpoly).vertices()
-                cp, cq = np.mean(P, axis=1), np.mean(Q, axis=1)
-                ax.quiver(cp[0], cp[1], cp[2], cq[0] - cp[0], cq[1] - cp[1], cq[2] - cp[2], color='r', arrow_length_ratio=0.1)
+                    u_hpoly = squash_multi_points(u.convex_set.set, dim=self.dim)
+                    v_hpoly = squash_multi_points(v.convex_set.set, dim=self.dim)
+                    P = VPolytope(u_hpoly).vertices()
+                    Q = VPolytope(v_hpoly).vertices()
+                    cp, cq = np.mean(P, axis=1), np.mean(Q, axis=1)
+                    ax.quiver(cp[0], cp[1], cp[2], cq[0] - cp[0], cq[1] - cp[1], cq[2] - cp[2], color='r', arrow_length_ratio=0.1)
+        
+        elif isinstance(ax, Axes):
+            assert self.dim == 2, "2D plotting is only supported for 2D STGCS"
+            c = ['r', 'c', 'b', 'y', 'g', 'm', 'k']
+            for i, v in enumerate(self.G.vertices.values()):
+                if v.name[0] != 'v':
+                    continue
+                hpoly = squash_multi_points(v.convex_set.set, dim=self.dim)
+                center = np.mean(VPolytope(hpoly).vertices(), axis=1)
+                draw_2d_set(hpoly, ax, color=c[i%len(c)])
+                if set_labels:
+                    ax.text(center[0], center[1], v.name, color='k')
 
-    def draw_with_solution(self, ax:Axes3D, sol:ShortestPathSolution, set_labels=True) -> None:
+            if edges:
+                for e in self.G.edges.values():
+                    u, v = self.G.vertices[e.u], self.G.vertices[e.v]
+                    if u.name[0] != 'v' or v.name[0] != 'v':
+                        continue
+
+                    u_hpoly = squash_multi_points(u.convex_set.set, dim=self.dim)
+                    v_hpoly = squash_multi_points(v.convex_set.set, dim=self.dim)
+                    P = VPolytope(u_hpoly).vertices()
+                    Q = VPolytope(v_hpoly).vertices()
+                    cp, cq = np.mean(P, axis=1), np.mean(Q, axis=1)
+                    ax.arrow(cp[0], cp[1], cq[0] - cp[0], cq[1] - cp[1], color='r', width=0.1)
+            
+        else:
+            raise ValueError("Invalid axis type")
+
+    def draw_with_solution(self, ax:Axes3D, sol:ShortestPathSolution, set_labels=True, bounds:List[Interval]=[]) -> None:
         c = ['r', 'c', 'b', 'y', 'g', 'm', 'k']
         for i, (v_name, wp) in enumerate(zip(sol.vertex_path, sol.trajectory)):
+            v = self.G.vertices[v_name]
             xp, xq = wp[:3], wp[3:]
-            if v_name[0] != 'v':
+            if v_name[0] != 'v' or (bounds != [] and not AABB(v.space_bounds + [v.itvl], bounds)):
                 continue
+
             ax.plot([xp[0], xq[0]], [xp[1], xq[1]], [xp[2], xq[2]], f'-ok', linewidth=2)
-            hpoly = squash_multi_points(self.G.vertices[v_name].convex_set.set, dim=self.dim)
+            hpoly = squash_multi_points(v.convex_set.set, dim=self.dim)
             center = np.mean(VPolytope(hpoly).vertices(), axis=1)
-            draw_3d_space_time_set(hpoly, ax, fc=c[i%len(c)], alpha=0.25)
+            draw_3d_set(hpoly, ax, fc=c[i%len(c)], alpha=0.25)
             if set_labels:
                 ax.text(center[0], center[1], center[2], v_name, color='k')
