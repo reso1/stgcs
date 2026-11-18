@@ -8,14 +8,14 @@ from typing import List, Optional, Sequence
 import time
 import numpy as np
 
-from benchmark.environment.env import Env
+from experiments.environment.env import Env
 
 from baselines.common import ShortestPathSolution
 from baselines.ompl_strrt_star import OfficialOMPLSTRRTStar, OfficialOMPLSTRRTStarOptions
 
-from stgcs.pbs import PriorityBasedSearch
-from stgcs.st_planner import MPQuery
-from stgcs.trajectory import STTrajectory
+from baselines.priority_search import PriorityBasedSearch
+from stgcs_native.types import MPQuery
+from stgcs_native.types import STTrajectory
 
 _STRRT_STAR_IMPLEMENTATION = OfficialOMPLSTRRTStar
 

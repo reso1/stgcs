@@ -1,7002 +1,802 @@
 [
   {
-    "instance_id": "base-grid2d-s1-seed00000",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 0,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00001",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 1,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00002",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 2,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00003",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 3,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00004",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 4,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00005",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 5,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00006",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 6,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00007",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 7,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00008",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 8,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00009",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 9,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00010",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 10,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00011",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 11,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00012",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 12,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00013",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 13,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00014",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 14,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00015",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 15,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00016",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 16,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00017",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 17,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00018",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 18,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00019",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 19,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00020",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 20,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00021",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 21,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00022",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 22,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00023",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 23,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00024",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 24,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00025",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 25,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00026",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 26,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00027",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 27,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00028",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 28,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00029",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 29,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00030",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 30,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00031",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 31,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00032",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 32,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00033",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 33,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00034",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 34,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00035",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 35,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00036",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 36,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00037",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 37,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00038",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 38,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00039",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 39,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00040",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 40,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00041",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 41,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00042",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 42,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00043",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 43,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00044",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 44,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00045",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 45,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00046",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 46,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00047",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 47,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00048",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 48,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00049",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 49,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00050",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 50,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00051",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 51,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00052",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 52,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00053",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 53,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00054",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 54,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00055",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 55,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00056",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 56,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00057",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 57,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00058",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 58,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00059",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 59,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00060",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 60,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00061",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 61,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00062",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 62,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00063",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 63,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00064",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 64,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00065",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 65,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00066",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 66,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00067",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 67,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00068",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 68,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00069",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 69,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00070",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 70,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00071",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 71,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00072",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 72,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00073",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 73,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00074",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 74,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00075",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 75,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00076",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 76,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00077",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 77,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00078",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 78,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00079",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 79,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00080",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 80,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00081",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 81,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00082",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 82,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00083",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 83,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00084",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 84,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00085",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 85,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00086",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 86,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00087",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 87,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00088",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 88,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00089",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 89,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00090",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 90,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00091",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 91,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00092",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 92,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00093",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 93,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00094",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 94,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00095",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 95,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00096",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 96,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00097",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 97,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00098",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 98,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s1-seed00099",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 99,
-    "env_params": {
-      "N": 1,
-      "M": 1,
-      "size": 1
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00000",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 0,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00001",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 1,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00002",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 2,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00003",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 3,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00004",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 4,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00005",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 5,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00006",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 6,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00007",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 7,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00008",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 8,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00009",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 9,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 12
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00010",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 10,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00011",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 11,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00012",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 12,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00013",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 13,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00014",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 14,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00015",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 15,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00016",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 16,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 12
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00017",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 17,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00018",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 18,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00019",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 19,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00020",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 20,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00021",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 21,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00022",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 22,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00023",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 23,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00024",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 24,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00025",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 25,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00026",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 26,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00027",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 27,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 12
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00028",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 28,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00029",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 29,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00030",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 30,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00031",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 31,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00032",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 32,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00033",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 33,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00034",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 34,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00035",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 35,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00036",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 36,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00037",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 37,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00038",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 38,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00039",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 39,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00040",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 40,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00041",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 41,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00042",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 42,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00043",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 43,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00044",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 44,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00045",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 45,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00046",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 46,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00047",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 47,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00048",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 48,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00049",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 49,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00050",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 50,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00051",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 51,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00052",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 52,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00053",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 53,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00054",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 54,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00055",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 55,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00056",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 56,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00057",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 57,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00058",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 58,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00059",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 59,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00060",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 60,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00061",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 61,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00062",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 62,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00063",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 63,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00064",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 64,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00065",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 65,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00066",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 66,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00067",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 67,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00068",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 68,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00069",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 69,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00070",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 70,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00071",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 71,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00072",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 72,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00073",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 73,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00074",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 74,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00075",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 75,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00076",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 76,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00077",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 77,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00078",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 78,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 1,
-    "stgcs_num_edges": 0
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00079",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 79,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00080",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 80,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00081",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 81,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 12
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00082",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 82,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00083",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 83,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00084",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 84,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00085",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 85,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00086",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 86,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00087",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 87,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00088",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 88,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00089",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 89,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00090",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 90,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00091",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 91,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00092",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 92,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 2,
-    "stgcs_num_edges": 2
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00093",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 93,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00094",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 94,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00095",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 95,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00096",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 96,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00097",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 97,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00098",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 98,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s2-seed00099",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 99,
-    "env_params": {
-      "N": 2,
-      "M": 2,
-      "size": 2
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00000",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 0,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00001",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 1,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00002",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 2,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00003",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 3,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00004",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 4,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00005",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 5,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 5,
-    "stgcs_num_edges": 12
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00006",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 6,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00007",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 7,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00008",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 8,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00009",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 9,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00010",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 10,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00011",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 11,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00012",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 12,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00013",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 13,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 12
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00014",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 14,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00015",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 15,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00016",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 16,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00017",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 17,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00018",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 18,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00019",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 19,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00020",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 20,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00021",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 21,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00022",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 22,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00023",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 23,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00024",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 24,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00025",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 25,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00026",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 26,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00027",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 27,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00028",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 28,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00029",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 29,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00030",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 30,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 5,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00031",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 31,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00032",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 32,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00033",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 33,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00034",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 34,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00035",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 35,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00036",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 36,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 5,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00037",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 37,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00038",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 38,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00039",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 39,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00040",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 40,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00041",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 41,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00042",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 42,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00043",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 43,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00044",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 44,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00045",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 45,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00046",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 46,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00047",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 47,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00048",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 48,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00049",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 49,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00050",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 50,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00051",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 51,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00052",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 52,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00053",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 53,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00054",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 54,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00055",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 55,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00056",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 56,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00057",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 57,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00058",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 58,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00059",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 59,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00060",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 60,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00061",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 61,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00062",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 62,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00063",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 63,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 12
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00064",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 64,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00065",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 65,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 3,
-    "stgcs_num_edges": 4
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00066",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 66,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00067",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 67,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00068",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 68,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00069",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 69,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00070",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 70,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00071",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 71,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 5,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00072",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 72,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00073",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 73,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00074",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 74,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00075",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 75,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 5,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00076",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 76,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00077",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 77,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00078",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 78,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00079",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 79,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 12
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00080",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 80,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00081",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 81,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00082",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 82,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 12
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00083",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 83,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00084",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 84,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00085",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 85,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00086",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 86,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00087",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 87,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00088",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 88,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00089",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 89,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00090",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 90,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 10
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00091",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 91,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00092",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 92,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00093",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 93,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00094",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 94,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00095",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 95,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 5,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00096",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 96,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00097",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 97,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00098",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 98,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s3-seed00099",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 99,
-    "env_params": {
-      "N": 3,
-      "M": 3,
-      "size": 3
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 4,
-    "stgcs_num_edges": 6
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00000",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 0,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00001",
+    "instance_id": "base-grid2d-s4-seed00001-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 1,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 15,
     "stgcs_num_edges": 34
   },
   {
-    "instance_id": "base-grid2d-s4-seed00002",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 2,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00003",
+    "instance_id": "base-grid2d-s4-seed00003-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 3,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 12,
     "stgcs_num_edges": 28
   },
   {
-    "instance_id": "base-grid2d-s4-seed00004",
+    "instance_id": "base-grid2d-s4-seed00004-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 4,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 15,
     "stgcs_num_edges": 34
   },
   {
-    "instance_id": "base-grid2d-s4-seed00005",
+    "instance_id": "base-grid2d-s4-seed00005-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 5,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 11,
     "stgcs_num_edges": 26
   },
   {
-    "instance_id": "base-grid2d-s4-seed00006",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 6,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00007",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 7,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 46
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00008",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 8,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00009",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 9,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00010",
+    "instance_id": "base-grid2d-s4-seed00010-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 10,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 10,
     "stgcs_num_edges": 24
   },
   {
-    "instance_id": "base-grid2d-s4-seed00011",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 11,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00012",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 12,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 48
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00013",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 13,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00014",
+    "instance_id": "base-grid2d-s4-seed00014-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 14,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 16,
     "stgcs_num_edges": 40
   },
   {
-    "instance_id": "base-grid2d-s4-seed00015",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 15,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 5,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00016",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 16,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00017",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 17,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00018",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 18,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00019",
+    "instance_id": "base-grid2d-s4-seed00019-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 19,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 16,
     "stgcs_num_edges": 30
   },
   {
-    "instance_id": "base-grid2d-s4-seed00020",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 20,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00021",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 21,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00022",
+    "instance_id": "base-grid2d-s4-seed00022-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 22,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 16,
     "stgcs_num_edges": 36
   },
   {
-    "instance_id": "base-grid2d-s4-seed00023",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 23,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00024",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 24,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00025",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 25,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00026",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 26,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00027",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 27,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00028",
+    "instance_id": "base-grid2d-s4-seed00028-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 28,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 16,
     "stgcs_num_edges": 40
   },
   {
-    "instance_id": "base-grid2d-s4-seed00029",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 29,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00030",
+    "instance_id": "base-grid2d-s4-seed00030-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 30,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 12,
     "stgcs_num_edges": 34
   },
   {
-    "instance_id": "base-grid2d-s4-seed00031",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 31,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00032",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 32,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00033",
+    "instance_id": "base-grid2d-s4-seed00033-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 33,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 16,
     "stgcs_num_edges": 36
   },
   {
-    "instance_id": "base-grid2d-s4-seed00034",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 34,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00035",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 35,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00036",
+    "instance_id": "base-grid2d-s4-seed00036-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 36,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 11,
     "stgcs_num_edges": 28
   },
   {
-    "instance_id": "base-grid2d-s4-seed00037",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 37,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00038",
+    "instance_id": "base-grid2d-s4-seed00038-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 38,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 16,
     "stgcs_num_edges": 40
   },
   {
-    "instance_id": "base-grid2d-s4-seed00039",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 39,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00040",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 40,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00041",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 41,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00042",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 42,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00043",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 43,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00044",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 44,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00045",
+    "instance_id": "base-grid2d-s4-seed00045-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 45,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 16,
     "stgcs_num_edges": 36
   },
   {
-    "instance_id": "base-grid2d-s4-seed00046",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 46,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00047",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 47,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00048",
+    "instance_id": "base-grid2d-s4-seed00048-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 48,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 15,
     "stgcs_num_edges": 32
   },
   {
-    "instance_id": "base-grid2d-s4-seed00049",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 49,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00050",
+    "instance_id": "base-grid2d-s4-seed00050-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 50,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 15,
     "stgcs_num_edges": 40
   },
   {
-    "instance_id": "base-grid2d-s4-seed00051",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 51,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00052",
+    "instance_id": "base-grid2d-s4-seed00052-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 52,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 15,
     "stgcs_num_edges": 36
   },
   {
-    "instance_id": "base-grid2d-s4-seed00053",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 53,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00054",
+    "instance_id": "base-grid2d-s4-seed00054-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 54,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 11,
     "stgcs_num_edges": 24
   },
   {
-    "instance_id": "base-grid2d-s4-seed00055",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 55,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00056",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 56,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00057",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 57,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00058",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 58,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00059",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 59,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00060",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 60,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 46
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00061",
+    "instance_id": "base-grid2d-s4-seed00061-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 61,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 12,
     "stgcs_num_edges": 24
   },
   {
-    "instance_id": "base-grid2d-s4-seed00062",
+    "instance_id": "base-grid2d-s4-seed00062-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 62,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 15,
     "stgcs_num_edges": 36
   },
   {
-    "instance_id": "base-grid2d-s4-seed00063",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 63,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00064",
+    "instance_id": "base-grid2d-s4-seed00064-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 64,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 11,
     "stgcs_num_edges": 24
   },
   {
-    "instance_id": "base-grid2d-s4-seed00065",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 65,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00066",
+    "instance_id": "base-grid2d-s4-seed00066-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 66,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 14,
     "stgcs_num_edges": 32
   },
   {
-    "instance_id": "base-grid2d-s4-seed00067",
+    "instance_id": "base-grid2d-s4-seed00067-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
     "spatial_seed": 67,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 15,
     "stgcs_num_edges": 36
   },
   {
-    "instance_id": "base-grid2d-s4-seed00068",
+    "instance_id": "base-grid2d-s4-seed00076-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
-    "spatial_seed": 68,
+    "spatial_seed": 76,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00069",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 69,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00070",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 70,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 14,
+    "stgcs_num_edges": 36
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00082-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 82,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
     "stgcs_num_edges": 40
   },
   {
-    "instance_id": "base-grid2d-s4-seed00071",
+    "instance_id": "base-grid2d-s4-seed00085-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
-    "spatial_seed": 71,
+    "spatial_seed": 85,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 32
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00091-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 91,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 34
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00095-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 95,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 32
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00099-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 99,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 36
+    "stgcs_num_edges": 32
   },
   {
-    "instance_id": "base-grid2d-s4-seed00072",
+    "instance_id": "base-grid2d-s4-seed00104-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
-    "spatial_seed": 72,
+    "spatial_seed": 104,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 40
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00105-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 105,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 40
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00106-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 106,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 36
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00108-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 108,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 8,
+    "stgcs_num_edges": 20
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00109-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 109,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 13,
+    "stgcs_num_edges": 34
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00111-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 111,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 40
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00112-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 112,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 36
+    "stgcs_num_edges": 34
   },
   {
-    "instance_id": "base-grid2d-s4-seed00073",
+    "instance_id": "base-grid2d-s4-seed00113-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
-    "spatial_seed": 73,
+    "spatial_seed": 113,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 36
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00115-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 115,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 12,
+    "stgcs_num_edges": 32
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00127-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 127,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 36
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00135-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 135,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 40
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00137-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 137,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 14,
+    "stgcs_num_edges": 38
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00138-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 138,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 34
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00140-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 140,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 36
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00141-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 141,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 34
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00142-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 142,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 38
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00144-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 144,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 32
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00146-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 146,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 12,
+    "stgcs_num_edges": 38
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00149-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 149,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 12,
+    "stgcs_num_edges": 28
+  },
+  {
+    "instance_id": "base-grid2d-s4-seed00150-scale1p11111",
+    "domain": "grid",
+    "space_dim": 2,
+    "spatial_seed": 150,
+    "env_params": {
+      "N": 4,
+      "M": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 7,
-    "stgcs_num_edges": 20
+    "stgcs_num_edges": 12
   },
   {
-    "instance_id": "base-grid2d-s4-seed00074",
+    "instance_id": "base-grid2d-s4-seed00151-scale1p11111",
     "domain": "grid",
     "space_dim": 2,
-    "spatial_seed": 74,
+    "spatial_seed": 151,
     "env_params": {
       "N": 4,
       "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00075",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 75,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00076",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 76,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00077",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 77,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 46
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00078",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 78,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 6,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00079",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 79,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00080",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 80,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00081",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 81,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00082",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 82,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00083",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 83,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00084",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 84,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00085",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 85,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00086",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 86,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 50
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00087",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 87,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00088",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 88,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00089",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 89,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00090",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 90,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00091",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 91,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00092",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 92,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00093",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 93,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00094",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 94,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00095",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 95,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00096",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 96,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00097",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 97,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 5,
-    "stgcs_num_edges": 8
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00098",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 98,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-grid2d-s4-seed00099",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 99,
-    "env_params": {
-      "N": 4,
-      "M": 4,
-      "size": 4
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00000",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 0,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 62
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00001",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 1,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 60
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00002",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 2,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 56
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00003",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 3,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 50
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00004",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 4,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00005",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 5,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 70
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00006",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 6,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 78
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00007",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 7,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 70
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00008",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 8,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 52
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00009",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 9,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 60
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00010",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 10,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 54
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00011",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 11,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 23,
-    "stgcs_num_edges": 68
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00012",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 12,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 76
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00013",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 13,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00014",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 14,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 64
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00015",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 15,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00016",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 16,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 50
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00017",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 17,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 50
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00018",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 18,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 60
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00019",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 19,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00020",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 20,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 58
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00021",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 21,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00022",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 22,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 58
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00023",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 23,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 66
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00024",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 24,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 66
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00025",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 25,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 64
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00026",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 26,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 23,
-    "stgcs_num_edges": 60
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00027",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 27,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 76
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00028",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 28,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 76
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00029",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 29,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00030",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 30,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 58
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00031",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 31,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 70
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00032",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 32,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 54
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00033",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 33,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 50
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00034",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 34,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 62
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00035",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 35,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 72
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00036",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 36,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00037",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 37,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 54
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00038",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 38,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 52
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00039",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 39,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 64
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00040",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 40,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 58
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00041",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 41,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 16,
     "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00042",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 42,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 54
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00043",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 43,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 60
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00044",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 44,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 56
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00045",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 45,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 23,
-    "stgcs_num_edges": 54
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00046",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 46,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00047",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 47,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00048",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 48,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 74
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00049",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 49,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 50
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00050",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 50,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 74
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00051",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 51,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 52
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00052",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 52,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00053",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 53,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 60
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00054",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 54,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 72
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00055",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 55,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 23,
-    "stgcs_num_edges": 60
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00056",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 56,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00057",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 57,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 62
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00058",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 58,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 74
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00059",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 59,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 23,
-    "stgcs_num_edges": 62
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00060",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 60,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 64
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00061",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 61,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 62
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00062",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 62,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 64
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00063",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 63,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 58
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00064",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 64,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 48
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00065",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 65,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 58
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00066",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 66,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 58
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00067",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 67,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 58
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00068",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 68,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 72
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00069",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 69,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00070",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 70,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00071",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 71,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 48
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00072",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 72,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 23,
-    "stgcs_num_edges": 54
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00073",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 73,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00074",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 74,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 78
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00075",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 75,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00076",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 76,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 68
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00077",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 77,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 70
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00078",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 78,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00079",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 79,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 23,
-    "stgcs_num_edges": 64
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00080",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 80,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 60
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00081",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 81,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 46
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00082",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 82,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 58
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00083",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 83,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00084",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 84,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00085",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 85,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00086",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 86,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 66
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00087",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 87,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00088",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 88,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 52
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00089",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 89,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 68
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00090",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 90,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 68
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00091",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 91,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 23,
-    "stgcs_num_edges": 64
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00092",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 92,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 52
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00093",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 93,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 23,
-    "stgcs_num_edges": 52
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00094",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 94,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 68
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00095",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 95,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 50
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00096",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 96,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 24,
-    "stgcs_num_edges": 72
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00097",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 97,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 50
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00098",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 98,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-grid2d-s5-seed00099",
-    "domain": "grid",
-    "space_dim": 2,
-    "spatial_seed": 99,
-    "env_params": {
-      "N": 5,
-      "M": 5,
-      "size": 5
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 25,
-    "stgcs_num_edges": 66
   }
 ]

@@ -1,0 +1,20 @@
+{
+  "object_file": "base-maze-12x12-seed00037-scale0p416667.npy",
+  "object_format": "numpy-object-array",
+  "record": {
+    "domain": "maze",
+    "env_params": {
+      "height": 12,
+      "robot_radius": 0.10416666666666667,
+      "spatial_scale": 0.4166666666666667,
+      "tmax": 100.0,
+      "width": 12
+    },
+    "instance_id": "base-maze-12x12-seed00037-scale0p416667",
+    "space_dim": 2,
+    "spatial_seed": 37,
+    "stgcs_num_edges": 44,
+    "stgcs_num_vertices": 19,
+    "supports_sampling": true
+  }
+}

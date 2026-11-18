@@ -5,14 +5,13 @@
     "domain": "empty-square2d",
     "env_params": {
       "endpoint_margin": 0.5,
-      "max_query_distance": 6.5,
-      "min_query_distance": 3.25,
+      "max_query_distance": 6.0,
+      "min_query_distance": 3.0,
       "name": "empty-square2d",
       "random_query_seed_offset": 7000,
       "robot_radius": 0.15,
-      "sampling": "bounded-random-local-queries",
-      "square_size": 10.0,
-      "tmax": 1000.0,
+      "square_size": 10.5,
+      "tmax": 100.0,
       "vlimit": 1.0
     },
     "instance_id": "base-empty-square2d-seed00000",
@@ -21,6 +20,5 @@
     "stgcs_num_edges": 0,
     "stgcs_num_vertices": 1,
     "supports_sampling": true
-  },
-  "schema_version": 1
+  }
 }

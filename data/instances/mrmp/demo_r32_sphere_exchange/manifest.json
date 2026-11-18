@@ -1,12 +1,12 @@
 [
   {
-    "base_instance_id": "base-sphere-ball-k16-pairs",
+    "base_instance_id": "base-sphere-ball-seed00000",
     "conflict_density": 1.0,
     "conflict_largest_component": 32,
     "independent_cost_sum": 128.0,
     "independent_makespan": 4.0,
     "independent_runtime": 0.0,
-    "instance_id": "mrmp-sphere-ball-swap-k16-pairs-32-robots",
+    "instance_id": "mrmp-base-sphere-ball-seed00000-32-robot-swap",
     "num_agents": 32,
     "num_conflicting_agents": 32,
     "num_conflicting_pairs": 496,
@@ -494,7 +494,6 @@
     ],
     "stgcs_num_edges": 0,
     "stgcs_num_vertices": 1,
-    "traffic_family": "sphere-ball-antipodal-swap",
-    "traffic_tier": "32-robot"
+    "tmax": 100.0
   }
 ]

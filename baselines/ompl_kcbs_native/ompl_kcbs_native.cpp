@@ -343,6 +343,10 @@ public:
 
     bool isValid(const ob::State *state) const override
     {
+        // Control propagation can leave the sampling bounds. OMPL delegates
+        // rejection of those propagated states to this validity checker.
+        if (!si_->satisfiesBounds(state))
+            return false;
         const auto point = state_values(state, dim_);
         return native_environment_->isStateValid(point, robot_radius_);
     }

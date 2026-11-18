@@ -6,7 +6,8 @@
     "spatial_seed": 0,
     "env_params": {
       "robot_radius": 0.1,
-      "vlimit": 1.0
+      "vlimit": 1.0,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 8,

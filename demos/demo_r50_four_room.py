@@ -1,4 +1,5 @@
 from __future__ import annotations
+from visualization.solution_io import SolutionIO
 
 import argparse
 import json
@@ -6,18 +7,13 @@ import math
 import os
 from pathlib import Path
 
-from benchmark.base import BaseManifestStore
-from benchmark.manifests.mrmp import load_manifest
-from benchmark.planners.mrmp import SearchPlannerSpec
-from demos.trajopt.trajopt_utils import (
-    MRMPPlannerSettings,
-    TrajoptSettings,
-    run_mrmp,
-    run_trajopt,
-    validate_solution_payload,
-)
-from stgcs.pbs import ChildExpansionMode
-from visualization.viewer_utils import print_json, start_instance_viewer
+from experiments.base import BaseManifestStore
+from experiments.manifests.mrmp import load_manifest
+from experiments.planners.mrmp import SearchPlannerSpec
+from experiments.planners.mrmp import MRMPPlannerSettings, TrajoptSettings
+from experiments.mrmp import MRMPExperiment
+from stgcs_native.types import ChildExpansionMode
+from visualization.viewer.server import ViewerServer
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,21 +22,21 @@ os.environ.setdefault("XDG_CACHE_HOME", "/private/tmp/stgcs-xdg-cache")
 
 DEFAULT_BASE_ROOT = ROOT / "data/stgcs_base"
 DEFAULT_MANIFEST_PATH = ROOT / "data/instances/mrmp/demo_r50_four_room/manifest.json"
-DEFAULT_SOLUTION_OUTPUT = ROOT / "data/solutions/demo_r50_four_room/mrmp_solution.json"
-DEFAULT_TRAJOPT_OUTPUT = ROOT / "data/solutions/demo_r50_four_room/trajopt_solution.json"
 DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 8765
 
 BASE_DOMAIN_KEY = "simple2d"
 BASE_INSTANCE_ID = "base-simple2d-seed00000"
 INSTANCE_ID = "mrmp-base-simple2d-seed00000-50-robot-random"
+DEFAULT_SOLUTION_OUTPUT = ROOT / "data/solutions" / DEFAULT_MANIFEST_PATH.parent.name / "mrmp_solution.json"
+DEFAULT_TRAJOPT_OUTPUT = ROOT / "data/solutions" / DEFAULT_MANIFEST_PATH.parent.name / "trajopt_solution.json"
 
-BUDGET = 600.0
-WINDOW_ALPHA = 5.0
+BUDGET = 120.0
+WINDOW_ALPHA = 2.0
 WINDOW_BETA = 1.0
-EPSILON = 1000.0
+EPSILON = 8.0
 DYNAMIC_WINDOW_ADJUSTMENT = True
-CHILD_EXPANSION_RULE = "lazy"
+CHILD_EXPANSION_RULE = "num_conflicts"
 CHILD_EXPANSION_RULES = {
     "lazy": ChildExpansionMode.LAZY,
     "soc": ChildExpansionMode.SOC,
@@ -93,7 +89,7 @@ TRAJOPT_SETTINGS = TrajoptSettings(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Solve and view the 50-robot SIMPLE2D large-scale MRMP demo."
+        description="Solve and view the 50-robot four-room MRMP demo with query seed 3."
     )
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST_PATH)
     parser.add_argument("--base-root", type=Path, default=DEFAULT_BASE_ROOT)
@@ -181,14 +177,13 @@ if __name__ == "__main__":
     payload = None
     if not bool(args.force_solve) and solution_output.exists():
         payload = json.loads(solution_output.read_text())
-        validate_solution_payload(payload, record, selected_planner_key, budget)
-        print(f"Reusing saved MRMP solution: {solution_output.relative_to(ROOT)}")
+        SolutionIO.validate_solution_payload(payload, record, selected_planner_key, budget)
+        print(f"Reusing saved MRMP solution: {os.path.relpath(solution_output, ROOT)}")
 
     if payload is None:
         print(f"Running {record.instance_id} with {selected_planner_name}")
-        payload = run_mrmp(
+        payload = MRMPExperiment.run_stgcs(
             record,
-            base_manifest_path,
             base_record,
             low_level_spec,
             selected_planner_key,
@@ -199,7 +194,7 @@ if __name__ == "__main__":
             window_beta=window_beta,
             child_expansion_rule=child_expansion_rule,
         )
-        validate_solution_payload(payload, record, selected_planner_key, budget)
+        SolutionIO.validate_solution_payload(payload, record, selected_planner_key, budget)
         solution_output.parent.mkdir(parents=True, exist_ok=True)
         tmp_path = solution_output.with_suffix(solution_output.suffix + ".tmp")
         tmp_path.write_text(json.dumps(payload, indent=2, sort_keys=True))
@@ -207,13 +202,13 @@ if __name__ == "__main__":
 
     trajopt_payload = None
     if bool(args.trajopt):
-        if not bool(args.force_trajopt) and trajopt_output.exists():
+        if not (args.force_solve or args.force_trajopt) and trajopt_output.exists():
             trajopt_payload = json.loads(trajopt_output.read_text())
-            validate_solution_payload(trajopt_payload, record, trajopt_planner_key, budget)
-            print(f"Reusing saved trajopt solution: {trajopt_output.relative_to(ROOT)}")
+            SolutionIO.validate_solution_payload(trajopt_payload, record, trajopt_planner_key, budget)
+            print(f"Reusing saved trajopt solution: {os.path.relpath(trajopt_output, ROOT)}")
         if trajopt_payload is None:
             print(f"Running trajopt for {record.instance_id}")
-            trajopt_payload = run_trajopt(
+            trajopt_payload = MRMPExperiment.run_trajopt(
                 record,
                 base_record,
                 payload,
@@ -221,7 +216,7 @@ if __name__ == "__main__":
                 trajopt_planner_name,
                 TRAJOPT_SETTINGS,
             )
-            validate_solution_payload(trajopt_payload, record, trajopt_planner_key, budget)
+            SolutionIO.validate_solution_payload(trajopt_payload, record, trajopt_planner_key, budget)
             trajopt_output.parent.mkdir(parents=True, exist_ok=True)
             tmp_path = trajopt_output.with_suffix(trajopt_output.suffix + ".tmp")
             tmp_path.write_text(json.dumps(trajopt_payload, indent=2, sort_keys=True))
@@ -229,9 +224,9 @@ if __name__ == "__main__":
 
     summary = {
         "instance_id": record.instance_id,
-        "base_manifest": str(base_manifest_path.relative_to(ROOT)),
-        "manifest": str(manifest_path.relative_to(ROOT)),
-        "solution": str(solution_output.relative_to(ROOT)),
+        "base_manifest": str(os.path.relpath(base_manifest_path, ROOT)),
+        "manifest": str(os.path.relpath(manifest_path, ROOT)),
+        "solution": str(os.path.relpath(solution_output, ROOT)),
         "success": bool(payload["is_success"]),
         "runtime": payload["runtime"],
         "sum_of_costs": payload["cost"],
@@ -241,21 +236,19 @@ if __name__ == "__main__":
     if trajopt_payload is not None:
         summary.update(
             {
-                "trajopt_solution": str(trajopt_output.relative_to(ROOT)),
+                "trajopt_solution": str(os.path.relpath(trajopt_output, ROOT)),
                 "trajopt_runtime": trajopt_payload["runtime"],
                 "trajopt_sum_of_costs": trajopt_payload["cost"],
                 "trajopt_makespan": trajopt_payload["makespan"],
             }
         )
-    print_json(
-        summary
-    )
+    print(json.dumps(summary, indent=2))
 
     if not bool(args.no_serve):
         solution_paths = [solution_output]
         if trajopt_payload is not None:
             solution_paths.append(trajopt_output)
-        start_instance_viewer(
+        ViewerServer.start(
             manifest_path,
             base_root,
             record.instance_id,

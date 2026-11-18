@@ -1,231 +1,114 @@
 # Experiments
 
-This folder contains repository-local scripts for building benchmark artifacts,
-running ST and MRMP experiments, and regenerating figures. Run them from the
-repository root with `python -m ...`; the `experiments` package is a script
-surface, not an installed library component.
+Dataset generation, batch planning, and reports. Run commands from the repository
+root after the [project setup](../README.md#setup).
 
-For local runs, keep Matplotlib and font caches in writable temp folders:
+| Location | Purpose |
+| --- | --- |
+| `datasets/` | Generate base geometry, ST queries, and MRMP manifests |
+| `runners/` | Run planners, ablations, and heuristic precomputation |
+| `reports/` | Read saved results and produce figures/tables |
+| `manifests/`, `environment/` | Dataset records and geometry |
+| `planners/` | Shared planner settings and experiment schedules |
+| `native.py`, `mrmp.py` | Adapt dataset records to the shared Python/C++ API |
+| `results.py`, `base_serialization.py` | Raw ST CSV and saved-base read/write helpers |
+
+## Run experiments
+
+Run one ST instance with BFS, writing results to a separate directory:
 
 ```bash
-export MPLCONFIGDIR=/private/tmp/stgcs-mpl-cache
-export XDG_CACHE_HOME=/private/tmp/stgcs-xdg-cache
+python -m experiments.runners.st \
+  --executable stgcs_cplusplus/build/bin/stgcs_planner \
+  --work-dir build/st-example/work --output-root build/st-example/results \
+  --suite performance_comparison --planner delta-state \
+  --performance-budget 30 --limit 1 --skip-scaling
 ```
 
-Use `--limit 1` or a small manifest when checking a runner before launching a
-full benchmark.
+Other ST suites are `heuristic_ablation`, `dominance_ablation`, and
+`heuristic_inflation`. Use `--suite all` for the full schedule. The runner
+rebuilds the selected native build before execution and resumes completed jobs
+from its work directory.
 
-## Layout
-
-- `build_base_manifest.py`: build shared base ST-GCS manifests under
-  `data/stgcs_base`.
-- `compute_heuristics.py`: precompute shared base heuristic caches.
-- `st_runners/`: ST-planning manifest builders and experiment runners.
-- `mrmp_runners/`: MRMP manifest builders and experiment runners.
-- `plot/`: figure and table scripts that consume CSV results.
-- `common.py` and `mpl_paper.py`: shared script utilities.
-
-Reusable benchmark definitions live in `benchmark/`, not here. In particular,
-`benchmark.offline_heuristics.BaseOfflineHeuristicStore` defines heuristic
-cache paths and loading behavior; `experiments.compute_heuristics` is only the
-CLI that generates those caches.
-
-## Shared Base Artifacts
-
-Build base manifests:
+Run one 10-robot MRMP instance with Windowed-PBS+BFS:
 
 ```bash
-python -m experiments.build_base_manifest grid2d \
-  --output-root data/stgcs_base \
-  --count-per-size 100
-
-python -m experiments.build_base_manifest maze \
-  --output-root data/stgcs_base \
-  --count-total 500
-
-python -m experiments.build_base_manifest iris-2d \
-  --output-root data/stgcs_base \
-  --count-total 500
-```
-
-Precompute h_tri caches for a base manifest:
-
-```bash
-python -m experiments.compute_heuristics \
-  data/stgcs_base/grid2d/manifest.json \
-  --workers 4
-```
-
-Precompute h_tri and h_tab caches:
-
-```bash
-python -m experiments.compute_heuristics \
-  data/stgcs_base/grid2d/manifest.json \
-  --workers 4 \
-  --h-tab-timeout-secs 60
-```
-
-The same command can consume an ST manifest; it resolves the referenced base
-records through `--base-root`:
-
-```bash
-python -m experiments.compute_heuristics \
-  data/instances/st_planning/manifest.json \
-  --base-root data/stgcs_base \
-  --workers 4 \
-  --h-tab-timeout-secs 60
-```
-
-Use `--force` only when the existing cache files should be recomputed.
-
-## ST Runners
-
-Build the dynamic-obstacle ST manifest used by the heuristic ablation:
-
-```bash
-python -m experiments.st_runners.heuristic_ablation_st_manifest \
-  --base-root data/stgcs_base \
-  --output data/instances/st_planning/manifest.json
-```
-
-Run the heuristic ablation:
-
-```bash
-python -m experiments.st_runners.heuristic_ablation_run_search \
-  data/instances/st_planning/manifest.json \
-  --base-root data/stgcs_base \
-  --output-root data/results/st_planning/heuristic_ablation \
-  --budget 600 \
-  --limit 1
-```
-
-Run the heuristic-inflation ablation:
-
-```bash
-python -m experiments.st_runners.heuristic_inflation_run_search \
-  data/instances/st_planning/manifest.json \
-  --base-root data/stgcs_base \
-  --output-root data/results/st_planning/heuristic_inflation \
-  --budget 600 \
-  --limit 1
-```
-
-Run the ST performance comparison:
-
-```bash
-python -m experiments.st_runners.performance_comparison_run_search \
-  data/instances/st_planning/manifest.json \
-  --base-root data/stgcs_base \
-  --output-root data/results/st_planning/performance_comparison \
-  --planner delta-pos \
-  --budget 600 \
-  --limit 1
-```
-
-Run the MICP timeout wrapper when isolating MICP rows:
-
-```bash
-PYTHON_BIN=/Users/jingtao/miniconda3/envs/gcs/bin/python \
-MANIFEST=data/instances/st_planning/manifest.json \
-PLANNERS="micp micpg" \
-LIMIT=1 \
-bash experiments/st_runners/run_st_performance_micp_timeout.sh
-```
-
-Build the heuristic-computation scaling manifest and caches:
-
-```bash
-python -m experiments.st_runners.heur_computation_time_scaling \
-  --output-root data/stgcs_base/heur_computation_time_scaling \
-  --h-tab-timeout-secs 10000
-```
-
-## MRMP Runners
-
-Build MRMP manifests:
-
-```bash
-python -m experiments.mrmp_runners.build_manifest grid2d \
-  --benchmark pbs-node-expansion \
-  --base-root data/stgcs_base
-
-python -m experiments.mrmp_runners.build_manifest all \
-  --benchmark performance-comparison \
-  --replicates-per-robot-count 1 \
-  --base-root data/stgcs_base
-```
-
-Run full-horizon PBS variants:
-
-```bash
-python -m experiments.mrmp_runners.run_search \
-  data/instances/mrmp/pbs_node_expansion/grid2d/manifest.json \
-  --base-root data/stgcs_base \
-  --budget 300 \
-  --limit 1
-```
-
-Run the windowed-coordination ablation:
-
-```bash
-python -m experiments.mrmp_runners.run_windowed_coordination \
-  --manifest-root data/instances/mrmp/windowed_coordination \
-  --base-root data/stgcs_base \
-  --output-root data/results/mrmp/windowed_coordination \
-  --budget 600 \
-  --limit 1
-```
-
-Run the MRMP performance comparison:
-
-```bash
-python -m experiments.mrmp_runners.run_performance_comparison \
+python -m experiments.runners.mrmp_comparison \
   data/instances/mrmp/performance_comparison/manifest_n10.json \
-  --base-root data/stgcs_base \
-  --output-root data/results/mrmp/performance_comparison \
-  --planner wpbs \
-  --budget 180 \
-  --limit 1
+  --executable stgcs_cplusplus/build/bin/stgcs_planner \
+  --work-dir build/mrmp-example/work --output-root build/mrmp-example/results \
+  --planner wpbs --budget 120 --limit 1
 ```
 
-`experiments/mrmp_runners/run_fixed_pp_strrt_star_performance_comparison.sh`
-is a small shell convenience wrapper for repeated MRMP performance-comparison
-runs over the numbered manifests.
+Omit `--limit` to run the selected manifest. Omit the manifest argument to use
+the robot-count manifests under `--manifest-root`. `--planner all` includes the
+full comparison; [OMPL backends](../baselines/README.md) are needed for its native
+baselines. MRMP runners resume rows already recorded at the selected budget.
+`runners.mrmp` runs PBS expansion-rule ablations; `runners.mrmp_windows` runs
+windowed-coordination ablations. Use each module's `--help` for its choices.
 
-## Plot Scripts
-
-Plot scripts read CSVs from `data/results/...` and write figures or tables to
-`latex/figs/...` and `latex/tables/...` by default. Run them as modules:
+## Generate figures from saved results
 
 ```bash
-python -m experiments.plot.plot_st_performance_comparison
-python -m experiments.plot.plot_st_heuristic_ablation_groups
-python -m experiments.plot.plot_st_dominance_ablation_groups
-python -m experiments.plot.plot_heuristic_inflation_and_scaling
-
-python -m experiments.plot.plot_mrmp_pbs_node_expansion
-python -m experiments.plot.plot_mrmp_windowed_coordination
-python -m experiments.plot.plot_mrmp_performance_comparison
-python -m experiments.plot.plot_mrmp_wpbs_runtime_breakdown
+python -m experiments.reports.st_comparison \
+  --budget 30 --output-prefix build/figures/st_comparison
+python -m experiments.reports.mrmp_comparison \
+  --budget 120 --output-prefix build/figures/mrmp_comparison
 ```
 
-Use each script's `--help` output for custom `--results-root`,
-`--output-prefix`, `--budget`, and format options.
+These read `data/exp_res` and write PDF/PNG outputs. `--results-root` selects
+another result directory. Set `--output-prefix` explicitly; most report defaults
+point to `latex/figs` or `latex/tables`, which are output directories.
 
-## Quick Checks
+| Paper figure | Module under `experiments.reports` |
+| --- | --- |
+| 9: spatial domains | `spatial_domains` |
+| 10: dominance ablation | `st_dominance` |
+| 11: heuristic ablation | `st_heuristics` |
+| 12: ST comparison | `st_comparison` |
+| 13: ST trajectories | `st_trajectories` |
+| 14: PBS expansion rules | `mrmp_pbs` |
+| 15: coordination windows | `mrmp_windows` |
+| 16: MRMP comparison | `mrmp_comparison` |
+| 17: MRMP trajectories | `mrmp_trajectories` |
+| 18: large 2D demos | `demo_large_2d` |
+| 20: sphere exchange | `demo_sphere_3d` |
+| B1: heuristic scaling/stress | `heuristic_scaling` |
 
-Check all main entrypoints without running experiments:
+The saved Fig. 14 results require
+`--results-root data/exp_res/mrmp/pbs_node_expansion`; the module's default points
+to a different run directory. `st_inflation` produces heuristic-inflation tables;
+`mrmp_runtime` produces runtime breakdowns.
+
+Qualitative trajectory reports have additional inputs: `st_trajectories` needs
+the separately prepared IRIS example, and `mrmp_trajectories` needs a comparison
+snapshot or `--replay-report` containing saved trajectories. Their normal replay
+paths can run planners. The two large-demo reports read `data/solutions`.
+Conceptual diagrams and real-robot photos are separate paper assets.
+
+## Generate datasets and precompute heuristics
+
+The existing datasets and heuristic caches are already saved. To inspect the
+generation options:
 
 ```bash
-python -m experiments.build_base_manifest --help
-python -m experiments.compute_heuristics --help
-python -m experiments.st_runners.performance_comparison_run_search --help
-python -m experiments.mrmp_runners.run_performance_comparison --help
-python -m experiments.plot.plot_st_performance_comparison --help
+python -m experiments.datasets.base --help
+python -m experiments.datasets.st --help
+python -m experiments.datasets.st_stress --help
+python -m experiments.datasets.mrmp --help
 ```
 
-Compile the experiment scripts:
+MRMP performance datasets keep one `manifest_nN.json` per robot count. ST stress
+instances live under `data/instances/st_planning/st_planning_stress`.
+Use each generator's output argument when creating another dataset.
+
+Explicitly prepare missing base heuristic tables with:
 
 ```bash
-find experiments -name '*.py' -print0 | xargs -0 python -m py_compile
+python -m experiments.runners.precompute \
+  data/stgcs_base/grid2d/manifest.json --workers 1
 ```
+
+This skips complete caches; `--force` recomputes them. Planner runs may also
+prepare missing caches. Report-only commands above do not need precomputation.
+See [data layout](../data/README.md) for stored formats and locations.

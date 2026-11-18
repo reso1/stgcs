@@ -1,0 +1,802 @@
+[
+  {
+    "instance_id": "base-maze-12x12-seed00000-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 0,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 13,
+    "stgcs_num_edges": 26
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00001-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 1,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 17,
+    "stgcs_num_edges": 40
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00002-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 2,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 18,
+    "stgcs_num_edges": 46
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00003-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 3,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 18,
+    "stgcs_num_edges": 40
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00005-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 5,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 44
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00006-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 6,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 42
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00007-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 7,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 13,
+    "stgcs_num_edges": 28
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00008-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 8,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 23,
+    "stgcs_num_edges": 52
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00010-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 10,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 13,
+    "stgcs_num_edges": 30
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00011-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 11,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 36
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00012-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 12,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 18,
+    "stgcs_num_edges": 42
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00013-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 13,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 17,
+    "stgcs_num_edges": 32
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00014-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 14,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 46
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00015-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 15,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 50
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00016-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 16,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 18,
+    "stgcs_num_edges": 44
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00017-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 17,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 30
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00018-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 18,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 44
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00019-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 19,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 30
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00020-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 20,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 18,
+    "stgcs_num_edges": 42
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00021-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 21,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 36
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00022-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 22,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 24,
+    "stgcs_num_edges": 52
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00023-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 23,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 46
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00024-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 24,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 40
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00027-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 27,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 48
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00028-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 28,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 13,
+    "stgcs_num_edges": 32
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00029-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 29,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 22,
+    "stgcs_num_edges": 50
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00031-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 31,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 17,
+    "stgcs_num_edges": 36
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00032-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 32,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 21,
+    "stgcs_num_edges": 50
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00033-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 33,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 44
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00034-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 34,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 21,
+    "stgcs_num_edges": 56
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00035-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 35,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 38
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00036-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 36,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 17,
+    "stgcs_num_edges": 38
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00037-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 37,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 44
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00038-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 38,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 42
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00040-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 40,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 46
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00041-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 41,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 44
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00042-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 42,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 24,
+    "stgcs_num_edges": 56
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00043-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 43,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 12,
+    "stgcs_num_edges": 22
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00044-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 44,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 21,
+    "stgcs_num_edges": 44
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00045-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 45,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 17,
+    "stgcs_num_edges": 36
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00046-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 46,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 22,
+    "stgcs_num_edges": 58
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00047-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 47,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 21,
+    "stgcs_num_edges": 46
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00048-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 48,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 28
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00049-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 49,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 22,
+    "stgcs_num_edges": 54
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00050-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 50,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 32
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00051-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 51,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 36
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00052-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 52,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 44
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00053-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 53,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 13,
+    "stgcs_num_edges": 30
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00054-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 54,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 30
+  },
+  {
+    "instance_id": "base-maze-12x12-seed00055-scale0p416667",
+    "domain": "maze",
+    "space_dim": 2,
+    "spatial_seed": 55,
+    "env_params": {
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
+    },
+    "supports_sampling": true,
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 46
+  }
+]

@@ -1,0 +1,2429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Planning Instance Viewer</title>
+  <style>
+    :root {
+      --bg: #f4f1e8;
+      --panel: rgba(255, 251, 242, 0.92);
+      --panel-border: #d6ccb7;
+      --text: #241d16;
+      --muted: #726657;
+      --accent: #184c61;
+      --canvas: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      background:
+        radial-gradient(circle at top left, rgba(24, 76, 97, 0.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(189, 109, 71, 0.12), transparent 26%),
+        var(--bg);
+      color: var(--text);
+      font: 14px/1.45 "Avenir Next", "Segoe UI", sans-serif;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      height: 100%;
+    }
+
+    .sidebar {
+      padding: 18px 16px;
+      border-right: 1px solid var(--panel-border);
+      background: var(--panel);
+      backdrop-filter: blur(10px);
+      overflow-y: auto;
+    }
+
+    .viewer-shell {
+      position: relative;
+      min-width: 0;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    #glCanvas {
+      background: var(--canvas);
+    }
+
+    #labelCanvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: transparent;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .lede {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+
+    .block {
+      margin-bottom: 18px;
+      padding: 12px;
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 10px 30px rgba(36, 29, 22, 0.05);
+    }
+
+    .block h2 {
+      margin: 0 0 10px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input[type="file"],
+    select,
+    button,
+    input[type="number"],
+    input[type="range"] {
+      width: 100%;
+    }
+
+    input[type="file"],
+    select,
+    button,
+    input[type="number"] {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--panel-border);
+      background: white;
+      color: var(--text);
+    }
+
+    button {
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+      border: none;
+      font-weight: 700;
+    }
+
+    button.secondary {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--panel-border);
+      margin-top: 8px;
+    }
+
+    .toggles label {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin: 0 0 8px;
+      font-weight: 500;
+    }
+
+    .meta {
+      color: var(--muted);
+      white-space: pre-wrap;
+      font-family: ui-monospace, "SFMono-Regular", monospace;
+      font-size: 12px;
+    }
+
+    .hud {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      max-width: 420px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(214, 204, 183, 0.95);
+      background: rgba(255, 251, 242, 0.88);
+      backdrop-filter: blur(10px);
+      color: var(--text);
+      font-size: 12px;
+      box-shadow: 0 18px 60px rgba(36, 29, 22, 0.12);
+      pointer-events: none;
+      white-space: pre-wrap;
+    }
+
+    .hint {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      padding: 9px 10px;
+      border-radius: 12px;
+      background: rgba(255, 251, 242, 0.88);
+      border: 1px solid rgba(214, 204, 183, 0.95);
+      color: var(--muted);
+      font-size: 12px;
+      pointer-events: none;
+    }
+
+    .empty {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .control-row {
+      display: grid;
+      grid-template-columns: 1fr 96px;
+      gap: 8px;
+      align-items: end;
+      margin-bottom: 8px;
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .solution-status {
+      color: var(--muted);
+      white-space: pre-wrap;
+      font-family: ui-monospace, "SFMono-Regular", monospace;
+      font-size: 12px;
+      min-height: 18px;
+    }
+
+    .solution-planner-buttons {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .solution-planner-buttons:empty {
+      display: none;
+    }
+
+    .solution-planner-buttons button {
+      text-align: left;
+      line-height: 1.25;
+    }
+
+    .solution-list {
+      margin-top: 8px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .solution-row {
+      border-left: 4px solid var(--accent);
+      padding: 4px 0 4px 8px;
+      color: var(--muted);
+      font-family: ui-monospace, "SFMono-Regular", monospace;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .solution-row label {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 0;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .solution-row input {
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+
+    .solution-row.is-hidden {
+      opacity: 0.55;
+    }
+
+    .solution-row.is-hidden .solution-row-text {
+      text-decoration: line-through;
+      text-decoration-thickness: 1px;
+    }
+
+    .solution-row-text {
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 900px) {
+      .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--panel-border);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h1>Instance Viewer</h1>
+      <p class="lede">WebGL viewer for enriched base, MRMP, and ST heuristic-ablation manifests. It renders spatial sets and query start-goal pairs.</p>
+
+      <section class="block">
+        <h2>Time</h2>
+        <label for="timeSlider">Simulation time</label>
+        <input id="timeSlider" type="range" min="0" max="0" step="0.01" value="0" disabled>
+        <div id="timeReadout" class="meta">t = 0.00</div>
+      </section>
+
+      <section class="block toggles">
+        <h2>Layers</h2>
+        <label><input id="toggleSetFill" type="checkbox" checked> Spatial sets fill</label>
+        <label><input id="toggleSetOutline" type="checkbox" checked> Spatial sets outline</label>
+        <label><input id="toggleStaticObstacles" type="checkbox" checked> Static obstacles</label>
+        <label><input id="toggleObstaclePath" type="checkbox" checked> Dynamic obstacle paths</label>
+        <label><input id="toggleObstacleBody" type="checkbox" checked> Dynamic obstacle bodies</label>
+        <label><input id="toggleQueries" type="checkbox" checked> Queries</label>
+        <label><input id="toggleSolutionPath" type="checkbox" checked> Solution paths</label>
+        <label><input id="toggleSolutionBody" type="checkbox" checked> Solution body</label>
+      </section>
+
+      <section class="block">
+        <h2>Solutions</h2>
+        <div id="solutionStatus" class="solution-status empty">No solution loaded.</div>
+        <div id="solutionList" class="solution-list"></div>
+      </section>
+
+    </aside>
+
+    <div hidden>
+      <input id="manifestFile" type="file" accept=".json,application/json">
+      <button id="fitButton" class="secondary" type="button">Fit Current Instance</button>
+      <button id="exportFigureButton" class="secondary" type="button">Export Figure</button>
+      <select id="instanceSelect" disabled>
+        <option>No manifest loaded</option>
+      </select>
+    </div>
+
+    <main class="viewer-shell">
+      <canvas id="glCanvas"></canvas>
+      <canvas id="labelCanvas"></canvas>
+      <div id="hud" class="hud">No manifest loaded.</div>
+      <div id="hint" class="hint">Drag to pan. Mouse wheel to zoom.</div>
+    </main>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("glCanvas");
+    const labelCanvas = document.getElementById("labelCanvas");
+    const labelCtx = labelCanvas.getContext("2d");
+    const manifestFile = document.getElementById("manifestFile");
+    const instanceSelect = document.getElementById("instanceSelect");
+    const timeSlider = document.getElementById("timeSlider");
+    const timeReadout = document.getElementById("timeReadout");
+    const fitButton = document.getElementById("fitButton");
+    const exportFigureButton = document.getElementById("exportFigureButton");
+    const hud = document.getElementById("hud");
+    const toggleSetFill = document.getElementById("toggleSetFill");
+    const toggleSetOutline = document.getElementById("toggleSetOutline");
+    const toggleStaticObstacles = document.getElementById("toggleStaticObstacles");
+    const toggleObstaclePath = document.getElementById("toggleObstaclePath");
+    const toggleObstacleBody = document.getElementById("toggleObstacleBody");
+    const toggleQueries = document.getElementById("toggleQueries");
+    const toggleSolutionPath = document.getElementById("toggleSolutionPath");
+    const toggleSolutionBody = document.getElementById("toggleSolutionBody");
+    const solutionStatus = document.getElementById("solutionStatus");
+    const solutionList = document.getElementById("solutionList");
+    const hint = document.getElementById("hint");
+    const EXPORT_DPI = 300;
+    const CSS_DPI = 96;
+    let renderPixelRatioOverride = null;
+
+    const gl = canvas.getContext("webgl2", { antialias: true, alpha: true, preserveDrawingBuffer: true });
+    if (!gl) {
+      hud.textContent = "WebGL2 is unavailable in this browser.";
+      throw new Error("WebGL2 unavailable");
+    }
+
+    const state = {
+      manifest: null,
+      currentIndex: 0,
+      time: 0,
+      view2d: {
+        centerX: 0,
+        centerY: 0,
+        spanX: 10,
+        spanY: 10,
+      },
+      view3d: {
+        target: [0, 0, 0],
+        distance: 10,
+        yaw: -0.9,
+        pitch: 0.55,
+        fovY: Math.PI / 4,
+        boundsRadius: 1,
+      },
+      drag: null,
+      solutionsByInstanceId: {},
+    };
+
+    const vertexShader2dSource = `#version 300 es
+      in vec2 a_position;
+      in vec4 a_color;
+      out vec4 v_color;
+      void main() {
+        gl_Position = vec4(a_position, 0.0, 1.0);
+        v_color = a_color;
+      }
+    `;
+
+    const vertexShader3dSource = `#version 300 es
+      uniform mat4 u_matrix;
+      in vec3 a_position;
+      in vec4 a_color;
+      out vec4 v_color;
+      void main() {
+        gl_Position = u_matrix * vec4(a_position, 1.0);
+        v_color = a_color;
+      }
+    `;
+
+    const fragmentShaderSource = `#version 300 es
+      precision mediump float;
+      in vec4 v_color;
+      out vec4 outColor;
+      void main() {
+        outColor = v_color;
+      }
+    `;
+
+    function compileShader(type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        throw new Error(gl.getShaderInfoLog(shader));
+      }
+      return shader;
+    }
+
+    function createProgram(vsSource, fsSource) {
+      const program = gl.createProgram();
+      gl.attachShader(program, compileShader(gl.VERTEX_SHADER, vsSource));
+      gl.attachShader(program, compileShader(gl.FRAGMENT_SHADER, fsSource));
+      gl.linkProgram(program);
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        throw new Error(gl.getProgramInfoLog(program));
+      }
+      return program;
+    }
+
+    const program2d = createProgram(vertexShader2dSource, fragmentShaderSource);
+    const program3d = createProgram(vertexShader3dSource, fragmentShaderSource);
+    const positionBuffer = gl.createBuffer();
+    const colorBuffer = gl.createBuffer();
+    const positionLocation2d = gl.getAttribLocation(program2d, "a_position");
+    const colorLocation2d = gl.getAttribLocation(program2d, "a_color");
+    const positionLocation3d = gl.getAttribLocation(program3d, "a_position");
+    const colorLocation3d = gl.getAttribLocation(program3d, "a_color");
+    const matrixLocation3d = gl.getUniformLocation(program3d, "u_matrix");
+
+    const palette = [
+      [0.09, 0.30, 0.38, 0.95],
+      [0.73, 0.42, 0.27, 0.95],
+      [0.14, 0.48, 0.34, 0.95],
+      [0.42, 0.28, 0.62, 0.95],
+      [0.73, 0.58, 0.23, 0.95],
+      [0.16, 0.53, 0.68, 0.95],
+    ];
+
+    const spatialSetFill = [0.804, 0.835, 0.808, 0.9];
+    const spatialSetBorder = [0.0, 0.0, 0.0, 0.9];
+
+    const solutionPalette = [
+      [0.82, 0.16, 0.18, 0.96],
+      [0.02, 0.42, 0.78, 0.96],
+      [0.30, 0.52, 0.08, 0.96],
+      [0.56, 0.26, 0.70, 0.96],
+      [0.88, 0.45, 0.04, 0.96],
+      [0.00, 0.55, 0.58, 0.96],
+    ];
+
+    const staticObstacleFill = [0.02, 0.02, 0.02, 0.82];
+    const staticObstacleLine = [0.0, 0.0, 0.0, 1.0];
+
+    function colorFromArray(value, fallback) {
+      if (!Array.isArray(value) || value.length < 3) {
+        return fallback;
+      }
+      const color = value.slice(0, 4).map((entry) => Number(entry));
+      if (color.length === 3) {
+        color.push(fallback[3]);
+      }
+      if (!color.every((entry) => Number.isFinite(entry))) {
+        return fallback;
+      }
+      return [
+        Math.min(Math.max(color[0], 0.0), 1.0),
+        Math.min(Math.max(color[1], 0.0), 1.0),
+        Math.min(Math.max(color[2], 0.0), 1.0),
+        Math.min(Math.max(color[3], 0.0), 1.0),
+      ];
+    }
+
+    function obstacleFillColor(obstacle) {
+      return colorFromArray(
+        obstacle?.fill_color || obstacle?.material?.fill_color || obstacle?.color,
+        staticObstacleFill,
+      );
+    }
+
+    function obstacleLineColor(obstacle) {
+      return colorFromArray(
+        obstacle?.line_color || obstacle?.material?.line_color,
+        staticObstacleLine,
+      );
+    }
+
+    function spatialSetFillColor(index, alpha = null) {
+      return [
+        spatialSetFill[0],
+        spatialSetFill[1],
+        spatialSetFill[2],
+        alpha === null ? spatialSetFill[3] : alpha,
+      ];
+    }
+
+    function solutionUsesUavModel(solution, instance) {
+      return solution?.body_model === "uav" || instance?.agent_model === "uav" || Boolean(instance?.uav_materials);
+    }
+
+    function uavMaterials(solution, instance, agentIndex, bodyAlpha) {
+      const raw = solution?.uav_materials || instance?.uav_materials || {};
+      const base = solutionColor(agentIndex);
+      const bodyFallback = solutionColor(agentIndex, bodyAlpha);
+      return {
+        body: colorFromArray(raw.body_color, bodyFallback),
+        arm: colorFromArray(raw.arm_color, bodyFallback),
+        propeller: colorFromArray(raw.propeller_color, [0.48, 0.48, 0.48, 0.88]),
+        outline: colorFromArray(raw.outline_color, [base[0] * 0.65, base[1] * 0.65, base[2] * 0.65, 1.0]),
+      };
+    }
+
+    function uavVisualRadius(instance, radius) {
+      const scale = Number(instance?.uav_visual_scale || 1.0);
+      if (!Number.isFinite(scale) || scale <= 0.0) {
+        return radius;
+      }
+      return radius * scale;
+    }
+
+    function resizeCanvas() {
+      const dpr = renderPixelRatioOverride || window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      const width = Math.max(1, Math.floor(rect.width * dpr));
+      const height = Math.max(1, Math.floor(rect.height * dpr));
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+      if (labelCanvas.width !== width || labelCanvas.height !== height) {
+        labelCanvas.width = width;
+        labelCanvas.height = height;
+      }
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+
+    function currentInstance() {
+      if (!state.manifest || !state.manifest.instances.length) {
+        return null;
+      }
+      return state.manifest.instances[state.currentIndex] || null;
+    }
+
+    function currentSolutions() {
+      const instance = currentInstance();
+      if (!instance) {
+        return [];
+      }
+      return state.solutionsByInstanceId[instance.instance_id] || [];
+    }
+
+    function solutionVisible(solution) {
+      return solution?.__viewer_visible !== false;
+    }
+
+    function visibleSolutions() {
+      return currentSolutions().filter((solution) => solutionVisible(solution));
+    }
+
+    function preloadedSolutionsByInstanceId(manifest) {
+      const result = {};
+      const addSolution = (solution, fallbackInstanceId = null) => {
+        if (!solution || (!solution.is_success && !solutionHasDrawableTrajectories(solution))) {
+          return;
+        }
+        const instanceId = String(solution.instance_id || fallbackInstanceId || "");
+        if (!instanceId) {
+          return;
+        }
+        if (!result[instanceId]) {
+          result[instanceId] = [];
+        }
+        solution.__viewer_visible = solution.__viewer_visible !== false;
+        result[instanceId].push(solution);
+      };
+
+      if (Array.isArray(manifest.solutions)) {
+        manifest.solutions.forEach((solution) => addSolution(solution));
+      }
+      if (Array.isArray(manifest.instances)) {
+        manifest.instances.forEach((instance) => {
+          if (!Array.isArray(instance.solutions)) {
+            return;
+          }
+          instance.solutions.forEach((solution) => addSolution(solution, instance.instance_id));
+        });
+      }
+      return result;
+    }
+
+    function trajectoryDrawable(trajectory) {
+      return Boolean(
+        (Array.isArray(trajectory?.segments) && trajectory.segments.length) ||
+        (Array.isArray(trajectory?.path) && trajectory.path.length)
+      );
+    }
+
+    function solutionHasDrawableTrajectories(solution) {
+      if (Array.isArray(solution?.trajectories)) {
+        return solution.trajectories.some((trajectory) => trajectoryDrawable(trajectory));
+      }
+      return trajectoryDrawable(solution?.trajectory);
+    }
+
+    function solutionTrajectories(solution) {
+      if (!solution?.is_success && !solutionHasDrawableTrajectories(solution)) {
+        return [];
+      }
+      if (Array.isArray(solution.trajectories)) {
+        return solution.trajectories;
+      }
+      return solution.trajectory ? [solution.trajectory] : [];
+    }
+
+    function solutionAlpha(solution, fieldName, fallback) {
+      const value = Number(solution?.[fieldName]);
+      if (!Number.isFinite(value)) {
+        return fallback;
+      }
+      return clamp(value, 0.0, 1.0);
+    }
+
+    function staticObstacles(instance) {
+      return Array.isArray(instance?.static_obstacles) ? instance.static_obstacles : [];
+    }
+
+    function layerDefaults(instance) {
+      const directDefaults = instance?.viewer_layer_defaults;
+      if (directDefaults && typeof directDefaults === "object") {
+        return directDefaults;
+      }
+      const envDefaults = instance?.env_params?.viewer_layer_defaults;
+      if (envDefaults && typeof envDefaults === "object") {
+        return envDefaults;
+      }
+      return {};
+    }
+
+    function booleanLayerDefault(defaults, key, fallback) {
+      if (typeof defaults?.[key] === "boolean") {
+        return defaults[key];
+      }
+      return fallback;
+    }
+
+    function applyLayerDefaults(instance) {
+      const defaults = layerDefaults(instance);
+      toggleSetFill.checked = booleanLayerDefault(defaults, "spatial_sets_fill", true);
+      toggleSetOutline.checked = booleanLayerDefault(defaults, "spatial_sets_outline", true);
+    }
+
+    function solutionColor(index, alpha = null) {
+      const base = solutionPalette[index % solutionPalette.length];
+      return [
+        base[0],
+        base[1],
+        base[2],
+        alpha === null ? base[3] : alpha,
+      ];
+    }
+
+    function formatMetric(value, digits = 3) {
+      if (value === null || value === undefined || !Number.isFinite(Number(value))) {
+        return "inf";
+      }
+      return Number(value).toFixed(digits).replace(/\.?0+$/, "");
+    }
+
+    function setSolutionStatus(message, isEmpty = false) {
+      solutionStatus.textContent = message;
+      solutionStatus.classList.toggle("empty", Boolean(isEmpty));
+    }
+
+    function renderSolutionList() {
+      solutionList.innerHTML = "";
+      const solutions = currentSolutions();
+      if (!solutions.length) {
+        setSolutionStatus("No solution loaded.", true);
+        return;
+      }
+      const visibleCount = solutions.filter((solution) => solutionVisible(solution)).length;
+      setSolutionStatus(
+        `${visibleCount}/${solutions.length} solution${solutions.length === 1 ? "" : "s"} visible.`,
+        false,
+      );
+      solutions.forEach((solution, index) => {
+        const row = document.createElement("div");
+        row.className = "solution-row";
+        row.classList.toggle("is-hidden", !solutionVisible(solution));
+        const color = solutionColor(index);
+        row.style.borderLeftColor = `rgba(${Math.round(color[0] * 255)}, ${Math.round(color[1] * 255)}, ${Math.round(color[2] * 255)}, 0.95)`;
+        const trajectories = solutionTrajectories(solution);
+        const drawableCount = trajectories.filter((trajectory) => trajectoryDrawable(trajectory)).length;
+        const agentText = drawableCount ? ` agents=${drawableCount}/${trajectories.length}` : "";
+        const label = document.createElement("label");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = solutionVisible(solution);
+        checkbox.addEventListener("change", () => {
+          solution.__viewer_visible = checkbox.checked;
+          renderSolutionList();
+          updateTimeUi(currentInstance());
+          render();
+        });
+        const text = document.createElement("span");
+        text.className = "solution-row-text";
+        text.textContent =
+          `${solution.planner_name}\n` +
+          `success=${solution.is_success ? "yes" : "no"} status=${solution.status}\n` +
+          `runtime=${formatMetric(solution.runtime)}s cost=${formatMetric(solution.cost)}${agentText}`;
+        label.appendChild(checkbox);
+        label.appendChild(text);
+        row.appendChild(label);
+        solutionList.appendChild(row);
+      });
+    }
+
+    function updateLoadedSolutionsUi() {
+      renderSolutionList();
+    }
+
+    function clamp(value, minValue, maxValue) {
+      return Math.min(Math.max(value, minValue), maxValue);
+    }
+
+    function project2d(point) {
+      const x = ((point[0] - state.view2d.centerX) / state.view2d.spanX) * 2.0;
+      const y = ((point[1] - state.view2d.centerY) / state.view2d.spanY) * 2.0;
+      return [x, y];
+    }
+
+    function canvasCssMetrics() {
+      const rect = canvas.getBoundingClientRect();
+      const width = Math.max(rect.width, 1);
+      const height = Math.max(rect.height, 1);
+      const dpr = canvas.width / width;
+      return { width, height, dpr };
+    }
+
+    function clipToScreen(clipPoint) {
+      const { width, height } = canvasCssMetrics();
+      return [
+        (clipPoint[0] * 0.5 + 0.5) * width,
+        (1.0 - (clipPoint[1] * 0.5 + 0.5)) * height,
+      ];
+    }
+
+    function projectPoint2dToScreen(point) {
+      return clipToScreen(project2d(point));
+    }
+
+    function projectPoint3d(point, matrix) {
+      const x = point[0];
+      const y = point[1];
+      const z = point[2];
+      const clipX = matrix[0] * x + matrix[4] * y + matrix[8] * z + matrix[12];
+      const clipY = matrix[1] * x + matrix[5] * y + matrix[9] * z + matrix[13];
+      const clipZ = matrix[2] * x + matrix[6] * y + matrix[10] * z + matrix[14];
+      const clipW = matrix[3] * x + matrix[7] * y + matrix[11] * z + matrix[15];
+      if (Math.abs(clipW) <= 1e-9 || clipW <= 0.0) {
+        return null;
+      }
+      const projected = [clipX / clipW, clipY / clipW, clipZ / clipW];
+      if (
+        projected[0] < -1.1 || projected[0] > 1.1 ||
+        projected[1] < -1.1 || projected[1] > 1.1 ||
+        projected[2] < -1.1 || projected[2] > 1.1
+      ) {
+        return null;
+      }
+      return projected;
+    }
+
+    function projectPoint3dToScreen(point, matrix) {
+      const projected = projectPoint3d(point, matrix);
+      if (!projected) {
+        return null;
+      }
+      return clipToScreen(projected);
+    }
+
+    function clearLabelCanvas() {
+      const { width, height, dpr } = canvasCssMetrics();
+      labelCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      labelCtx.clearRect(0, 0, width, height);
+    }
+
+    function markerScreenRadius2d(radius) {
+      const { width, height } = canvasCssMetrics();
+      const radiusX = (radius * width) / (2.0 * Math.max(state.view2d.spanX, 1e-9));
+      const radiusY = (radius * height) / (2.0 * Math.max(state.view2d.spanY, 1e-9));
+      return Math.min(radiusX, radiusY);
+    }
+
+    function queryMarkerRadius(instance) {
+      const robotRadius = Number(instance?.robot_radius || 0.0);
+      if (robotRadius > 0.0) {
+        return robotRadius;
+      }
+      const min = instance?.bounds?.min || [];
+      const max = instance?.bounds?.max || [];
+      const spans = max.map((value, index) => Math.abs(Number(value) - Number(min[index])));
+      const maxSpan = Math.max(1.0, ...spans.filter((span) => Number.isFinite(span)));
+      return 0.018 * maxSpan;
+    }
+
+    function robotMarkerRadius(instance) {
+      const robotRadius = Number(instance?.robot_radius || 0.0);
+      return robotRadius > 0.0 ? robotRadius : queryMarkerRadius(instance);
+    }
+
+    function endpointMarkers(instance) {
+      if (!Array.isArray(instance?.endpoint_markers)) {
+        return [];
+      }
+      return instance.endpoint_markers
+        .map((marker) => marker?.position)
+        .filter((position) => Array.isArray(position) && position.length === instance.dimension);
+    }
+
+    function markerScreenRadius3d(center, radius, matrix, basis) {
+      const anchor = projectPoint3dToScreen(center, matrix);
+      if (!anchor) {
+        return null;
+      }
+      const edge = projectPoint3dToScreen(add3(center, scale3(basis.right, radius)), matrix);
+      if (!edge) {
+        return null;
+      }
+      return Math.hypot(edge[0] - anchor[0], edge[1] - anchor[1]);
+    }
+
+    function drawMarkerLabel(screenPoint, label, radiusPx, textColor) {
+      if (!screenPoint || !Number.isFinite(radiusPx) || radiusPx <= 0.0) {
+        return;
+      }
+      const { width, height } = canvasCssMetrics();
+      if (
+        screenPoint[0] < -radiusPx || screenPoint[0] > width + radiusPx ||
+        screenPoint[1] < -radiusPx || screenPoint[1] > height + radiusPx
+      ) {
+        return;
+      }
+      const fontSize = Math.min(Math.max(radiusPx * 1.15, 9.0), 24.0);
+      labelCtx.font = `400 ${fontSize}px "Avenir Next", "Segoe UI", sans-serif`;
+      labelCtx.textAlign = "center";
+      labelCtx.textBaseline = "middle";
+      labelCtx.fillStyle = textColor;
+      labelCtx.fillText(label, screenPoint[0], screenPoint[1]);
+    }
+
+    function drawQueryLabels(instance, matrix = null) {
+      if (!instance || !toggleQueries.checked) {
+        return;
+      }
+      if (instance.hide_query_labels || endpointMarkers(instance).length) {
+        return;
+      }
+
+      if (instance.dimension === 2) {
+        const markerRadius = robotMarkerRadius(instance);
+        const markerRadiusPx = markerScreenRadius2d(markerRadius);
+        instance.queries.forEach((query, index) => {
+          drawMarkerLabel(
+            projectPoint2dToScreen(query.start),
+            `S${index + 1}`,
+            markerRadiusPx,
+            "rgba(0, 0, 0, 1.0)",
+          );
+          drawMarkerLabel(
+            projectPoint2dToScreen(query.goal),
+            `G${index + 1}`,
+            markerRadiusPx,
+            "rgba(0, 0, 0, 1.0)",
+          );
+        });
+        return;
+      }
+
+      if (instance.dimension === 3 && matrix) {
+        const basis = cameraBasis();
+        const markerRadius = robotMarkerRadius(instance);
+        instance.queries.forEach((query, index) => {
+          drawMarkerLabel(
+            projectPoint3dToScreen(query.start, matrix),
+            `S${index + 1}`,
+            markerScreenRadius3d(query.start, markerRadius, matrix, basis),
+            "rgba(0, 0, 0, 1.0)",
+          );
+          drawMarkerLabel(
+            projectPoint3dToScreen(query.goal, matrix),
+            `G${index + 1}`,
+            markerScreenRadius3d(query.goal, markerRadius, matrix, basis),
+            "rgba(0, 0, 0, 1.0)",
+          );
+        });
+      }
+    }
+
+    function buildCircle2d(center, radius, segments = 40) {
+      const vertices = [];
+      for (let i = 0; i <= segments; i += 1) {
+        const angle = (Math.PI * 2 * i) / segments;
+        vertices.push([
+          center[0] + Math.cos(angle) * radius,
+          center[1] + Math.sin(angle) * radius,
+        ]);
+      }
+      return vertices;
+    }
+
+    function obstaclePosition(obstacle, time) {
+      const segments = obstacle.segments || [];
+      if (!segments.length) {
+        return (obstacle.path && obstacle.path.length) ? obstacle.path[0] : [0, 0, 0];
+      }
+      if (time <= segments[0].t_start) {
+        return segments[0].start;
+      }
+      for (const segment of segments) {
+        if (time <= segment.t_end) {
+          return interpolateSegment(segment.start, segment.goal, [segment.t_start, segment.t_end], time);
+        }
+      }
+      return segments[segments.length - 1].goal;
+    }
+
+    function trajectoryPosition(trajectory, time) {
+      const segments = trajectory?.segments || [];
+      if (!segments.length) {
+        return (trajectory?.path && trajectory.path.length) ? trajectory.path[0] : null;
+      }
+      if (time <= segments[0].t_start) {
+        return segments[0].start;
+      }
+      for (const segment of segments) {
+        if (time <= segment.t_end) {
+          return interpolateSegment(segment.start, segment.goal, [segment.t_start, segment.t_end], time);
+        }
+      }
+      return segments[segments.length - 1].goal;
+    }
+
+    function interpolateSegment(x0, x1, interval, time) {
+      if (time <= interval[0]) {
+        return x0;
+      }
+      if (time >= interval[1]) {
+        return x1;
+      }
+      const duration = interval[1] - interval[0];
+      const alpha = duration <= 0 ? 1.0 : (time - interval[0]) / duration;
+      return x0.map((value, index) => value + (x1[index] - value) * alpha);
+    }
+
+    function setFitView(instance) {
+      if (!instance) {
+        return;
+      }
+      if (instance.dimension === 3) {
+        setFitView3d(instance);
+        return;
+      }
+      setFitView2d(instance);
+    }
+
+    function setFitView2d(instance) {
+      const min = instance.bounds.min;
+      const max = instance.bounds.max;
+      const padding = Math.max(instance.robot_radius * 5, 0.3);
+      let spanX = Math.max(max[0] - min[0] + padding * 2, 1);
+      let spanY = Math.max(max[1] - min[1] + padding * 2, 1);
+      const aspect = canvas.width / Math.max(canvas.height, 1);
+      if (spanX / spanY > aspect) {
+        spanY = spanX / aspect;
+      } else {
+        spanX = spanY * aspect;
+      }
+      state.view2d.centerX = (min[0] + max[0]) * 0.5;
+      state.view2d.centerY = (min[1] + max[1]) * 0.5;
+      state.view2d.spanX = spanX;
+      state.view2d.spanY = spanY;
+    }
+
+    function setFitView3d(instance) {
+      const min = instance.bounds.min;
+      const max = instance.bounds.max;
+      const size = [
+        Math.max(max[0] - min[0], 1e-6),
+        Math.max(max[1] - min[1], 1e-6),
+        Math.max(max[2] - min[2], 1e-6),
+      ];
+      const center = [
+        (min[0] + max[0]) * 0.5,
+        (min[1] + max[1]) * 0.5,
+        (min[2] + max[2]) * 0.5,
+      ];
+      const radius = Math.max(Math.hypot(size[0], size[1], size[2]) * 0.5, instance.robot_radius * 4, 0.5);
+      const aspect = canvas.width / Math.max(canvas.height, 1);
+      const halfFovY = state.view3d.fovY * 0.5;
+      const halfFovX = Math.atan(Math.tan(halfFovY) * Math.max(aspect, 1e-3));
+      const fitAngle = Math.max(0.2, Math.min(halfFovX, halfFovY));
+      const distance = radius / Math.tan(fitAngle) + radius * 1.35;
+      state.view3d.target = center;
+      state.view3d.distance = Math.max(distance, radius * 2.2);
+      state.view3d.yaw = -0.9;
+      state.view3d.pitch = 0.55;
+      state.view3d.boundsRadius = radius;
+    }
+
+    function setHint(instance) {
+      if (!instance) {
+        hint.textContent = "Load a manifest to inspect it.";
+        return;
+      }
+      const timeHint = instance.dynamic_obstacles.length
+        ? " Use the time slider to inspect obstacle motion."
+        : "";
+      if (instance.dimension === 3) {
+        hint.textContent = `Drag to orbit. Shift-drag or right-drag to pan. Mouse wheel to zoom.${timeHint}`;
+        return;
+      }
+      hint.textContent = `Drag to pan. Mouse wheel to zoom.${timeHint}`;
+    }
+
+    function pushTriangles2d(positionData, colorData, points, color) {
+      if (points.length < 3) {
+        return;
+      }
+      const anchor = project2d(points[0]);
+      for (let i = 1; i < points.length - 1; i += 1) {
+        const b = project2d(points[i]);
+        const c = project2d(points[i + 1]);
+        positionData.push(...anchor, ...b, ...c);
+        colorData.push(...color, ...color, ...color);
+      }
+    }
+
+    function pushLineStrip2d(positionData, colorData, points, color, closed = false) {
+      if (points.length < 2) {
+        return;
+      }
+      for (let i = 0; i < points.length - 1; i += 1) {
+        const a = project2d(points[i]);
+        const b = project2d(points[i + 1]);
+        positionData.push(...a, ...b);
+        colorData.push(...color, ...color);
+      }
+      if (closed) {
+        const a = project2d(points[points.length - 1]);
+        const b = project2d(points[0]);
+        positionData.push(...a, ...b);
+        colorData.push(...color, ...color);
+      }
+    }
+
+    function pushCircle2d(positionData, colorData, center, radius, color) {
+      pushTriangles2d(positionData, colorData, buildCircle2d(center, radius), color);
+    }
+
+    function pushCircleOutline2d(positionData, colorData, center, radius, color) {
+      pushLineStrip2d(positionData, colorData, buildCircle2d(center, radius), color, false);
+    }
+
+    function pushSquareOutline2d(positionData, colorData, center, radius, color) {
+      const points = [
+        [center[0] - radius, center[1] - radius],
+        [center[0] + radius, center[1] - radius],
+        [center[0] + radius, center[1] + radius],
+        [center[0] - radius, center[1] + radius],
+      ];
+      pushLineStrip2d(positionData, colorData, points, color, true);
+    }
+
+    function pushCross2d(positionData, colorData, center, radius, color) {
+      const r = radius;
+      const points = [
+        [[center[0] - r, center[1] - r], [center[0] + r, center[1] + r]],
+        [[center[0] - r, center[1] + r], [center[0] + r, center[1] - r]],
+      ];
+      for (const [a, b] of points) {
+        pushLineStrip2d(positionData, colorData, [a, b], color, false);
+      }
+    }
+
+    function pushStaticObstacle2d(obstacle, trianglePositions, triangleColors, linePositions, lineColors) {
+      const fillColor = obstacleFillColor(obstacle);
+      const lineColor = obstacleLineColor(obstacle);
+      if (obstacle.type === "polygon" && Array.isArray(obstacle.vertices)) {
+        pushTriangles2d(trianglePositions, triangleColors, obstacle.vertices, fillColor);
+        pushLineStrip2d(linePositions, lineColors, obstacle.vertices, lineColor, true);
+        return;
+      }
+      if (obstacle.type === "sphere" && Array.isArray(obstacle.center)) {
+        pushCircle2d(trianglePositions, triangleColors, obstacle.center, obstacle.radius, fillColor);
+        pushCircleOutline2d(linePositions, lineColors, obstacle.center, obstacle.radius, lineColor);
+      }
+    }
+
+    function pushDiamond2d(positionData, colorData, center, radius, color) {
+      const points = [
+        [center[0], center[1] + radius],
+        [center[0] + radius, center[1]],
+        [center[0], center[1] - radius],
+        [center[0] - radius, center[1]],
+      ];
+      pushTriangles2d(positionData, colorData, points, color);
+    }
+
+    function pushDiamondOutline2d(positionData, colorData, center, radius, color) {
+      const points = [
+        [center[0], center[1] + radius],
+        [center[0] + radius, center[1]],
+        [center[0], center[1] - radius],
+        [center[0] - radius, center[1]],
+      ];
+      pushLineStrip2d(positionData, colorData, points, color, true);
+    }
+
+    function add3(a, b) {
+      return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+    }
+
+    function sub3(a, b) {
+      return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+    }
+
+    function scale3(vector, scale) {
+      return [vector[0] * scale, vector[1] * scale, vector[2] * scale];
+    }
+
+    function dot3(a, b) {
+      return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+    }
+
+    function cross3(a, b) {
+      return [
+        a[1] * b[2] - a[2] * b[1],
+        a[2] * b[0] - a[0] * b[2],
+        a[0] * b[1] - a[1] * b[0],
+      ];
+    }
+
+    function length3(vector) {
+      return Math.hypot(vector[0], vector[1], vector[2]);
+    }
+
+    function normalize3(vector) {
+      const length = length3(vector);
+      if (length <= 1e-9) {
+        return [0, 0, 0];
+      }
+      return scale3(vector, 1 / length);
+    }
+
+    function cameraEye() {
+      const { target, distance, yaw, pitch } = state.view3d;
+      const cosPitch = Math.cos(pitch);
+      return [
+        target[0] + distance * cosPitch * Math.cos(yaw),
+        target[1] + distance * cosPitch * Math.sin(yaw),
+        target[2] + distance * Math.sin(pitch),
+      ];
+    }
+
+    function cameraBasis() {
+      const eye = cameraEye();
+      const forward = normalize3(sub3(state.view3d.target, eye));
+      let right = normalize3(cross3(forward, [0, 0, 1]));
+      if (length3(right) <= 1e-6) {
+        right = normalize3(cross3(forward, [0, 1, 0]));
+      }
+      const up = normalize3(cross3(right, forward));
+      return { eye, forward, right, up };
+    }
+
+    function mat4Multiply(a, b) {
+      const out = new Float32Array(16);
+      for (let col = 0; col < 4; col += 1) {
+        for (let row = 0; row < 4; row += 1) {
+          let sum = 0;
+          for (let k = 0; k < 4; k += 1) {
+            sum += a[k * 4 + row] * b[col * 4 + k];
+          }
+          out[col * 4 + row] = sum;
+        }
+      }
+      return out;
+    }
+
+    function mat4Perspective(fovy, aspect, near, far) {
+      const f = 1.0 / Math.tan(fovy * 0.5);
+      const nf = 1.0 / (near - far);
+      return new Float32Array([
+        f / aspect, 0, 0, 0,
+        0, f, 0, 0,
+        0, 0, (far + near) * nf, -1,
+        0, 0, (2 * far * near) * nf, 0,
+      ]);
+    }
+
+    function mat4LookAt(eye, center, up) {
+      const zAxis = normalize3(sub3(eye, center));
+      const xAxis = normalize3(cross3(up, zAxis));
+      const yAxis = cross3(zAxis, xAxis);
+      return new Float32Array([
+        xAxis[0], yAxis[0], zAxis[0], 0,
+        xAxis[1], yAxis[1], zAxis[1], 0,
+        xAxis[2], yAxis[2], zAxis[2], 0,
+        -dot3(xAxis, eye), -dot3(yAxis, eye), -dot3(zAxis, eye), 1,
+      ]);
+    }
+
+    function buildViewProjectionMatrix() {
+      const aspect = canvas.width / Math.max(canvas.height, 1);
+      const radius = Math.max(state.view3d.boundsRadius, 0.5);
+      const near = Math.max(0.01, state.view3d.distance - radius * 4.0);
+      const far = Math.max(near + 1.0, state.view3d.distance + radius * 6.0);
+      const basis = cameraBasis();
+      const projection = mat4Perspective(state.view3d.fovY, aspect, near, far);
+      const view = mat4LookAt(basis.eye, state.view3d.target, basis.up);
+      return mat4Multiply(projection, view);
+    }
+
+    function pushTriangle3d(positionData, colorData, a, b, c, color) {
+      positionData.push(...a, ...b, ...c);
+      colorData.push(...color, ...color, ...color);
+    }
+
+    function pushLine3d(positionData, colorData, a, b, color) {
+      positionData.push(...a, ...b);
+      colorData.push(...color, ...color);
+    }
+
+    function pushLineStrip3d(positionData, colorData, points, color, closed = false) {
+      if (points.length < 2) {
+        return;
+      }
+      for (let i = 0; i < points.length - 1; i += 1) {
+        pushLine3d(positionData, colorData, points[i], points[i + 1], color);
+      }
+      if (closed) {
+        pushLine3d(positionData, colorData, points[points.length - 1], points[0], color);
+      }
+    }
+
+    function trajectoryTubeRadius3d(instance) {
+      const min = instance?.bounds?.min || [];
+      const max = instance?.bounds?.max || [];
+      const spans = max.map((value, index) => Math.abs(Number(value) - Number(min[index])));
+      const maxSpan = Math.max(1.0, ...spans.filter((span) => Number.isFinite(span)));
+      return Math.max(queryMarkerRadius(instance) * 0.08, maxSpan * 0.001);
+    }
+
+    function pushTrajectorySegment3d(positionData, colorData, start, end, radius, color, sides = 6) {
+      const direction = normalize3(sub3(end, start));
+      if (length3(direction) <= 1e-9 || radius <= 0.0) {
+        return;
+      }
+      let reference = Math.abs(dot3(direction, [0, 0, 1])) > 0.92 ? [0, 1, 0] : [0, 0, 1];
+      const axis0 = normalize3(cross3(direction, reference));
+      const axis1 = normalize3(cross3(direction, axis0));
+      if (length3(axis0) <= 1e-9 || length3(axis1) <= 1e-9) {
+        return;
+      }
+      const segmentSides = Math.max(4, Math.floor(sides));
+      for (let i = 0; i < segmentSides; i += 1) {
+        const theta0 = (i / segmentSides) * Math.PI * 2.0;
+        const theta1 = ((i + 1) / segmentSides) * Math.PI * 2.0;
+        const offset0 = add3(scale3(axis0, Math.cos(theta0) * radius), scale3(axis1, Math.sin(theta0) * radius));
+        const offset1 = add3(scale3(axis0, Math.cos(theta1) * radius), scale3(axis1, Math.sin(theta1) * radius));
+        const a0 = add3(start, offset0);
+        const a1 = add3(start, offset1);
+        const b0 = add3(end, offset0);
+        const b1 = add3(end, offset1);
+        pushTriangle3d(positionData, colorData, a0, b0, b1, color);
+        pushTriangle3d(positionData, colorData, a0, b1, a1, color);
+      }
+    }
+
+    function pushTrajectoryTube3d(positionData, colorData, points, radius, color) {
+      if (points.length < 2) {
+        return;
+      }
+      for (let i = 0; i < points.length - 1; i += 1) {
+        pushTrajectorySegment3d(positionData, colorData, points[i], points[i + 1], radius, color);
+      }
+    }
+
+    function pushBox3d(positionData, colorData, center, halfSize, color) {
+      const l = [
+        center[0] - halfSize[0],
+        center[1] - halfSize[1],
+        center[2] - halfSize[2],
+      ];
+      const u = [
+        center[0] + halfSize[0],
+        center[1] + halfSize[1],
+        center[2] + halfSize[2],
+      ];
+      const vertices = [
+        [l[0], l[1], l[2]],
+        [u[0], l[1], l[2]],
+        [u[0], u[1], l[2]],
+        [l[0], u[1], l[2]],
+        [l[0], l[1], u[2]],
+        [u[0], l[1], u[2]],
+        [u[0], u[1], u[2]],
+        [l[0], u[1], u[2]],
+      ];
+      const faces = [
+        [0, 1, 2], [0, 2, 3],
+        [4, 6, 5], [4, 7, 6],
+        [0, 4, 5], [0, 5, 1],
+        [1, 5, 6], [1, 6, 2],
+        [2, 6, 7], [2, 7, 3],
+        [3, 7, 4], [3, 4, 0],
+      ];
+      pushIndexedTriangles3d(positionData, colorData, vertices, faces, color);
+    }
+
+    function pushIndexedTriangles3d(positionData, colorData, vertices, faces, color) {
+      if (!Array.isArray(faces)) {
+        return;
+      }
+      faces.forEach((face) => {
+        if (!Array.isArray(face) || face.length < 3) {
+          return;
+        }
+        const a = vertices[face[0]];
+        const b = vertices[face[1]];
+        const c = vertices[face[2]];
+        if (a && b && c) {
+          pushTriangle3d(positionData, colorData, a, b, c, color);
+        }
+      });
+    }
+
+    function pushIndexedEdges3d(positionData, colorData, vertices, edges, color) {
+      if (!Array.isArray(edges)) {
+        return;
+      }
+      edges.forEach((edge) => {
+        if (!Array.isArray(edge) || edge.length < 2) {
+          return;
+        }
+        const a = vertices[edge[0]];
+        const b = vertices[edge[1]];
+        if (a && b) {
+          pushLine3d(positionData, colorData, a, b, color);
+        }
+      });
+    }
+
+    function pushSphere3d(positionData, colorData, center, radius, color, latBands = 6, lonBands = 10) {
+      for (let lat = 0; lat < latBands; lat += 1) {
+        const theta0 = (lat / latBands) * Math.PI - Math.PI * 0.5;
+        const theta1 = ((lat + 1) / latBands) * Math.PI - Math.PI * 0.5;
+        const z0 = Math.sin(theta0);
+        const z1 = Math.sin(theta1);
+        const r0 = Math.cos(theta0);
+        const r1 = Math.cos(theta1);
+        for (let lon = 0; lon < lonBands; lon += 1) {
+          const phi0 = (lon / lonBands) * Math.PI * 2;
+          const phi1 = ((lon + 1) / lonBands) * Math.PI * 2;
+          const p00 = [
+            center[0] + radius * r0 * Math.cos(phi0),
+            center[1] + radius * r0 * Math.sin(phi0),
+            center[2] + radius * z0,
+          ];
+          const p01 = [
+            center[0] + radius * r0 * Math.cos(phi1),
+            center[1] + radius * r0 * Math.sin(phi1),
+            center[2] + radius * z0,
+          ];
+          const p10 = [
+            center[0] + radius * r1 * Math.cos(phi0),
+            center[1] + radius * r1 * Math.sin(phi0),
+            center[2] + radius * z1,
+          ];
+          const p11 = [
+            center[0] + radius * r1 * Math.cos(phi1),
+            center[1] + radius * r1 * Math.sin(phi1),
+            center[2] + radius * z1,
+          ];
+          pushTriangle3d(positionData, colorData, p00, p10, p11, color);
+          pushTriangle3d(positionData, colorData, p00, p11, p01, color);
+        }
+      }
+    }
+
+    function pushRing3d(positionData, colorData, center, radius, color, axis = "z", segments = 32) {
+      const points = [];
+      for (let i = 0; i <= segments; i += 1) {
+        const angle = (i / segments) * Math.PI * 2;
+        const cosAngle = Math.cos(angle);
+        const sinAngle = Math.sin(angle);
+        if (axis === "x") {
+          points.push([center[0], center[1] + radius * cosAngle, center[2] + radius * sinAngle]);
+        } else if (axis === "y") {
+          points.push([center[0] + radius * cosAngle, center[1], center[2] + radius * sinAngle]);
+        } else {
+          points.push([center[0] + radius * cosAngle, center[1] + radius * sinAngle, center[2]]);
+        }
+      }
+      pushLineStrip3d(positionData, colorData, points, color, false);
+    }
+
+    function pushCross3d(positionData, colorData, center, radius, color) {
+      pushLine3d(positionData, colorData, [center[0] - radius, center[1], center[2]], [center[0] + radius, center[1], center[2]], color);
+      pushLine3d(positionData, colorData, [center[0], center[1] - radius, center[2]], [center[0], center[1] + radius, center[2]], color);
+      pushLine3d(positionData, colorData, [center[0], center[1], center[2] - radius], [center[0], center[1], center[2] + radius], color);
+    }
+
+    function pushOctahedron3d(positionData, colorData, center, radius, color) {
+      const vertices = [
+        [center[0] + radius, center[1], center[2]],
+        [center[0] - radius, center[1], center[2]],
+        [center[0], center[1] + radius, center[2]],
+        [center[0], center[1] - radius, center[2]],
+        [center[0], center[1], center[2] + radius],
+        [center[0], center[1], center[2] - radius],
+      ];
+      const faces = [
+        [0, 2, 4], [2, 1, 4], [1, 3, 4], [3, 0, 4],
+        [2, 0, 5], [1, 2, 5], [3, 1, 5], [0, 3, 5],
+      ];
+      pushIndexedTriangles3d(positionData, colorData, vertices, faces, color);
+    }
+
+    function pushOctahedronWire3d(positionData, colorData, center, radius, color) {
+      const vertices = [
+        [center[0] + radius, center[1], center[2]],
+        [center[0] - radius, center[1], center[2]],
+        [center[0], center[1] + radius, center[2]],
+        [center[0], center[1] - radius, center[2]],
+        [center[0], center[1], center[2] + radius],
+        [center[0], center[1], center[2] - radius],
+      ];
+      const edges = [
+        [0, 2], [2, 1], [1, 3], [3, 0],
+        [0, 4], [2, 4], [1, 4], [3, 4],
+        [0, 5], [2, 5], [1, 5], [3, 5],
+      ];
+      pushIndexedEdges3d(positionData, colorData, vertices, edges, color);
+    }
+
+    function pushWireBox3d(positionData, colorData, center, radius, color) {
+      const vertices = [
+        [center[0] - radius, center[1] - radius, center[2] - radius],
+        [center[0] + radius, center[1] - radius, center[2] - radius],
+        [center[0] + radius, center[1] + radius, center[2] - radius],
+        [center[0] - radius, center[1] + radius, center[2] - radius],
+        [center[0] - radius, center[1] - radius, center[2] + radius],
+        [center[0] + radius, center[1] - radius, center[2] + radius],
+        [center[0] + radius, center[1] + radius, center[2] + radius],
+        [center[0] - radius, center[1] + radius, center[2] + radius],
+      ];
+      const edges = [
+        [0, 1], [1, 2], [2, 3], [3, 0],
+        [4, 5], [5, 6], [6, 7], [7, 4],
+        [0, 4], [1, 5], [2, 6], [3, 7],
+      ];
+      pushIndexedEdges3d(positionData, colorData, vertices, edges, color);
+    }
+
+    function pushUav3d(trianglePositions, triangleColors, linePositions, lineColors, center, radius, materials) {
+      const bodyHalfSize = [radius * 0.62, radius * 0.42, radius * 0.16];
+      pushBox3d(trianglePositions, triangleColors, center, bodyHalfSize, materials.body);
+
+      const motorOffset = radius * 0.78;
+      const propellerRadius = radius * 0.28;
+      const motorRadius = radius * 0.11;
+      const z = center[2] + radius * 0.24;
+      const motorCenters = [
+        [center[0] + motorOffset, center[1] + motorOffset, z],
+        [center[0] + motorOffset, center[1] - motorOffset, z],
+        [center[0] - motorOffset, center[1] - motorOffset, z],
+        [center[0] - motorOffset, center[1] + motorOffset, z],
+      ];
+      motorCenters.forEach((motorCenter) => {
+        pushLine3d(linePositions, lineColors, center, motorCenter, materials.arm);
+        pushSphere3d(trianglePositions, triangleColors, motorCenter, motorRadius, materials.propeller, 4, 8);
+        pushRing3d(linePositions, lineColors, motorCenter, propellerRadius, materials.propeller, "z", 24);
+      });
+      pushBox3d(
+        trianglePositions,
+        triangleColors,
+        [center[0], center[1], center[2] + radius * 0.24],
+        [radius * 0.22, radius * 0.16, radius * 0.05],
+        materials.outline,
+      );
+    }
+
+    function pushStaticObstacle3d(obstacle, trianglePositions, triangleColors, linePositions, lineColors) {
+      const fillColor = obstacleFillColor(obstacle);
+      const lineColor = obstacleLineColor(obstacle);
+      if (obstacle.type === "polygon" && Array.isArray(obstacle.vertices)) {
+        if (Array.isArray(obstacle.faces) && obstacle.faces.length) {
+          pushIndexedTriangles3d(
+            trianglePositions,
+            triangleColors,
+            obstacle.vertices,
+            obstacle.faces,
+            fillColor,
+          );
+        }
+        if (Array.isArray(obstacle.edges) && obstacle.edges.length) {
+          pushIndexedEdges3d(
+            linePositions,
+            lineColors,
+            obstacle.vertices,
+            obstacle.edges,
+            lineColor,
+          );
+        } else {
+          pushLineStrip3d(linePositions, lineColors, obstacle.vertices, lineColor, true);
+        }
+        return;
+      }
+      if (obstacle.type === "sphere" && Array.isArray(obstacle.center)) {
+        pushSphere3d(
+          trianglePositions,
+          triangleColors,
+          obstacle.center,
+          obstacle.radius,
+          fillColor,
+          6,
+          10,
+        );
+        ["x", "y", "z"].forEach((axis) => {
+          pushRing3d(
+            linePositions,
+            lineColors,
+            obstacle.center,
+            obstacle.radius,
+            lineColor,
+            axis,
+            28,
+          );
+        });
+      }
+    }
+
+    function updateHud(instance) {
+      if (!instance) {
+        hud.textContent = "No manifest loaded.";
+        return;
+      }
+      const family = instance.traffic_family ?? "-";
+      const tier = instance.traffic_tier ?? "-";
+      if (instance.problem_kind === "base") {
+        const staticCount = staticObstacles(instance).length;
+        hud.textContent =
+          `${instance.instance_id}\n` +
+          `${instance.domain} dim=${instance.dimension} seed=${instance.spatial_seed}\n` +
+          `sets=${instance.spatial_sets.length} static_obs=${staticCount} supports_sampling=${instance.supports_sampling ? "yes" : "no"} stgcs=(${instance.stgcs_num_vertices}V, ${instance.stgcs_num_edges}E)`;
+        return;
+      }
+      if (instance.problem_kind === "mrmp") {
+        const staticCount = staticObstacles(instance).length;
+        hud.textContent =
+          `${instance.instance_id}\n` +
+          `${instance.domain} dim=${instance.dimension}\n` +
+          `sets=${instance.spatial_sets.length} static_obs=${staticCount} agents=${instance.num_agents} queries=${instance.queries.length}\n` +
+          `indep_soc=${instance.independent_cost_sum.toFixed(3)} conflicts=${instance.num_conflicting_pairs} stgcs=(${instance.stgcs_num_vertices}V, ${instance.stgcs_num_edges}E)`;
+        return;
+      }
+      if (instance.problem_kind === "st_heuristic_ablation") {
+        const staticCount = staticObstacles(instance).length;
+        hud.textContent =
+          `${instance.instance_id}\n` +
+          `${instance.domain} dim=${instance.dimension} group=${instance.group} source=${instance.source_domain}\n` +
+          `sets=${instance.spatial_sets.length} static_obs=${staticCount} dyn_obs=${instance.dynamic_obstacles.length} queries=${instance.queries.length}\n` +
+          `stgcs=(${instance.stgcs_num_vertices}V, ${instance.stgcs_num_edges}E)`;
+        return;
+      }
+      const staticCount = staticObstacles(instance).length;
+      hud.textContent =
+        `${instance.instance_id}\n` +
+        `${instance.domain} dim=${instance.dimension} family=${family} tier=${tier}\n` +
+        `sets=${instance.spatial_sets.length} static_obs=${staticCount} dyn_obs=${instance.dynamic_obstacles.length} queries=${instance.queries.length}\n` +
+        `static_cost=${instance.static_cost.toFixed(3)} stgcs=(${instance.stgcs_num_vertices}V, ${instance.stgcs_num_edges}E)`;
+    }
+
+    function updateTimeUi(instance) {
+      const range = instance && Array.isArray(instance.time_range) ? instance.time_range : [0, 0];
+      let minTime = Number(range[0] || 0);
+      let maxTime = Number(range[1] || 0);
+      visibleSolutions().forEach((solution) => {
+        solutionTrajectories(solution).forEach((trajectory) => {
+          const solutionRange = trajectory?.time_range || null;
+          if (!Array.isArray(solutionRange) || solutionRange.length < 2) {
+            return;
+          }
+          const solMin = Number(solutionRange[0]);
+          const solMax = Number(solutionRange[1]);
+          if (Number.isFinite(solMin)) {
+            minTime = Math.min(minTime, solMin);
+          }
+          if (Number.isFinite(solMax)) {
+            maxTime = Math.max(maxTime, solMax);
+          }
+        });
+      });
+      timeSlider.disabled = !instance || maxTime <= minTime;
+      timeSlider.min = minTime.toFixed(2);
+      timeSlider.max = maxTime.toFixed(2);
+      timeSlider.step = maxTime > minTime ? Math.max((maxTime - minTime) / 500, 0.01).toFixed(2) : "0.01";
+      state.time = Math.min(Math.max(state.time, minTime), maxTime);
+      timeSlider.value = String(state.time);
+      timeReadout.textContent = `t = ${state.time.toFixed(2)}`;
+    }
+
+    function populateInstanceSelect() {
+      instanceSelect.innerHTML = "";
+      if (!state.manifest || !state.manifest.instances.length) {
+        instanceSelect.disabled = true;
+        const option = document.createElement("option");
+        option.textContent = "No instances";
+        instanceSelect.appendChild(option);
+        return;
+      }
+      instanceSelect.disabled = false;
+      state.manifest.instances.forEach((instance, index) => {
+        const option = document.createElement("option");
+        option.value = String(index);
+        option.textContent = instance.instance_id;
+        instanceSelect.appendChild(option);
+      });
+      instanceSelect.value = String(state.currentIndex);
+    }
+
+    function loadManifestObject(manifest) {
+      if (Array.isArray(manifest) && manifest.length && manifest[0].instance_id && manifest[0].env_params) {
+        throw new Error(
+          "Raw instance manifest detected. Use visualization.viewer.server or visualization.viewer.manifest first."
+        );
+      }
+      if (!manifest || !Array.isArray(manifest.instances)) {
+        throw new Error("Manifest must contain an instances array.");
+      }
+      state.manifest = manifest;
+      state.currentIndex = 0;
+      state.time = 0;
+      state.solutionsByInstanceId = preloadedSolutionsByInstanceId(manifest);
+      populateInstanceSelect();
+      const instance = currentInstance();
+      if (instance && Array.isArray(instance.time_range)) {
+        state.time = Number(instance.time_range[0] || 0);
+      }
+      applyLayerDefaults(instance);
+      updateHud(instance);
+      updateTimeUi(instance);
+      updateLoadedSolutionsUi();
+      setHint(instance);
+      if (instance) {
+        setFitView(instance);
+      }
+      render();
+    }
+
+    function buildSceneGeometry2d(instance) {
+      const trianglePositions = [];
+      const triangleColors = [];
+      const linePositions = [];
+      const lineColors = [];
+
+      if (toggleSetFill.checked) {
+        instance.spatial_sets.forEach((setData, index) => {
+          pushTriangles2d(
+            trianglePositions,
+            triangleColors,
+            setData.vertices,
+            spatialSetFillColor(index),
+          );
+        });
+      }
+
+      if (toggleSetOutline.checked) {
+        instance.spatial_sets.forEach((setData) => {
+          pushLineStrip2d(
+            linePositions,
+            lineColors,
+            setData.vertices,
+            spatialSetBorder,
+            true,
+          );
+        });
+      }
+
+      if (toggleStaticObstacles.checked) {
+        staticObstacles(instance).forEach((obstacle) => {
+          pushStaticObstacle2d(obstacle, trianglePositions, triangleColors, linePositions, lineColors);
+        });
+      }
+
+      if (toggleObstaclePath.checked) {
+        instance.dynamic_obstacles.forEach((obstacle, index) => {
+          const shade = palette[index % palette.length];
+          pushLineStrip2d(
+            linePositions,
+            lineColors,
+            obstacle.path,
+            [shade[0], shade[1], shade[2], 0.95],
+            false,
+          );
+        });
+      }
+
+      if (toggleObstacleBody.checked) {
+        instance.dynamic_obstacles.forEach((obstacle, index) => {
+          const shade = palette[index % palette.length];
+          const pos = obstaclePosition(obstacle, state.time);
+          pushCircle2d(
+            trianglePositions,
+            triangleColors,
+            pos,
+            obstacle.radius,
+            [shade[0], shade[1], shade[2], 0.40],
+          );
+          pushCircleOutline2d(
+            linePositions,
+            lineColors,
+            pos,
+            obstacle.radius,
+            [shade[0], shade[1], shade[2], 0.95],
+          );
+        });
+      }
+
+      if (toggleQueries.checked) {
+        const endpointPositions = endpointMarkers(instance);
+        if (endpointPositions.length) {
+          const endpointFill = [0.12, 0.40, 0.84, 0.86];
+          const endpointStroke = [0.02, 0.13, 0.36, 1.0];
+          const markerRadius = robotMarkerRadius(instance);
+
+          endpointPositions.forEach((position) => {
+            pushCircle2d(
+              trianglePositions,
+              triangleColors,
+              position,
+              markerRadius,
+              endpointFill,
+            );
+            pushCircleOutline2d(
+              linePositions,
+              lineColors,
+              position,
+              markerRadius,
+              endpointStroke,
+            );
+          });
+        } else {
+          instance.queries.forEach((query, index) => {
+            const startStroke = [0.03, 0.28, 0.19, 1.0];
+            const goalStroke = [0.55, 0.34, 0.03, 1.0];
+            const markerRadius = robotMarkerRadius(instance);
+
+            pushCircleOutline2d(
+              linePositions,
+              lineColors,
+              query.start,
+              markerRadius,
+              startStroke,
+            );
+
+            pushSquareOutline2d(
+              linePositions,
+              lineColors,
+              query.goal,
+              markerRadius,
+              goalStroke,
+            );
+          });
+        }
+      }
+
+      visibleSolutions().forEach((solution) => {
+        solutionTrajectories(solution).forEach((trajectory, agentIndex) => {
+          const color = solutionColor(agentIndex);
+          if (toggleSolutionPath.checked && Array.isArray(trajectory.path)) {
+            pushLineStrip2d(
+              linePositions,
+              lineColors,
+              trajectory.path,
+              solutionColor(agentIndex, 0.96),
+              false,
+            );
+          }
+          if (toggleSolutionBody.checked) {
+            const pos = trajectoryPosition(trajectory, state.time);
+            if (pos) {
+              const markerRadius = robotMarkerRadius(instance);
+              pushCircle2d(
+                trianglePositions,
+                triangleColors,
+                pos,
+                markerRadius,
+                solutionColor(agentIndex, 0.82),
+              );
+              pushCircleOutline2d(
+                linePositions,
+                lineColors,
+                pos,
+                markerRadius,
+                [0.0, 0.0, 0.0, 1.0],
+              );
+            }
+          }
+        });
+      });
+
+      return {
+        trianglePositions: new Float32Array(trianglePositions),
+        triangleColors: new Float32Array(triangleColors),
+        linePositions: new Float32Array(linePositions),
+        lineColors: new Float32Array(lineColors),
+      };
+    }
+
+    function buildSceneGeometry3d(instance) {
+      const trianglePositions = [];
+      const triangleColors = [];
+      const linePositions = [];
+      const lineColors = [];
+
+      if (toggleSetFill.checked) {
+        instance.spatial_sets.forEach((setData, index) => {
+          if (!Array.isArray(setData.faces) || !setData.faces.length) {
+            return;
+          }
+          pushIndexedTriangles3d(
+            trianglePositions,
+            triangleColors,
+            setData.vertices,
+            setData.faces,
+            spatialSetFillColor(index, 0.52),
+          );
+        });
+      }
+
+      if (toggleSetOutline.checked) {
+        instance.spatial_sets.forEach((setData) => {
+          if (Array.isArray(setData.edges) && setData.edges.length) {
+            pushIndexedEdges3d(
+              linePositions,
+              lineColors,
+              setData.vertices,
+              setData.edges,
+              spatialSetBorder,
+            );
+            return;
+          }
+          pushLineStrip3d(
+            linePositions,
+            lineColors,
+            setData.vertices,
+            spatialSetBorder,
+            true,
+          );
+        });
+      }
+
+      if (toggleStaticObstacles.checked) {
+        staticObstacles(instance).forEach((obstacle) => {
+          pushStaticObstacle3d(obstacle, trianglePositions, triangleColors, linePositions, lineColors);
+        });
+      }
+
+      if (toggleObstaclePath.checked) {
+        instance.dynamic_obstacles.forEach((obstacle, index) => {
+          const shade = palette[index % palette.length];
+          pushLineStrip3d(
+            linePositions,
+            lineColors,
+            obstacle.path,
+            [shade[0], shade[1], shade[2], 0.95],
+            false,
+          );
+        });
+      }
+
+      if (toggleObstacleBody.checked) {
+        instance.dynamic_obstacles.forEach((obstacle, index) => {
+          const shade = palette[index % palette.length];
+          const pos = obstaclePosition(obstacle, state.time);
+          pushSphere3d(
+            trianglePositions,
+            triangleColors,
+            pos,
+            obstacle.radius,
+            [shade[0], shade[1], shade[2], 0.38],
+            6,
+            10,
+          );
+          ["x", "y", "z"].forEach((axis) => {
+            pushRing3d(
+              linePositions,
+              lineColors,
+              pos,
+              obstacle.radius,
+              [shade[0], shade[1], shade[2], 0.9],
+              axis,
+              28,
+            );
+          });
+        });
+      }
+
+      if (toggleQueries.checked) {
+        const endpointPositions = endpointMarkers(instance);
+        if (endpointPositions.length) {
+          const endpointFill = [0.12, 0.40, 0.84, 0.86];
+          const endpointStroke = [0.02, 0.13, 0.36, 1.0];
+          const markerRadius = robotMarkerRadius(instance);
+
+          endpointPositions.forEach((position) => {
+            pushSphere3d(
+              trianglePositions,
+              triangleColors,
+              position,
+              markerRadius,
+              endpointFill,
+              6,
+              10,
+            );
+            ["x", "y", "z"].forEach((axis) => {
+              pushRing3d(
+                linePositions,
+                lineColors,
+                position,
+                markerRadius,
+                endpointStroke,
+                axis,
+                28,
+              );
+            });
+          });
+        } else {
+          instance.queries.forEach((query, index) => {
+            const startStroke = [0.03, 0.28, 0.19, 1.0];
+            const goalStroke = [0.55, 0.34, 0.03, 1.0];
+            const markerRadius = robotMarkerRadius(instance);
+
+            ["x", "y", "z"].forEach((axis) => {
+              pushRing3d(linePositions, lineColors, query.start, markerRadius, startStroke, axis, 28);
+            });
+            pushWireBox3d(linePositions, lineColors, query.goal, markerRadius, goalStroke);
+          });
+        }
+      }
+
+      visibleSolutions().forEach((solution) => {
+        solutionTrajectories(solution).forEach((trajectory, agentIndex) => {
+          const color = solutionColor(agentIndex);
+          const pathAlpha = solutionAlpha(solution, "path_alpha", 0.98);
+          const bodyAlpha = solutionAlpha(solution, "body_alpha", 0.82);
+          if (toggleSolutionPath.checked && Array.isArray(trajectory.path)) {
+            pushTrajectoryTube3d(
+              trianglePositions,
+              triangleColors,
+              trajectory.path,
+              trajectoryTubeRadius3d(instance),
+              solutionColor(agentIndex, pathAlpha),
+            );
+          }
+          if (toggleSolutionBody.checked) {
+            const pos = trajectoryPosition(trajectory, state.time);
+            if (pos) {
+              const markerRadius = robotMarkerRadius(instance);
+              pushSphere3d(
+                trianglePositions,
+                triangleColors,
+                pos,
+                markerRadius,
+                solutionColor(agentIndex, bodyAlpha),
+                8,
+                12,
+              );
+              ["x", "y", "z"].forEach((axis) => {
+                pushRing3d(linePositions, lineColors, pos, markerRadius, [0.0, 0.0, 0.0, 1.0], axis, 24);
+              });
+            }
+          }
+        });
+      });
+
+      return {
+        trianglePositions: new Float32Array(trianglePositions),
+        triangleColors: new Float32Array(triangleColors),
+        linePositions: new Float32Array(linePositions),
+        lineColors: new Float32Array(lineColors),
+      };
+    }
+
+    function exportPixelRatio(cssWidth, cssHeight) {
+      let ratio = Math.max(EXPORT_DPI / CSS_DPI, window.devicePixelRatio || 1);
+      const viewportDims = gl.getParameter(gl.MAX_VIEWPORT_DIMS);
+      if (viewportDims && viewportDims.length >= 2) {
+        ratio = Math.min(
+          ratio,
+          Number(viewportDims[0]) / Math.max(cssWidth, 1),
+          Number(viewportDims[1]) / Math.max(cssHeight, 1),
+        );
+      }
+      return Math.max(1, ratio);
+    }
+
+    function downloadBlob(blob, filename) {
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+      link.download = filename;
+      link.href = url;
+      link.click();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function asciiBytes(text) {
+      return new TextEncoder().encode(text);
+    }
+
+    function concatBytes(chunks) {
+      const total = chunks.reduce((sum, chunk) => sum + chunk.length, 0);
+      const output = new Uint8Array(total);
+      let offset = 0;
+      chunks.forEach((chunk) => {
+        output.set(chunk, offset);
+        offset += chunk.length;
+      });
+      return output;
+    }
+
+    function pdfEscape(text) {
+      return String(text)
+        .replace(/\\/g, "\\\\")
+        .replace(/\(/g, "\\(")
+        .replace(/\)/g, "\\)");
+    }
+
+    function pdfDate(date) {
+      const pad = (value) => String(value).padStart(2, "0");
+      return (
+        "D:" +
+        date.getUTCFullYear() +
+        pad(date.getUTCMonth() + 1) +
+        pad(date.getUTCDate()) +
+        pad(date.getUTCHours()) +
+        pad(date.getUTCMinutes()) +
+        pad(date.getUTCSeconds()) +
+        "Z"
+      );
+    }
+
+    async function maybeDeflate(bytes) {
+      if (!("CompressionStream" in window)) {
+        return { bytes, filter: "" };
+      }
+      const stream = new Blob([bytes]).stream().pipeThrough(new CompressionStream("deflate"));
+      const compressed = new Uint8Array(await new Response(stream).arrayBuffer());
+      return { bytes: compressed, filter: "/Filter /FlateDecode " };
+    }
+
+    function buildPdf(objects, trailerExtra = "") {
+      const chunks = [];
+      const offsets = [0];
+      let byteOffset = 0;
+      const append = (chunk) => {
+        chunks.push(chunk);
+        byteOffset += chunk.length;
+      };
+
+      append(asciiBytes("%PDF-1.4\n%\xE2\xE3\xCF\xD3\n"));
+      objects.forEach((object, index) => {
+        const objectNumber = index + 1;
+        offsets[objectNumber] = byteOffset;
+        append(asciiBytes(`${objectNumber} 0 obj\n`));
+        if (object.stream) {
+          append(asciiBytes(`${object.dictionary}/Length ${object.stream.length} >>\nstream\n`));
+          append(object.stream);
+          append(asciiBytes("\nendstream\n"));
+        } else {
+          append(asciiBytes(`${object.dictionary}\n`));
+        }
+        append(asciiBytes("endobj\n"));
+      });
+
+      const xrefOffset = byteOffset;
+      append(asciiBytes(`xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`));
+      for (let index = 1; index <= objects.length; index += 1) {
+        append(asciiBytes(`${String(offsets[index]).padStart(10, "0")} 00000 n \n`));
+      }
+      append(asciiBytes(
+        `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R${trailerExtra} >>\n` +
+        `startxref\n${xrefOffset}\n%%EOF\n`
+      ));
+      return concatBytes(chunks);
+    }
+
+    async function renderedCanvasToPdfBytes(renderedCanvas, cssWidth, cssHeight, title) {
+      const width = renderedCanvas.width;
+      const height = renderedCanvas.height;
+      const pageWidth = cssWidth * 72.0 / CSS_DPI;
+      const pageHeight = cssHeight * 72.0 / CSS_DPI;
+      const ctx = renderedCanvas.getContext("2d");
+      const pixels = ctx.getImageData(0, 0, width, height).data;
+      const rgb = new Uint8Array(width * height * 3);
+      const alpha = new Uint8Array(width * height);
+      for (let src = 0, rgbDst = 0, alphaDst = 0; src < pixels.length; src += 4) {
+        rgb[rgbDst] = pixels[src];
+        rgb[rgbDst + 1] = pixels[src + 1];
+        rgb[rgbDst + 2] = pixels[src + 2];
+        alpha[alphaDst] = pixels[src + 3];
+        rgbDst += 3;
+        alphaDst += 1;
+      }
+      const compressedRgb = await maybeDeflate(rgb);
+      const compressedAlpha = await maybeDeflate(alpha);
+      const content = asciiBytes(
+        `q\n${pageWidth.toFixed(4)} 0 0 ${pageHeight.toFixed(4)} 0 0 cm\n/Im0 Do\nQ\n`
+      );
+      const now = new Date();
+      return buildPdf(
+        [
+          { dictionary: "<< /Type /Catalog /Pages 2 0 R >>" },
+          { dictionary: "<< /Type /Pages /Kids [3 0 R] /Count 1 >>" },
+          {
+            dictionary:
+              `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pageWidth.toFixed(4)} ${pageHeight.toFixed(4)}] ` +
+              "/Resources << /XObject << /Im0 4 0 R >> >> /Contents 6 0 R >>",
+          },
+          {
+            dictionary:
+              `<< /Type /XObject /Subtype /Image /Width ${width} /Height ${height} ` +
+              `/ColorSpace /DeviceRGB /BitsPerComponent 8 /SMask 5 0 R ${compressedRgb.filter}`,
+            stream: compressedRgb.bytes,
+          },
+          {
+            dictionary:
+              `<< /Type /XObject /Subtype /Image /Width ${width} /Height ${height} ` +
+              `/ColorSpace /DeviceGray /BitsPerComponent 8 ${compressedAlpha.filter}`,
+            stream: compressedAlpha.bytes,
+          },
+          { dictionary: "<< ", stream: content },
+          {
+            dictionary:
+              `<< /Producer (${pdfEscape("ST-GCS WebGL Viewer")}) ` +
+              `/Title (${pdfEscape(title)}) /CreationDate (${pdfEscape(pdfDate(now))}) >>`,
+          },
+        ],
+        " /Info 7 0 R",
+      );
+    }
+
+    async function exportCurrentFigure() {
+      const instance = currentInstance();
+      if (!instance) {
+        setSolutionStatus("Figure export requires a loaded instance.", false);
+        return;
+      }
+      const instanceName = String(instance.instance_id || "viewer-figure").replace(/[^a-zA-Z0-9_.-]+/g, "-");
+      const rect = canvas.getBoundingClientRect();
+      const cssWidth = Math.max(rect.width, 1);
+      const cssHeight = Math.max(rect.height, 1);
+      const previousPixelRatioOverride = renderPixelRatioOverride;
+      try {
+        renderPixelRatioOverride = exportPixelRatio(cssWidth, cssHeight);
+        render();
+        gl.finish();
+        const outputCanvas = document.createElement("canvas");
+        outputCanvas.width = canvas.width;
+        outputCanvas.height = canvas.height;
+        const outputCtx = outputCanvas.getContext("2d");
+        outputCtx.clearRect(0, 0, outputCanvas.width, outputCanvas.height);
+        outputCtx.drawImage(canvas, 0, 0);
+        outputCtx.drawImage(labelCanvas, 0, 0);
+        const pdfBytes = await renderedCanvasToPdfBytes(outputCanvas, cssWidth, cssHeight, instanceName);
+        downloadBlob(new Blob([pdfBytes], { type: "application/pdf" }), `${instanceName}-viewer-figure.pdf`);
+      } finally {
+        renderPixelRatioOverride = previousPixelRatioOverride;
+        render();
+      }
+    }
+
+    function drawPrimitive2d(mode, positions, colors) {
+      if (!positions.length) {
+        return;
+      }
+      gl.useProgram(program2d);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STREAM_DRAW);
+      gl.enableVertexAttribArray(positionLocation2d);
+      gl.vertexAttribPointer(positionLocation2d, 2, gl.FLOAT, false, 0, 0);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STREAM_DRAW);
+      gl.enableVertexAttribArray(colorLocation2d);
+      gl.vertexAttribPointer(colorLocation2d, 4, gl.FLOAT, false, 0, 0);
+
+      gl.drawArrays(mode, 0, positions.length / 2);
+    }
+
+    function drawPrimitive3d(mode, positions, colors, matrix) {
+      if (!positions.length) {
+        return;
+      }
+      gl.useProgram(program3d);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STREAM_DRAW);
+      gl.enableVertexAttribArray(positionLocation3d);
+      gl.vertexAttribPointer(positionLocation3d, 3, gl.FLOAT, false, 0, 0);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STREAM_DRAW);
+      gl.enableVertexAttribArray(colorLocation3d);
+      gl.vertexAttribPointer(colorLocation3d, 4, gl.FLOAT, false, 0, 0);
+
+      gl.uniformMatrix4fv(matrixLocation3d, false, matrix);
+
+      gl.drawArrays(mode, 0, positions.length / 3);
+    }
+
+    function render() {
+      resizeCanvas();
+      clearLabelCanvas();
+      gl.clearColor(1.0, 1.0, 1.0, 1.0);
+      gl.clearDepth(1.0);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+      const instance = currentInstance();
+      if (!instance) {
+        setHint(null);
+        return;
+      }
+      setHint(instance);
+      if (instance.dimension === 2) {
+        gl.disable(gl.DEPTH_TEST);
+        const geometry = buildSceneGeometry2d(instance);
+        drawPrimitive2d(gl.TRIANGLES, geometry.trianglePositions, geometry.triangleColors);
+        drawPrimitive2d(gl.LINES, geometry.linePositions, geometry.lineColors);
+        drawQueryLabels(instance);
+        updateHud(instance);
+        return;
+      }
+      if (instance.dimension === 3) {
+        gl.enable(gl.DEPTH_TEST);
+        const geometry = buildSceneGeometry3d(instance);
+        const matrix = buildViewProjectionMatrix();
+        drawPrimitive3d(gl.TRIANGLES, geometry.trianglePositions, geometry.triangleColors, matrix);
+        drawPrimitive3d(gl.LINES, geometry.linePositions, geometry.lineColors, matrix);
+        drawQueryLabels(instance, matrix);
+        updateHud(instance);
+        return;
+      }
+      hud.textContent = `${instance.instance_id}\nUnsupported dimension ${instance.dimension}.`;
+      hint.textContent = `Unsupported dimension ${instance.dimension}.`;
+    }
+
+    function onManifestFileChange(event) {
+      const file = event.target.files[0];
+      if (!file) {
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          loadManifestObject(JSON.parse(reader.result));
+        } catch (error) {
+          hud.textContent = `Failed to parse manifest: ${error.message}`;
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function loadManifestFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const manifestUrl = params.get("manifest");
+      if (!manifestUrl) {
+        return;
+      }
+      fetch(manifestUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(loadManifestObject)
+        .catch((error) => {
+          hud.textContent = `Failed to fetch manifest from URL: ${error.message}`;
+        });
+    }
+
+    function screenToWorld2d(deltaX, deltaY) {
+      return [
+        (deltaX / canvas.width) * state.view2d.spanX * 2.0,
+        -(deltaY / canvas.height) * state.view2d.spanY * 2.0,
+      ];
+    }
+
+    function pan3d(deltaX, deltaY) {
+      const aspect = canvas.width / Math.max(canvas.height, 1);
+      const halfHeight = Math.tan(state.view3d.fovY * 0.5) * state.view3d.distance;
+      const halfWidth = halfHeight * aspect;
+      const { right, up } = cameraBasis();
+      const offset = add3(
+        scale3(right, (-2 * halfWidth * deltaX) / Math.max(canvas.width, 1)),
+        scale3(up, (2 * halfHeight * deltaY) / Math.max(canvas.height, 1)),
+      );
+      state.view3d.target = add3(state.view3d.target, offset);
+    }
+
+    function orbit3d(deltaX, deltaY) {
+      state.view3d.yaw -= deltaX * 0.01;
+      state.view3d.pitch = clamp(state.view3d.pitch - deltaY * 0.01, -1.45, 1.45);
+    }
+
+    manifestFile.addEventListener("change", onManifestFileChange);
+    instanceSelect.addEventListener("change", (event) => {
+      state.currentIndex = Number(event.target.value);
+      const instance = currentInstance();
+      state.time = instance && Array.isArray(instance.time_range) ? Number(instance.time_range[0] || 0) : 0;
+      applyLayerDefaults(instance);
+      updateTimeUi(instance);
+      updateLoadedSolutionsUi();
+      setHint(instance);
+      setFitView(instance);
+      render();
+    });
+    timeSlider.addEventListener("input", () => {
+      state.time = Number(timeSlider.value);
+      timeReadout.textContent = `t = ${state.time.toFixed(2)}`;
+      render();
+    });
+    fitButton.addEventListener("click", () => {
+      setFitView(currentInstance());
+      render();
+    });
+    exportFigureButton.addEventListener("click", () => {
+      exportCurrentFigure().catch((error) => {
+        console.error(error);
+        setSolutionStatus(`Figure export failed: ${error.message || error}`, false);
+      });
+    });
+    [toggleSetFill, toggleSetOutline, toggleStaticObstacles, toggleObstaclePath, toggleObstacleBody, toggleQueries, toggleSolutionPath, toggleSolutionBody]
+      .forEach((checkbox) => checkbox.addEventListener("change", render));
+
+    canvas.addEventListener("contextmenu", (event) => event.preventDefault());
+    canvas.addEventListener("pointerdown", (event) => {
+      const instance = currentInstance();
+      if (!instance) {
+        return;
+      }
+      canvas.setPointerCapture(event.pointerId);
+      const action = instance.dimension === 3 && !(event.shiftKey || event.button === 2) ? "orbit" : "pan";
+      state.drag = { x: event.clientX, y: event.clientY, action };
+    });
+    canvas.addEventListener("pointermove", (event) => {
+      if (!state.drag) {
+        return;
+      }
+      const dx = event.clientX - state.drag.x;
+      const dy = event.clientY - state.drag.y;
+      state.drag.x = event.clientX;
+      state.drag.y = event.clientY;
+      const instance = currentInstance();
+      if (!instance) {
+        return;
+      }
+      if (instance.dimension === 3) {
+        if (state.drag.action === "orbit") {
+          orbit3d(dx, dy);
+        } else {
+          pan3d(dx, dy);
+        }
+      } else {
+        const [worldDx, worldDy] = screenToWorld2d(dx, dy);
+        state.view2d.centerX -= worldDx;
+        state.view2d.centerY -= worldDy;
+      }
+      render();
+    });
+    function endDrag() {
+      state.drag = null;
+    }
+    canvas.addEventListener("pointerup", endDrag);
+    canvas.addEventListener("pointercancel", endDrag);
+    canvas.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      const instance = currentInstance();
+      if (!instance) {
+        return;
+      }
+      const zoomFactor = Math.exp(event.deltaY * 0.0015);
+      if (instance.dimension === 3) {
+        state.view3d.distance = clamp(state.view3d.distance * zoomFactor, 0.05, 1e6);
+      } else {
+        state.view2d.spanX *= zoomFactor;
+        state.view2d.spanY *= zoomFactor;
+      }
+      render();
+    }, { passive: false });
+    window.addEventListener("resize", render);
+
+    resizeCanvas();
+    render();
+    loadManifestFromUrl();
+  </script>
+</body>
+</html>

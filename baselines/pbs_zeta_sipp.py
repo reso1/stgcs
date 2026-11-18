@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import math
 import time
-from dataclasses import dataclass
 from typing import List, Optional, Sequence, Tuple
 
 import networkx as nx
@@ -10,192 +9,21 @@ import numpy as np
 
 from baselines.common import ShortestPathSolution
 from baselines.zeta_sipp import ZetaStarSIPPPlanner
-from benchmark.environment.env import Env
-from benchmark.environment.obstacle import DynamicSphere
-from stgcs.interval import Interval
-from stgcs.pbs import (
+from experiments.environment.env import Env
+from experiments.environment.obstacle import ConcatDynamicSphere
+from baselines.priority_search import (
     DEFAULT_CHILD_EXPANSION_MODE,
     ChildExpansionMode,
     LowLevelPlanCacheKey,
     PBSNode,
     PriorityBasedSearch,
 )
-from stgcs.st_planner import MPQuery, STPlanStatus
-from stgcs.graph import STGCS
-from stgcs.trajectory import STTrajectory
+from stgcs_native.types import MPQuery, STPlanStatus
+from experiments.environment.space_time_graph import STGCS
+from stgcs_native.types import STTrajectory
 
 
 _ZETA_STAR_SIPP_PLANNER = ZetaStarSIPPPlanner
-
-
-@dataclass(frozen=True)
-class _TrajectorySegment:
-    x0: np.ndarray
-    xt: np.ndarray
-    start: float
-    end: float
-
-
-class _ZetaSIPPTrajectoryObstacle:
-    """Dynamic obstacle view of a full trajectory for Zeta*-SIPP safe intervals."""
-
-    TIME_EPS = 1e-12
-
-    def __init__(
-        self,
-        segments: Sequence[_TrajectorySegment],
-        radius: float,
-        t0: float,
-        tmax: float,
-        reserve_start: bool,
-        reserve_goal: bool,
-    ) -> None:
-        if not segments:
-            raise ValueError("Zeta*-SIPP trajectory obstacle requires at least one segment.")
-        self.segments = tuple(segments)
-        self.radius = float(radius)
-        self.t0 = float(t0)
-        self.tmax = float(tmax)
-        self.reserve_start = bool(reserve_start)
-        self.reserve_goal = bool(reserve_goal)
-        self.x0 = np.asarray(self.segments[0].x0, dtype=float)
-        self.xt = np.asarray(self.segments[-1].xt, dtype=float)
-        self.itvl = Interval(float(self.segments[0].start), float(self.segments[-1].end))
-
-    @classmethod
-    def from_solution(
-        cls,
-        sol: STTrajectory,
-        radius: float,
-        t0: float,
-        tmax: float,
-        reserve_start: bool,
-        reserve_goal: bool,
-    ) -> "_ZetaSIPPTrajectoryObstacle":
-        segments = [
-            _TrajectorySegment(
-                x0=np.asarray(sol.xA(idx)[:-1], dtype=float),
-                xt=np.asarray(sol.xB(idx)[:-1], dtype=float),
-                start=float(sol.xA(idx)[-1]),
-                end=float(sol.xB(idx)[-1]),
-            )
-            for idx in range(sol.size)
-        ]
-        return cls(
-            segments,
-            radius=float(radius),
-            t0=float(t0),
-            tmax=float(tmax),
-            reserve_start=bool(reserve_start),
-            reserve_goal=bool(reserve_goal),
-        )
-
-    @classmethod
-    def _segment_collision_interval(
-        cls,
-        segment: _TrajectorySegment,
-        point: np.ndarray,
-        radius: float,
-    ) -> Optional[Interval]:
-        point = np.asarray(point, dtype=float)
-        duration = float(segment.end - segment.start)
-        if duration <= cls.TIME_EPS:
-            if np.linalg.norm(segment.x0 - point) <= radius:
-                return Interval(float(segment.start), float(segment.end))
-            return None
-
-        velocity = (segment.xt - segment.x0) / duration
-        a = float(np.dot(velocity, velocity))
-        if a <= cls.TIME_EPS:
-            if np.linalg.norm(segment.x0 - point) <= radius:
-                return Interval(float(segment.start), float(segment.end))
-            return None
-
-        delta = segment.x0 - point
-        b = 2.0 * float(np.dot(velocity, delta))
-        c = float(np.dot(delta, delta)) - float(radius) ** 2
-        discriminant = b * b - 4.0 * a * c
-        if discriminant < 0.0:
-            return None
-
-        sqrt_discriminant = math.sqrt(discriminant)
-        tau1 = (-b - sqrt_discriminant) / (2.0 * a)
-        tau2 = (-b + sqrt_discriminant) / (2.0 * a)
-        active = Interval(0.0, duration)
-        collision = Interval(tau1, tau2).intersection(active)
-        if collision is None:
-            return None
-        return Interval(collision.start + segment.start, collision.end + segment.start)
-
-    def collision_intervals(self, point: np.ndarray, robot_radius: float) -> List[Interval]:
-        radius = self.radius + float(robot_radius)
-        point = np.asarray(point, dtype=float)
-        intervals: List[Interval] = []
-
-        first = self.segments[0]
-        if (
-            self.reserve_start
-            and first.start > self.t0 + self.TIME_EPS
-            and np.linalg.norm(first.x0 - point) <= radius
-        ):
-            intervals.append(Interval(self.t0, first.start))
-
-        for segment in self.segments:
-            interval = self._segment_collision_interval(segment, point, radius)
-            if interval is not None:
-                intervals.append(interval)
-
-        last = self.segments[-1]
-        if (
-            self.reserve_goal
-            and last.end < self.tmax - self.TIME_EPS
-            and np.linalg.norm(last.xt - point) <= radius
-        ):
-            intervals.append(Interval(last.end, self.tmax))
-        return intervals
-
-    def is_colliding_lineseg(
-        self,
-        p: np.ndarray,
-        q: np.ndarray,
-        tp: float,
-        tq: float,
-        robot_radius: float,
-    ) -> bool:
-        query_interval = Interval(float(tp), float(tq))
-        first = self.segments[0]
-        if self.reserve_start and first.start > self.t0 + self.TIME_EPS:
-            if DynamicSphere(first.x0, first.x0, self.radius, Interval(self.t0, first.start)).is_colliding_lineseg(
-                p, q, tp, tq, robot_radius
-            ):
-                return True
-
-        for segment in self.segments:
-            segment_interval = Interval(segment.start, segment.end)
-            if segment_interval.intersects(query_interval):
-                obstacle = DynamicSphere(segment.x0, segment.xt, self.radius, segment_interval)
-                if obstacle.is_colliding_lineseg(p, q, tp, tq, robot_radius):
-                    return True
-
-        last = self.segments[-1]
-        if self.reserve_goal and last.end < self.tmax - self.TIME_EPS:
-            return DynamicSphere(last.xt, last.xt, self.radius, Interval(last.end, self.tmax)).is_colliding_lineseg(
-                p, q, tp, tq, robot_radius
-            )
-        return False
-
-    def x(self, t: float) -> np.ndarray:
-        t = float(t)
-        if t <= self.segments[0].start:
-            return self.x0
-        for segment in self.segments:
-            if t <= segment.end:
-                duration = segment.end - segment.start
-                if duration <= self.TIME_EPS:
-                    return segment.xt.copy()
-                alpha = (t - segment.start) / duration
-                return segment.x0 * (1.0 - alpha) + segment.xt * alpha
-        return self.xt
 
 
 class ZetaSIPPPriorityBasedSearch(PriorityBasedSearch):
@@ -301,7 +129,6 @@ class ZetaSIPPPriorityBasedSearch(PriorityBasedSearch):
         node: PBSNode,
         high_priority_agents: Sequence[int],
         queries: Sequence[MPQuery],
-        reserve_tf: float,
     ) -> Env:
         reserved_env = self.env.copy()
         for agent_idx in high_priority_agents:
@@ -310,11 +137,9 @@ class ZetaSIPPPriorityBasedSearch(PriorityBasedSearch):
                 continue
             x0_staying, xt_staying = self._reservation_stay_modes(int(agent_idx), list(queries))
             reserved_env.O_Dynamic.append(
-                _ZetaSIPPTrajectoryObstacle.from_solution(
+                ConcatDynamicSphere.from_solution(
                     sol,
                     radius=self.robot_radius,
-                    t0=self.t0,
-                    tmax=float(reserve_tf),
                     reserve_start=x0_staying,
                     reserve_goal=xt_staying,
                 )
@@ -337,7 +162,6 @@ class ZetaSIPPPriorityBasedSearch(PriorityBasedSearch):
             node,
             high_priority_agents,
             queries,
-            reserve_tf=self.tmax,
         )
         planner = _ZETA_STAR_SIPP_PLANNER(
             reserved_env,

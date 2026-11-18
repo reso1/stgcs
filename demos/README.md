@@ -1,186 +1,84 @@
 # Demos
 
-This folder contains runnable demos that load benchmark instances, reuse saved
-solution JSONs when available, optionally rerun the planning pipeline, and open
-the WebGL viewer.
+Python entry points for individual planning problems and their browser viewers.
+Install the project and build the native tools as described in the
+[root README](../README.md). Run commands from the repository root.
 
-Run demos from the repository root with `python -m ...`:
-
-```bash
-export MPLCONFIGDIR=/private/tmp/stgcs-mpl-cache
-export XDG_CACHE_HOME=/private/tmp/stgcs-xdg-cache
-```
-
-Most demos write or read solutions under `data/solutions/...`. If the expected
-MRMP and trajopt solution JSONs already exist and match the current demo
-configuration, the demo loads them instead of solving again.
-
-## Large MRMP Demos
-
-These demos load saved MRMP and trajopt JSONs by default. Use `--force-solve`
-to rerun MRMP, `--force-trajopt` to rerun trajopt, `--no-trajopt` to skip
-trajopt, and `--no-serve` to run or load solutions without starting the viewer.
-
-View the checked-in 50-robot four-room solution:
+## Large-scale saved solutions
 
 ```bash
 python -m demos.demo_r50_four_room
-```
-
-Run the full 50-robot pipeline without starting the viewer:
-
-```bash
-python -m demos.demo_r50_four_room --no-serve
-```
-
-Rerun both MRMP and trajopt:
-
-```bash
-python -m demos.demo_r50_four_room --force-solve --force-trajopt
-```
-
-View the checked-in 100-robot empty-workspace solution:
-
-```bash
 python -m demos.demo_r100_empty
-```
-
-Rerun only trajopt from the saved MRMP solution:
-
-```bash
-python -m demos.demo_r100_empty --force-trajopt
-```
-
-View the checked-in 32-robot sphere exchange solution:
-
-```bash
 python -m demos.demo_r32_sphere_exchange
-```
-
-Rerun the sphere MRMP solve with a different child-expansion rule:
-
-```bash
-python -m demos.demo_r32_sphere_exchange \
-  --force-solve \
-  --force-trajopt \
-  --child-expansion-rule num_conflicts
-```
-
-View the checked-in 48-UAV village solution:
-
-```bash
 python -m demos.demo_r48_village
 ```
 
-The village demo uses port `8780` by default. Run it on another port with:
+Run one viewer at a time, or choose distinct ports with `--port`.
+
+| Module | Instance | Planning budget | Viewer port |
+| --- | --- | --- | --- |
+| `demo_r50_four_room` | 50 robots, four rooms, query seed 3 | 120 s | 8765 |
+| `demo_r100_empty` | 100 robots, empty square, query seed 3 | 120 s | 8765 |
+| `demo_r32_sphere_exchange` | 32 UAVs exchanging antipodal positions | 120 s | 8765 |
+| `demo_r48_village` | 48 UAVs, village seed 1000 | 300 s | 8780 |
+
+Each script uses its matching folder under `data/instances/mrmp` and
+`data/solutions`. Saved MRMP and smoothed solutions are reused when present;
+missing solutions are computed. Displayed timings are the saved run's timings.
+
+The four demos use epsilon 8, alpha 2, beta 1, dynamic windows, NC ordering,
+and a 100-second planning horizon. The village uses `max(h_mot, h_tri)`;
+the others use `h_max`. Smoothing samples every 0.10 s with 0.50 s windows
+and a 0.25 s stride.
+
+Common options:
+
+| Option | Effect |
+| --- | --- |
+| `--no-serve` | Load/run and print results without starting the viewer |
+| `--force-solve` | Recompute MRMP and refresh smoothing |
+| `--force-trajopt` | Reuse MRMP and recompute smoothing |
+| `--no-trajopt` | Show only the MRMP solution |
+| `--solution-output PATH`, `--trajopt-output PATH` | Select the saved solution files |
+
+For example, recompute into separate files:
 
 ```bash
-python -m demos.demo_r48_village --port 8870
+python -m demos.demo_r50_four_room --force-solve --force-trajopt --no-serve \
+  --solution-output build/demo-rerun/mrmp_solution.json \
+  --trajopt-output build/demo-rerun/trajopt_solution.json
 ```
 
-It also maintains intermediate cache files:
-
-- `data/solutions/demo_r48_village/mrmp_cache.json`
-- `data/solutions/demo_r48_village/trajopt_cache.json`
-
-Pass `--force-solve` or `--force-trajopt` when those cached stages should be
-recomputed.
-
-## Sequential MRMP Demos
-
-The sequential demos are script-defined tasks. Their default `serve` phase runs
-MRMP stage by stage, runs trajopt, saves JSONs, and starts a viewer. They reuse
-valid saved JSONs under `data/solutions/demo_sequential_tasks/...`.
-
-Run the formation-control demo:
-
-```bash
-python -m demos.demo_stgcs_formation_control
-```
-
-Run it without opening the viewer:
-
-```bash
-python -m demos.demo_stgcs_formation_control --no-serve
-```
-
-Plot only the stage target configurations:
-
-```bash
-python -m demos.demo_stgcs_formation_control targets \
-  --targets-output /private/tmp/formation_targets.png \
-  --no-show-targets
-```
-
-Run the rearrangement demo:
+## Sequential tasks
 
 ```bash
 python -m demos.demo_stgcs_rearrangement
+python -m demos.demo_stgcs_formation_control
 ```
 
-Sequential demos do not expose `--force-solve` or `--force-trajopt`. To rerun
-from scratch, delete the output directory or pass a fresh `--output-dir`:
+These run a sequence of MRMP stages, smooth the trajectories, and serve the
+viewer on port 8766. They create solutions when no saved files exist. Both accept
+`--force-solve`, `--force-trajopt`, `--no-serve`, and `--output-dir`.
+To inspect targets without planning:
 
 ```bash
-python -m demos.demo_stgcs_rearrangement \
-  --output-dir /private/tmp/stgcs-rearrangement-rerun \
-  --no-serve
+python -m demos.demo_stgcs_rearrangement targets --no-show-targets \
+  --targets-output build/rearrangement-targets.png
 ```
 
-Sequential viewers use port `8766` by default.
-
-## Benchmark Viewer Demos
-
-These demos select fixed benchmark instances and save viewer solution payloads.
-They do not expose CLI flags; edit the constants near the top of the script to
-change the selected instance or planner.
-
-View one 20-robot benchmark instance with Windowed-PBS+BFS:
+## Single-instance planner comparison
 
 ```bash
-python -m demos.demo_benchmark_instances
+python -m demos.demo_mrmp_benchmark
 ```
 
-The script reuses files in `data/solutions/benchmark_instances/`. Delete the
-corresponding JSON if the selected benchmark instance should be solved again.
+This compares planners on the 10-robot grid `s4/seed1` instance. Its current
+budget is **30 s per planner**, whereas Figure 16 uses 120 s. Configuration is
+in the module's `INSTANCE`, `BUDGET`, and `PLANNER_KEYS` constants. It saves
+results under `data/solutions/benchmark_comparison` and opens port 8765.
+Build the [optional OMPL backends](../baselines/README.md) for the complete
+comparison; unavailable native baselines are skipped.
 
-View the 10-robot benchmark-comparison demo:
-
-```bash
-python -m demos.demo_benchmark_comparison
-```
-
-The script tries to load or compute the configured planners and writes the
-combined viewer payload under `data/solutions/benchmark_comparison/...`. Native
-baseline planners are skipped when their optional native modules are not built
-and no saved solution is available.
-
-## Viewer
-
-When a demo starts the viewer, it prints a local URL such as:
-
-```text
-http://127.0.0.1:8765/
-```
-
-The process stays active until interrupted. Use `--no-serve` when only the
-solution JSONs or printed summary are needed.
-
-## Quick Checks
-
-Check CLI availability without solving:
-
-```bash
-python -m demos.demo_r50_four_room --help
-python -m demos.demo_r100_empty --help
-python -m demos.demo_r32_sphere_exchange --help
-python -m demos.demo_r48_village --help
-python -m demos.demo_stgcs_formation_control --help
-python -m demos.demo_stgcs_rearrangement --help
-```
-
-Compile the demo scripts:
-
-```bash
-find demos -name '*.py' -print0 | xargs -0 python -m py_compile
-```
+Dataset-backed demos use `MRMPExperiment` and the shared `stgcs_native` client.
+Sequential tasks use `sequential_mrmp_utils.py`; browser serving and solution
+serialization live in [visualization](../visualization/README.md).

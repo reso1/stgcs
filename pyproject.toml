@@ -24,20 +24,24 @@ dependencies = [
   "tqdm==4.67.1",
 ]
 
+[tool.setuptools.package-dir]
+stgcs_native = "python/stgcs_native"
+
 [tool.setuptools.packages.find]
+where = [".", "python"]
 include = [
   "baselines",
   "baselines.*",
   "demos",
   "demos.*",
-  "benchmark",
-  "benchmark.*",
-  "stgcs",
-  "stgcs.*",
+  "stgcs_native",
+  "stgcs_native.*",
+  "experiments",
+  "experiments.*",
   "visualization",
   "visualization.*",
 ]
-exclude = ["experiments*", "data*"]
+exclude = ["data*", "tests*", "stgcs_cplusplus*"]
 
 [tool.setuptools.package-data]
 baselines = ["ompl_kcbs_native/*", "ompl_strrt_star_native/*"]

@@ -1,19 +1,22 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-import heapq
 import math
 import time
 from typing import Callable, Iterable, List, Optional, Sequence, Tuple
 
 import numpy as np
-from pydrake.all import HPolyhedron
+from shapely.geometry import LineString, MultiPoint, Point, box
+from shapely.ops import unary_union
+from shapely.prepared import prep
 
 from baselines.common import ShortestPathSolution
-from benchmark.environment.env import Env
-from benchmark.environment.obstacle import StaticPolygon, StaticSphere
-from stgcs.interval import Interval
-from stgcs.st_planner import MPQuery
+from experiments.environment.env import Env
+from experiments.environment.obstacle import (
+    ConcatDynamicSphere, DynamicSphere, StaticPolygon, StaticSphere,
+)
+from experiments.environment.interval import Interval
+from stgcs_native.types import MPQuery
 
 
 TIME_EPS = 1e-9
@@ -30,7 +33,7 @@ class _ZetaUtils:
         for start, end in intervals:
             lo = max(0.0, float(start))
             hi = min(float(end), float(t_max))
-            if hi <= lo + TIME_EPS:
+            if hi < lo:
                 continue
             ordered.append((lo, hi))
         ordered.sort(key=lambda item: (item[0], item[1]))
@@ -54,228 +57,123 @@ class _ZetaUtils:
     def complement_intervals(blocked: Sequence[Tuple[float, float]], t_max: float) -> List[Tuple[float, float]]:
         safe: List[Tuple[float, float]] = []
         cursor = 0.0
+        # Collision intervals are closed, including instantaneous contacts.
+        margin = 10 * TIME_EPS
         for start, end in blocked:
-            if start > cursor + TIME_EPS:
-                safe.append((cursor, start))
-            cursor = max(cursor, end)
-            if cursor >= t_max - TIME_EPS:
-                break
-        if cursor < t_max - TIME_EPS:
+            if start - margin >= cursor:
+                safe.append((cursor, start - margin))
+            cursor = max(cursor, end + margin)
+            if cursor > t_max:
+                return safe
+        if cursor <= t_max:
             safe.append((cursor, t_max))
-        elif abs(cursor - t_max) <= TIME_EPS:
-            safe.append((t_max, t_max))
         return safe
 
     @staticmethod
     def intersect_intervals(a: Sequence[float], b: Sequence[float]) -> List[float]:
         lo = max(float(a[0]), float(b[0]))
         hi = min(float(a[1]), float(b[1]))
-        if hi <= lo + TIME_EPS:
+        if hi < lo - TIME_EPS:
             return []
         return [lo, hi]
 
     @staticmethod
-    def point_in_cspace(env: Env, point: np.ndarray) -> bool:
-        point = np.asarray(point, dtype=float)
-        return any(hpoly.PointInSet(point) for hpoly in env._CSpace_hpoly)
-
-    @staticmethod
-    def point_in_domain_box(env: Env, point: np.ndarray) -> bool:
-        point = np.asarray(point, dtype=float)
-        return bool(np.all(point >= env.lb - TIME_EPS) and np.all(point <= env.ub + TIME_EPS))
-
-    @classmethod
-    def point_in_discretized_space(cls, env: Env, point: np.ndarray) -> bool:
-        if env.O_Static:
-            return cls.point_in_domain_box(env, point)
-        return cls.point_in_cspace(env, point)
-
-    @staticmethod
-    def cell_bounds(center: np.ndarray, cell_size: float) -> Tuple[np.ndarray, np.ndarray]:
-        center = np.asarray(center, dtype=float)
-        half_size = 0.5 * float(cell_size)
-        return center - half_size, center + half_size
-
-    @classmethod
-    def cell_corners(cls, center: np.ndarray, cell_size: float) -> Tuple[np.ndarray, ...]:
-        lower, upper = cls.cell_bounds(center, cell_size)
-        return (
-            np.array([lower[0], lower[1]], dtype=float),
-            np.array([upper[0], lower[1]], dtype=float),
-            np.array([upper[0], upper[1]], dtype=float),
-            np.array([lower[0], upper[1]], dtype=float),
-        )
-
-    @staticmethod
-    def cspace_cell_containment_required(env: Env) -> bool:
-        if not env.O_Static:
-            return True
-        return str(env.name).lower().startswith("maze")
-
-    @staticmethod
-    def native_maze_grid_required(env: Env) -> bool:
-        return str(env.name).lower().startswith("maze")
-
-    @staticmethod
-    def native_maze_grid_cell_size(env: Env) -> float:
-        span = np.asarray(env.ub[:2], dtype=float) - np.asarray(env.lb[:2], dtype=float)
-        if not np.allclose(span, np.round(span), atol=TIME_EPS):
-            raise ValueError(f"Maze grid discretization requires integer domain span, got {span}.")
-        return 1.0
-
-    @classmethod
-    def cell_in_domain_box(cls, env: Env, center: np.ndarray, cell_size: float) -> bool:
-        lower, upper = cls.cell_bounds(center, cell_size)
-        return bool(np.all(lower >= env.lb - TIME_EPS) and np.all(upper <= env.ub + TIME_EPS))
-
-    @classmethod
-    def cell_in_cspace(cls, env: Env, center: np.ndarray, cell_size: float) -> bool:
-        corners = cls.cell_corners(center, cell_size)
-        return any(
-            all(hpoly.PointInSet(corner, TIME_EPS) for corner in corners)
-            for hpoly in env._CSpace_hpoly
-        )
-
-    @classmethod
-    def cell_in_discretized_space(cls, env: Env, center: np.ndarray, cell_size: float) -> bool:
-        if cls.cspace_cell_containment_required(env):
-            return cls.cell_in_cspace(env, center, cell_size)
-        return cls.cell_in_domain_box(env, center, cell_size)
-
-    @classmethod
-    def native_maze_cell_is_free(cls, env: Env, center: np.ndarray) -> bool:
-        return cls.point_in_cspace(env, center) and not cls.blocked_by_static(
-            env,
-            center,
-            env.robot_radius,
-        )
-
-    @staticmethod
-    def blocked_by_static(env: Env, point: np.ndarray, inflation: float) -> bool:
-        return any(obstacle.is_colliding(point, inflation) for obstacle in env.O_Static)
-
-    @staticmethod
-    def segment_blocked_by_static(env: Env, start: np.ndarray, goal: np.ndarray, inflation: float) -> bool:
-        return any(obstacle.is_colliding_lineseg(start, goal, inflation) for obstacle in env.O_Static)
-
-    @classmethod
-    def cell_blocked_by_static(
-        cls,
-        env: Env,
-        center: np.ndarray,
-        cell_size: float,
-        inflation: float,
-    ) -> bool:
-        lower, upper = cls.cell_bounds(center, cell_size)
-        inflated_box = HPolyhedron.MakeBox(lower - float(inflation), upper + float(inflation))
-        for obstacle in env.O_Static:
-            if isinstance(obstacle, StaticPolygon):
-                if obstacle.hpoly.IntersectsWith(inflated_box):
-                    return True
-                continue
-            if isinstance(obstacle, StaticSphere):
-                closest = np.minimum(np.maximum(obstacle.pos, lower), upper)
-                if np.linalg.norm(obstacle.pos - closest) <= obstacle.radius + float(inflation):
-                    return True
-                continue
-            raise TypeError(f"Unsupported static obstacle type {type(obstacle)!r} for Zeta*-SIPP projection.")
-        return False
-
-    @classmethod
-    def point_blocked_intervals(
-        cls, env: Env, point: np.ndarray, inflation: float, t_max: float
-    ) -> List[Tuple[float, float]]:
-        blocked: List[Tuple[float, float]] = []
-        for obstacle in env.O_Dynamic:
-            for interval in obstacle.collision_intervals(point, inflation):
-                blocked.append((interval.start, interval.end))
-        return cls.merge_intervals(blocked, t_max)
-
-    @staticmethod
     def line_seg_on_grid(x0: float, y0: float, x1: float, y1: float, distance: float) -> List[dict]:
+        # Trace positive-length cell crossings. A corner touch does not enter
+        # either side cell; the adjoining free cells already cover that point.
         grids: List[dict] = []
-        dx = abs(x1 - x0)
-        dy = abs(y1 - y0)
-
-        x = math.floor(x0)
-        y = math.floor(y0)
-
-        dtdx = math.inf if dx <= TIME_EPS else 1.0 / dx
-        dtdy = math.inf if dy <= TIME_EPS else 1.0 / dy
-
-        d0 = 0.0
-        n = 1
-
-        if dx <= TIME_EPS:
-            x_inc = 0
-            t_next_horizontal = math.inf
-        elif x1 > x0:
-            x_inc = 1
-            n += math.floor(x1) - x
-            t_next_horizontal = (x + 1 - x0) * dtdx
-        else:
-            x_inc = -1
-            n += x - math.floor(x1)
-            t_next_horizontal = (x0 - x) * dtdx
-
-        if dy <= TIME_EPS:
-            y_inc = 0
-            t_next_vertical = math.inf
-        elif y1 > y0:
-            y_inc = 1
-            n += math.floor(y1) - y
-            t_next_vertical = (y + 1 - y0) * dtdy
-        else:
-            y_inc = -1
-            n += y - math.floor(y1)
-            t_next_vertical = (y0 - y) * dtdy
-
-        for _ in range(n):
-            d1 = distance * min(t_next_horizontal, t_next_vertical, 1.0)
-            grids.append({"x": x, "y": y, "dist": [d0, d1]})
-            d0 = d1
-            if t_next_horizontal > t_next_vertical:
-                y += y_inc
-                t_next_vertical += dtdy
-            else:
+        dx, dy = x1 - x0, y1 - y0
+        x, y = math.floor(x0), math.floor(y0)
+        x_inc = 1 if dx > 0 else -1
+        y_inc = 1 if dy > 0 else -1
+        dtdx = 1.0 / abs(dx) if dx else math.inf
+        dtdy = 1.0 / abs(dy) if dy else math.inf
+        next_x = ((x + 1 - x0) if dx > 0 else (x0 - x)) * dtdx if dx else math.inf
+        next_y = ((y + 1 - y0) if dy > 0 else (y0 - y)) * dtdy if dy else math.inf
+        begin = 0.0
+        while True:
+            end = min(next_x, next_y, 1.0)
+            if end > begin or distance == 0:
+                grids.append({"x": x, "y": y, "dist": [distance * begin, distance * end]})
+            if end >= 1.0:
+                break
+            cross_x, cross_y = next_x <= next_y, next_y <= next_x
+            if cross_x:
                 x += x_inc
-                t_next_horizontal += dtdx
+                next_x += dtdx
+            if cross_y:
+                y += y_inc
+                next_y += dtdy
+            begin = end
         return grids
 
 
 class _KeyedHeap:
+    """Indexed priority queue with exactly one live entry per item."""
+
     def __init__(self, key_fn: Callable[[object], float]) -> None:
         self._key_fn = key_fn
         self._heap: List[Tuple[float, int, object]] = []
+        self._positions: dict[int, int] = {}
         self._counter = 0
 
     def push(self, item: object) -> None:
-        heapq.heappush(self._heap, (float(self._key_fn(item)), self._counter, item))
+        entry = (float(self._key_fn(item)), self._counter, item)
         self._counter += 1
+        index = self._positions.get(id(item))
+        if index is None:
+            self._heap.append(entry)
+            self._sift_up(len(self._heap) - 1)
+        else:
+            self._heap[index] = entry
+            self._sift_down(self._sift_up(index))
 
     def sort_element(self, item: object) -> None:
         self.push(item)
 
-    def _discard_stale(self) -> None:
-        while self._heap:
-            key, _, item = self._heap[0]
-            if abs(key - float(self._key_fn(item))) <= 1e-12:
-                return
-            heapq.heappop(self._heap)
+    def _sift_up(self, index: int) -> int:
+        entry = self._heap[index]
+        while index:
+            parent = (index - 1) // 2
+            if entry >= self._heap[parent]:
+                break
+            self._heap[index] = self._heap[parent]
+            self._positions[id(self._heap[index][2])] = index
+            index = parent
+        self._heap[index] = entry
+        self._positions[id(entry[2])] = index
+        return index
+
+    def _sift_down(self, index: int) -> None:
+        entry = self._heap[index]
+        size = len(self._heap)
+        while 2 * index + 1 < size:
+            child = 2 * index + 1
+            if child + 1 < size and self._heap[child + 1] < self._heap[child]:
+                child += 1
+            if entry <= self._heap[child]:
+                break
+            self._heap[index] = self._heap[child]
+            self._positions[id(self._heap[index][2])] = index
+            index = child
+        self._heap[index] = entry
+        self._positions[id(entry[2])] = index
 
     def peek_key(self) -> float:
-        self._discard_stale()
         if not self._heap:
             return math.inf
         return float(self._heap[0][0])
 
     def shift(self) -> object:
-        self._discard_stale()
-        _, _, item = heapq.heappop(self._heap)
+        _, _, item = self._heap[0]
+        last = self._heap.pop()
+        del self._positions[id(item)]
+        if self._heap:
+            self._heap[0] = last
+            self._sift_down(0)
         return item
 
     def size(self) -> int:
-        self._discard_stale()
         return len(self._heap)
 
 
@@ -313,8 +211,133 @@ class _Cell:
     visible_cells: List["_Cell"] = field(default_factory=list)
 
 
+class _ZetaGeometry:
+    """Cached exact 2D geometry; robot_radius is the square's half extent."""
+
+    def __init__(self, env: Env):
+        self.env = env
+        self.use_cspace = not env.O_Static or str(env.name).lower().startswith("maze")
+        self.space = (unary_union([MultiPoint(vertices).convex_hull for vertices in env.C_Space])
+                      if self.use_cspace else box(*env.lb, *env.ub))
+        self.prepared_space = prep(self.space)
+        self.polygons = []
+        self.spheres = []
+        for obstacle in env.O_Static:
+            if isinstance(obstacle, StaticPolygon):
+                inflated = self.square_sweep(obstacle.vertices, env.robot_radius)
+                self.polygons.append(prep(inflated))
+            elif isinstance(obstacle, StaticSphere):
+                self.spheres.append((Point(obstacle.pos), obstacle.radius))
+            else:
+                raise TypeError(f"Unsupported static obstacle {type(obstacle)!r}")
+
+    @staticmethod
+    def square_sweep(vertices, half_extent):
+        corners = half_extent * np.array([[-1, -1], [-1, 1], [1, -1], [1, 1]])
+        return MultiPoint((np.asarray(vertices)[:, None, :] + corners).reshape(-1, 2)).convex_hull
+
+    def is_free(self, shape) -> bool:
+        if not self.prepared_space.covers(shape):
+            return False
+        # Scaled Maze corners can differ by ~1e-16 after Minkowski addition.
+        # Treat numerical contact consistently with the independent collision solver.
+        if any(obstacle.context.distance(shape) <= TIME_EPS for obstacle in self.polygons):
+            return False
+        if self.spheres:
+            vertices = shape.exterior.coords if shape.geom_type == "Polygon" else shape.coords
+            swept = self.square_sweep(vertices, self.env.robot_radius)
+            if any(swept.distance(center) <= radius for center, radius in self.spheres):
+                return False
+        return True
+
+    def point_is_free(self, point) -> bool:
+        return self.is_free(Point(point))
+
+    def aligned_maze_grid(self, origin: np.ndarray, cell_size: float) -> bool:
+        """Only axis-aligned maze clearance boundaries on grid lines qualify."""
+        if not str(self.env.name).lower().startswith("maze") or self.spheres:
+            return False
+        boundaries = [np.asarray(vertices) for vertices in self.env.C_Space]
+        boundaries.extend(np.asarray(p.context.exterior.coords) for p in self.polygons)
+        boundaries.append(np.asarray(box(*self.env.lb, *self.env.ub).exterior.coords))
+        for vertices in boundaries:
+            edges = np.roll(vertices, -1, axis=0) - vertices
+            if not np.all(np.any(np.abs(edges) <= TIME_EPS, axis=1)):
+                return False
+            aligned = origin + np.rint((vertices - origin) / cell_size) * cell_size
+            if not np.allclose(vertices, aligned, atol=10 * TIME_EPS, rtol=0):
+                return False
+        return True
+
+    def cell_is_free(self, center, cell_size, wall_aligned=False) -> bool:
+        if wall_aligned:
+            # With every clearance boundary on a grid line, the center exactly
+            # classifies the cell interior. Search rejects blocked edge/corner
+            # contacts explicitly, instead of discarding the adjacent free cell.
+            return self.is_free(Point(center))
+        # Certify the entire cell once, including the robot's square footprint.
+        lo, hi = center - cell_size / 2, center + cell_size / 2
+        return self.is_free(box(*lo, *hi))
+
+    def segment_is_free(self, start, goal) -> bool:
+        shape = Point(start) if np.array_equal(start, goal) else LineString([start, goal])
+        return self.is_free(shape)
+
+
+class _DynamicIntervals:
+    """Analytic square occupancy intervals for piecewise-linear moving obstacles."""
+
+    def __init__(self, env: Env, t_max: float):
+        self.t_max = t_max
+        phases = []
+        for obstacle in env.O_Dynamic:
+            if isinstance(obstacle, ConcatDynamicSphere):
+                pieces = obstacle.segments
+            elif isinstance(obstacle, DynamicSphere):
+                pieces = [obstacle]
+            else:
+                raise TypeError(f"Unsupported dynamic obstacle {type(obstacle)!r}")
+            raw = [(p.x0, p.xt, p.itvl.start, p.itvl.end) for p in pieces]
+            if not isinstance(obstacle, ConcatDynamicSphere) or obstacle.reserve_start:
+                raw.insert(0, (pieces[0].x0, pieces[0].x0, 0., pieces[0].itvl.start))
+            if not isinstance(obstacle, ConcatDynamicSphere) or obstacle.reserve_goal:
+                raw.append((pieces[-1].xt, pieces[-1].xt, pieces[-1].itvl.end, t_max))
+            for x0, x1, begin, end in raw:
+                lo, hi = max(0., begin), min(t_max, end)
+                if hi < lo:
+                    continue
+                velocity = (x1 - x0) / (end - begin) if end > begin else np.zeros(env.dim)
+                phases.append((x0 + velocity * (lo - begin), velocity, lo, hi, obstacle.radius))
+        self.origins = np.array([p[0] for p in phases]).reshape(-1, env.dim)
+        self.velocities = np.array([p[1] for p in phases]).reshape(-1, env.dim)
+        self.begins = np.array([p[2] for p in phases])
+        self.ends = np.array([p[3] for p in phases])
+        self.radii = np.array([p[4] for p in phases])
+
+    def blocked(self, point, half_extent) -> List[Tuple[float, float]]:
+        if not len(self.begins):
+            return []
+        # Match the continuous box checker, including boundary contacts.
+        radius = self.radii + half_extent + 10 * TIME_EPS
+        delta = self.origins - point
+        lo, hi = np.zeros(len(self.begins)), self.ends - self.begins
+        for axis in range(delta.shape[1]):
+            velocity = self.velocities[:, axis]
+            moving = velocity != 0
+            divisor = np.where(moving, velocity, 1.)
+            a = (-radius - delta[:, axis]) / divisor
+            b = (radius - delta[:, axis]) / divisor
+            lo = np.maximum(lo, np.where(moving, np.minimum(a, b), -np.inf))
+            hi = np.minimum(hi, np.where(moving, np.maximum(a, b), np.inf))
+            hi = np.where(~moving & (np.abs(delta[:, axis]) > radius), -np.inf, hi)
+        keep = lo <= hi
+        return _ZetaUtils.merge_intervals(zip(self.begins[keep] + lo[keep],
+                                              self.begins[keep] + hi[keep]), self.t_max)
+
+
 class _ProjectedGrid:
-    def __init__(self, env: Env, t_max: float, cell_size: float) -> None:
+    def __init__(self, env: Env, t_max: float, cell_size: float, deadline: float = math.inf) -> None:
+        started = time.perf_counter()
         if env.dim != 2:
             raise ValueError(f"Zeta*-SIPP projection currently supports only 2D environments, got dim={env.dim}")
         if cell_size <= 0.0:
@@ -322,21 +345,26 @@ class _ProjectedGrid:
 
         self.env = env
         self.t_max = float(t_max)
-        self.use_native_maze_grid = _ZetaUtils.native_maze_grid_required(env)
-        self.cell_size = (
-            _ZetaUtils.native_maze_grid_cell_size(env)
-            if self.use_native_maze_grid
-            else float(cell_size)
-        )
+        self.deadline = deadline
+        self.check_deadline()
+        self.geometry = _ZetaGeometry(env)
+        self.dynamic = _DynamicIntervals(env, t_max)
+        self.cell_size = float(cell_size)
         self.origin = np.asarray(env.lb[:2], dtype=float)
         span = np.asarray(env.ub[:2], dtype=float) - self.origin
-        self.shape = tuple(int(np.ceil(float(axis) / self.cell_size)) for axis in span)
-        self.half_diag = 0.5 * self.cell_size * math.sqrt(2.0)
+        self.wall_aligned = self.geometry.aligned_maze_grid(self.origin, self.cell_size)
+        self.shape = tuple(int(np.rint(axis / self.cell_size) if self.wall_aligned
+                               else np.ceil(axis / self.cell_size)) for axis in span)
         self.grids: List[List[_Cell]] = []
         self.cells: List[_Cell] = []
         self.checks = 0
         self.scanned_grids = 0
         self._build_cells()
+        self.build_runtime = time.perf_counter() - started
+
+    def check_deadline(self) -> None:
+        if time.perf_counter() >= self.deadline:
+            raise TimeoutError("Zeta-SIPP planning deadline")
 
     def _build_cells(self) -> None:
         for ix in range(self.shape[0]):
@@ -344,37 +372,20 @@ class _ProjectedGrid:
             for iy in range(self.shape[1]):
                 center_grid = np.array([ix + 0.5, iy + 0.5], dtype=float)
                 center_world = self.grid_to_world(center_grid)
-                if self.use_native_maze_grid:
-                    weight = _ZetaUtils.native_maze_cell_is_free(self.env, center_world)
-                    risk_inflation = self.env.robot_radius
-                else:
-                    weight = (
-                        _ZetaUtils.cell_in_discretized_space(self.env, center_world, self.cell_size)
-                        and not _ZetaUtils.cell_blocked_by_static(
-                            self.env,
-                            center_world,
-                            self.cell_size,
-                            self.env.robot_radius,
-                        )
-                    )
-                    risk_inflation = self.env.robot_radius + self.half_diag
-                risk_intervals = _ZetaUtils.flatten_intervals(
-                    _ZetaUtils.point_blocked_intervals(
-                        self.env,
-                        center_world,
-                        risk_inflation,
-                        self.t_max,
-                    )
-                )
+                self.check_deadline()
+                weight = self.geometry.cell_is_free(center_world, self.cell_size, self.wall_aligned)
+                # Every domain blocks the entire cell for the moving square footprint.
+                blocked = self.dynamic.blocked(
+                    center_world, self.env.robot_radius + self.cell_size / 2)
                 cell = _Cell(
                     grid_point=center_grid,
                     world_point=center_world,
                     weight=weight,
-                    risk_interval=risk_intervals,
+                    risk_interval=_ZetaUtils.flatten_intervals(blocked),
                     base_index=(ix, iy),
                 )
                 if cell.weight:
-                    for safe_interval in self.safe_intervals_for_point(center_world):
+                    for safe_interval in _ZetaUtils.complement_intervals(blocked, self.t_max):
                         cell.nodes.append(_Node(center_grid.copy(), center_world.copy(), safe_interval, cell))
                 row.append(cell)
                 self.cells.append(cell)
@@ -389,9 +400,23 @@ class _ProjectedGrid:
         return self.origin + self.cell_size * np.asarray(point, dtype=float)
 
     def safe_intervals_for_point(self, world_point: np.ndarray) -> List[Tuple[float, float]]:
-        blocked = _ZetaUtils.point_blocked_intervals(self.env, world_point, self.env.robot_radius, self.t_max)
-        safe = _ZetaUtils.complement_intervals(blocked, self.t_max)
-        return [interval for interval in safe if interval[1] >= interval[0] - TIME_EPS]
+        """Use the containing cell's intervals without snapping the query point."""
+        cell = self.cell_for_point(world_point)
+        if cell is None or not cell.weight:
+            return []
+        if self.wall_aligned:
+            point = self.world_to_grid(world_point)
+            if any(not self.get_cell(g["x"], g["y"]).weight
+                   for g in self.trace_segment(point, point, 0.0)):
+                return []
+        return [node.safe_interval for node in cell.nodes]
+
+    def cell_for_point(self, world_point: np.ndarray) -> Optional[_Cell]:
+        point = np.asarray(world_point, dtype=float)
+        if not np.all(np.isfinite(point)) or np.any(point < self.env.lb) or np.any(point > self.env.ub):
+            return None
+        grid = self.world_to_grid(point)
+        return self.get_cell(math.floor(grid[0]), math.floor(grid[1]))
 
     def in_bounds(self, ix: int, iy: int) -> bool:
         return 0 <= ix < self.shape[0] and 0 <= iy < self.shape[1]
@@ -401,122 +426,50 @@ class _ProjectedGrid:
             return None
         return self.grids[ix][iy]
 
-    @staticmethod
-    def _is_query_endpoint(endpoint: _Cell | _Node) -> bool:
-        if isinstance(endpoint, _Node):
-            return endpoint.cell.is_query_cell
-        return endpoint.is_query_cell
-
-    @staticmethod
-    def _world_point(endpoint: _Cell | _Node) -> np.ndarray:
-        if isinstance(endpoint, _Node):
-            return endpoint.world_point
-        return endpoint.world_point
-
-    def _query_line_of_sight(self, a: _Cell | _Node, b: _Cell | _Node) -> bool:
-        start = self._world_point(a)
-        goal = self._world_point(b)
-        if _ZetaUtils.segment_blocked_by_static(self.env, start, goal, self.env.robot_radius):
-            return False
-
-        if _ZetaUtils.cspace_cell_containment_required(self.env):
-            return bool(self.env.is_segment_in_CSpace(start, goal))
-
-        distance = float(np.linalg.norm(goal - start))
-        sample_step = max(self.cell_size * 0.25, 1e-6)
-        num_samples = max(2, int(math.ceil(distance / sample_step)) + 1)
-        for alpha in np.linspace(0.0, 1.0, num_samples):
-            point = start + alpha * (goal - start)
-            if not _ZetaUtils.point_in_discretized_space(self.env, point):
-                return False
-            if _ZetaUtils.blocked_by_static(self.env, point, self.env.robot_radius):
-                return False
-        return True
+    def trace_segment(self, start: np.ndarray, goal: np.ndarray, distance: float) -> List[dict]:
+        grids = _ZetaUtils.line_seg_on_grid(*start, *goal, distance)
+        if not self.wall_aligned:
+            return grids
+        # Aligned maze cells certify their interiors. Include all cells touched
+        # along edges or at corners so a path cannot graze an inflated wall.
+        tolerance = 10 * TIME_EPS / self.cell_size
+        traversed = {(g["x"], g["y"]) for g in grids}
+        extra = []
+        delta = goal - start
+        for axis in (0, 1):
+            if delta[axis] == 0 and abs(start[axis] - round(start[axis])) <= tolerance:
+                for grid in grids:
+                    other = dict(grid)
+                    key = "x" if axis == 0 else "y"
+                    boundary = round(start[axis])
+                    other[key] = boundary - 1 if grid[key] == boundary else boundary
+                    extra.append(other)
+                    traversed.add((other["x"], other["y"]))
+        cuts = {0.0, distance}
+        cuts.update(d for grid in grids for d in grid["dist"])
+        for d in cuts:
+            point = start + (d / distance if distance else 0.0) * delta
+            indices = [([round(v) - 1, round(v)] if abs(v - round(v)) <= tolerance
+                        else [math.floor(v)]) for v in point]
+            for ix in indices[0]:
+                for iy in indices[1]:
+                    if (ix, iy) not in traversed:
+                        extra.append({"x": ix, "y": iy, "dist": [d, d]})
+                        traversed.add((ix, iy))
+        grids.extend(extra)
+        grids = [g for g in grids if self.in_bounds(g["x"], g["y"])]
+        grids.sort(key=lambda g: (g["dist"][0], g["dist"][1]))
+        return grids
 
     def line_of_sight_grid(self, a: _Cell | _Node, b: _Cell | _Node) -> bool:
+        self.check_deadline()
         self.checks += 1
-        if self._is_query_endpoint(a) or self._is_query_endpoint(b):
-            return self._query_line_of_sight(a, b)
-
-        if _ZetaUtils.segment_blocked_by_static(
-            self.env,
-            self._world_point(a),
-            self._world_point(b),
-            self.env.robot_radius,
-        ):
-            return False
-
-        x0, y0 = float(a.grid_point[0]), float(a.grid_point[1])
-        x1, y1 = float(b.grid_point[0]), float(b.grid_point[1])
-
-        grid_count = 0
-
-        def is_blocked(ix: int, iy: int) -> bool:
-            nonlocal grid_count
-            grid_count += 1
-            cell = self.get_cell(ix, iy)
-            return cell is None or not cell.weight
-
-        dx = abs(x1 - x0)
-        dy = abs(y1 - y0)
-
-        x = math.floor(x0)
-        y = math.floor(y0)
-
-        if not float(x0).is_integer() and not float(y0).is_integer() and is_blocked(x, y):
-            self.scanned_grids += grid_count
-            return False
-        if float(x0).is_integer() and float(y0).is_integer() and x1 > x0 and y1 > y0 and is_blocked(x, y):
-            self.scanned_grids += grid_count
-            return False
-
-        n = 1
-        if dx <= TIME_EPS:
-            x_inc = 0
-            error = math.inf
-        elif x1 > x0:
-            x_inc = 1
-            n += math.floor(x1) - x
-            error = (x + 1 - x0) * dy
-        else:
-            x_inc = -1
-            n += x - math.floor(x1)
-            error = (x0 - x) * dy
-
-        if dy <= TIME_EPS:
-            y_inc = 0
-            error = -math.inf
-        elif y1 > y0:
-            y_inc = 1
-            n += math.floor(y1) - y
-            error -= (y + 1 - y0) * dx
-        else:
-            y_inc = -1
-            n += y - math.floor(y1)
-            error -= (y0 - y) * dx
-
-        while n > 1:
-            n -= 1
-            if error > 0:
-                y += y_inc
-                error -= dx
-            elif error < 0:
-                x += x_inc
-                error += dy
-            else:
-                if is_blocked(x + x_inc, y) and is_blocked(x, y + y_inc):
-                    self.scanned_grids += grid_count
-                    return False
-                x += x_inc
-                error += dy
-                y += y_inc
-                error -= dx
-                n -= 1
-            if is_blocked(x, y):
-                self.scanned_grids += grid_count
+        trace = self.trace_segment(a.grid_point, b.grid_point, 1.0)
+        for grid in trace:
+            self.scanned_grids += 1
+            cell = self.get_cell(grid["x"], grid["y"])
+            if cell is None or not cell.weight:
                 return False
-
-        self.scanned_grids += grid_count
         return True
 
 
@@ -568,6 +521,7 @@ class _Shadowcast:
         return dedup
 
     def compute(self, origin: _Cell, delta_x: int, top_slope: float, bottom_slope: float, transform: dict) -> None:
+        self.projection.check_deadline()
         if bottom_slope >= top_slope:
             return
 
@@ -610,6 +564,7 @@ class _TOAASIPP:
         self.query = query
         self.t_max = float(t_max)
         self.runtime_limit_secs = float(runtime_limit_secs)
+        projection.deadline = min(projection.deadline, time.perf_counter() + self.runtime_limit_secs)
         self.time_buffer = float(time_buffer)
         self.open_heap = _KeyedHeap(lambda node: node.f)
         self.bound_heap = _KeyedHeap(lambda cell: cell.fh)
@@ -666,12 +621,15 @@ class _TOAASIPP:
         if not goal_intervals:
             raise ValueError("Goal query is not feasible in projected Zeta*-SIPP under is_stay/t_max constraints.")
 
+        start_base = self.projection.cell_for_point(self.query.start)
+        goal_base = self.projection.cell_for_point(self.query.goal)
+
         start_cell = _Cell(
             grid_point=start_grid,
             world_point=np.asarray(self.query.start, dtype=float),
             weight=True,
-            risk_interval=[],
-            base_index=None,
+            risk_interval=start_base.risk_interval,
+            base_index=start_base.base_index,
             is_query_cell=True,
         )
         start_cell.nodes = [_Node(start_grid.copy(), np.asarray(self.query.start, dtype=float), start_intervals[0], start_cell)]
@@ -680,8 +638,8 @@ class _TOAASIPP:
             grid_point=goal_grid,
             world_point=np.asarray(self.query.goal, dtype=float),
             weight=True,
-            risk_interval=[],
-            base_index=None,
+            risk_interval=goal_base.risk_interval,
+            base_index=goal_base.base_index,
             is_query_cell=True,
         )
         goal_cell.nodes = [
@@ -695,11 +653,10 @@ class _TOAASIPP:
         return start_cell, goal_cell
 
     def search(self) -> List[_Node]:
-        start_ts = time.perf_counter()
+        self.projection.check_deadline()
         start_cell, end_cell = self.init()
         while self.open_heap.size() > 0 and self.open_heap.peek_key() < math.inf:
-            if time.perf_counter() - start_ts > self.runtime_limit_secs:
-                return []
+            self.projection.check_deadline()
             self.steps += 1
             current_node = self.find_next_closed_node()
             if current_node is not None:
@@ -780,7 +737,9 @@ class _TOAASIPP:
         return
 
     def add_potential_parent(self, parent: _Node, node: _Node) -> None:
-        g_low_new = parent.g + self.heuristic(parent, node)
+        g_low_new = self.potential_parent_lower_bound(parent, node)
+        if not math.isfinite(g_low_new):
+            return
         if g_low_new < node.g_low - TIME_EPS:
             node.g_low = g_low_new
             node.best_potential_parent = parent
@@ -788,6 +747,41 @@ class _TOAASIPP:
             self.open_heap.sort_element(node)
         node.potential_parents.append(parent)
         node.g_low_array.append(g_low_new)
+
+    def endpoint_wait_bounds(self, parent: _Node, node: _Node, travel_time: float,
+                             time_buffer: float = 0.0) -> Tuple[float, float]:
+        # Fractions before leaving the source cell / after entering the target
+        # cell. Unlike a half-cell formula, this also handles arbitrary query
+        # points, boundary endpoints, and transitions within one cell.
+        first_fraction = last_fraction = 1.0
+        for start, end in zip(parent.grid_point, node.grid_point):
+            delta = float(end - start)
+            if delta > 0:
+                first_fraction = min(first_fraction, (math.floor(start) + 1 - start) / delta)
+                last_fraction = min(last_fraction, (end - math.floor(end)) / delta)
+            elif delta < 0:
+                first_fraction = min(first_fraction, (math.floor(start) - start) / delta)
+                last_fraction = min(last_fraction, (math.floor(end) + 1 - end) / -delta)
+        first_time, last_time = travel_time * first_fraction, travel_time * last_fraction
+        wait_time = max(0.0, node.safe_interval[0] - parent.g - travel_time + last_time)
+        if wait_time > TIME_EPS:
+            wait_time += time_buffer
+        max_wait_time = min(parent.safe_interval[1] - parent.g - first_time,
+                            node.safe_interval[1] - parent.g - travel_time,
+                            self.t_max - parent.g - travel_time)
+        if wait_time > max_wait_time + TIME_EPS:
+            return math.inf, max_wait_time
+        return wait_time, max_wait_time
+
+    def potential_parent_lower_bound(self, parent: _Node, node: _Node) -> float:
+        travel_time = self.heuristic(parent, node)
+        wait_time, _ = self.endpoint_wait_bounds(parent, node, travel_time)
+        arrival = parent.g + wait_time + travel_time
+        # Only a verified feasible arrival (g), not another candidate's lower
+        # bound (g_low), can rule out a potential improvement.
+        if arrival >= node.g - TIME_EPS:
+            return math.inf
+        return arrival
 
     def new_best_potential_parent_exists(self, node: _Node) -> bool:
         node.g_low = node.g
@@ -814,27 +808,23 @@ class _TOAASIPP:
     def transition(self, parent: _Node, node: _Node) -> float:
         if parent is node:
             return 0.0
+        # Static occupancy is checked during the temporal grid traversal below.
         return self.get_cost_sipp(parent, node)
 
     def get_cost_sipp(self, parent: _Node, node: _Node) -> float:
         travel_time = self._travel_time_world(parent.world_point, node.world_point, self.query.vlimit)
         if travel_time <= TIME_EPS:
-            if parent.g <= node.safe_interval[1] + TIME_EPS:
-                return max(0.0, node.safe_interval[0] - parent.g)
+            arrival = max(parent.g, node.safe_interval[0])
+            if arrival <= min(parent.safe_interval[1], node.safe_interval[1]) + TIME_EPS:
+                return arrival - parent.g
             return math.inf
 
-        depart_time = max(parent.g, node.safe_interval[0] - travel_time)
-        if depart_time > parent.safe_interval[1] + TIME_EPS:
+        wait_time, max_wait_time = self.endpoint_wait_bounds(parent, node, travel_time, self.time_buffer)
+        if not math.isfinite(wait_time):
             return math.inf
 
         grid_distance = float(np.linalg.norm(node.grid_point - parent.grid_point))
-        trace_grids = _ZetaUtils.line_seg_on_grid(
-            float(parent.grid_point[0]),
-            float(parent.grid_point[1]),
-            float(node.grid_point[0]),
-            float(node.grid_point[1]),
-            grid_distance,
-        )
+        trace_grids = self.projection.trace_segment(parent.grid_point, node.grid_point, grid_distance)
 
         intervals: List[List[float]] = []
         for grid in trace_grids:
@@ -843,13 +833,10 @@ class _TOAASIPP:
             else:
                 lam0 = _ZetaUtils.clamp(grid["dist"][0] / grid_distance, 0.0, 1.0)
                 lam1 = _ZetaUtils.clamp(grid["dist"][1] / grid_distance, 0.0, 1.0)
-            intervals.append([depart_time + lam0 * travel_time, depart_time + lam1 * travel_time])
+            intervals.append([lam0 * travel_time, lam1 * travel_time])
 
-        wait_time = max(0.0, depart_time - parent.g)
-        for index in range(len(trace_grids)):
-            wait_time = self.update_wait_time(trace_grids, intervals, index, wait_time, parent)
-            if parent.g + wait_time > parent.safe_interval[1] + TIME_EPS:
-                return math.inf
+        wait_time = self.update_wait_time(
+            trace_grids, intervals, wait_time, parent, max_wait_time)
 
         arrival = parent.g + wait_time + travel_time
         if arrival < node.safe_interval[0] - TIME_EPS or arrival > node.safe_interval[1] + TIME_EPS:
@@ -861,36 +848,41 @@ class _TOAASIPP:
     def update_wait_time(
         self,
         trace_grids: Sequence[dict],
-        intervals: List[List[float]],
-        index: int,
+        intervals: Sequence[Sequence[float]],
         wait_time: float,
         parent: _Node,
+        max_wait_time: float,
     ) -> float:
-        wait_time_old = wait_time
-        grid = trace_grids[index]
-        cell = self.projection.get_cell(int(grid["x"]), int(grid["y"]))
-        if cell is None:
-            return math.inf
-
-        for offset in range(0, len(cell.risk_interval), 2):
-            risk_interval = [cell.risk_interval[offset], cell.risk_interval[offset + 1]]
-            conflict = _ZetaUtils.intersect_intervals(risk_interval, intervals[index])
-            if not conflict:
+        # Keep traversal times relative; delays change only a scalar offset.
+        # A changed offset rechecks the affected prefix, including the cell
+        # that caused it. Iterators implement upstream's recursive rechecking
+        # without growing the Python call stack.
+        pending = [iter(range(len(trace_grids)))]
+        while pending:
+            index = next(pending[-1], None)
+            if index is None:
+                pending.pop()
                 continue
-            delta = risk_interval[1] - intervals[index][0] + self.time_buffer
-            wait_time += delta
-            for interval in intervals:
-                interval[0] += delta
-                interval[1] += delta
-
-        if wait_time > wait_time_old + TIME_EPS:
-            for prior in range(index):
-                wait_time = self.update_wait_time(trace_grids, intervals, prior, wait_time, parent)
-                if wait_time >= math.inf:
+            self.projection.check_deadline()
+            grid = trace_grids[index]
+            cell = self.projection.get_cell(int(grid["x"]), int(grid["y"]))
+            if cell is None or not cell.weight:
+                return math.inf
+            old_wait_time = wait_time
+            relative_in, relative_out = intervals[index]
+            for offset in range(0, len(cell.risk_interval), 2):
+                time_in = parent.g + wait_time + relative_in
+                time_out = parent.g + wait_time + relative_out
+                risk_start, risk_end = cell.risk_interval[offset:offset + 2]
+                if risk_start > time_out + TIME_EPS:
+                    break  # Later risk intervals are also beyond this traversal.
+                if time_in > risk_end + TIME_EPS:
+                    continue
+                wait_time = risk_end - parent.g - relative_in + self.time_buffer
+                if wait_time > max_wait_time + TIME_EPS:
                     return math.inf
-
-        if parent.g + wait_time > parent.safe_interval[1] + TIME_EPS:
-            return math.inf
+            if wait_time > old_wait_time:
+                pending.append(iter(range(index + 1)))
         return wait_time
 
 
@@ -914,6 +906,7 @@ class _ZetaSIPP(_TOAASIPP):
     def init_bound(self, start_cell: _Cell, end_cell: _Cell) -> None:
         start_cell.fh = float(self.query.t_start) + start_cell.h
         for cell in self.projection.cells:
+            self.projection.check_deadline()
             if not cell.weight or cell is start_cell or not cell.nodes:
                 continue
             self.bound_cell(cell, start_cell, end_cell)
@@ -932,6 +925,7 @@ class _ZetaSIPP(_TOAASIPP):
         while self.bound_heap.size() > 0 and (
             self.open_heap.size() == 0 or self.bound_heap.peek_key() <= self.open_heap.peek_key() + TIME_EPS
         ):
+            self.projection.check_deadline()
             new_cell = self.bound_heap.shift()
             self.visit_cell(new_cell, end_cell)
             self.inverted_scan(new_cell)
@@ -1028,6 +1022,7 @@ class ZetaStarSIPPPlanner:
         self.use_fov = bool(use_fov)
         self.last_projection: Optional[_ProjectedGrid] = None
         self.last_path: List[_Node] = []
+        self.last_status = "not_started"
 
     @staticmethod
     def componentwise_travel_time(start: np.ndarray, goal: np.ndarray, vlimit: float) -> float:
@@ -1052,45 +1047,45 @@ class ZetaStarSIPPPlanner:
 
     def plan(self, query: MPQuery, t_max: float) -> ShortestPathSolution:
         ts = time.perf_counter()
-        projection = _ProjectedGrid(self.env.copy(), t_max=t_max, cell_size=self.cell_size)
-        self.last_projection = projection
-        if np.allclose(query.start, query.goal):
-            feasible_intervals = [
-                interval
-                for interval in projection.safe_intervals_for_point(query.start)
-                if interval[0] - TIME_EPS <= query.t_start <= interval[1] + TIME_EPS
-                and (not query.is_stay or interval[1] >= t_max - TIME_EPS)
-            ]
-            if not feasible_intervals:
-                return ShortestPathSolution(False, -1.0, time.perf_counter() - ts, [], [])
-            zero_segment = np.hstack([query.start, query.t_start, query.goal, query.t_start])
-            return ShortestPathSolution(
-                is_success=True,
-                cost=0.0,
-                time=time.perf_counter() - ts,
-                vertex_path=[],
-                trajectory=[zero_segment],
-                itvl=Interval(float(query.t_start), float(query.t_start)),
-                dim=self.env.dim + 1,
-            )
-        planner_cls = _ZetaStarSIPP if self.use_fov else _ZetaSIPP
-        planner = planner_cls(
-            projection=projection,
-            query=query,
-            t_max=t_max,
-            runtime_limit_secs=self.runtime_limit_secs,
-            time_buffer=self.time_buffer,
-        )
-
+        self.last_projection, self.last_path = None, []
+        self.last_status = "exhausted"
         try:
-            path = planner.search()
-        except ValueError:
-            return ShortestPathSolution(False, -1.0, time.perf_counter() - ts, [], [])
-
-        self.last_path = path
-        if not path:
-            return ShortestPathSolution(False, -1.0, time.perf_counter() - ts, [], [])
-        return self._path_to_solution(path, query, time.perf_counter() - ts)
+            projection = _ProjectedGrid(self.env, t_max=t_max, cell_size=self.cell_size,
+                                        deadline=ts + self.runtime_limit_secs)
+            self.last_projection = projection
+            if not (projection.safe_intervals_for_point(query.start)
+                    and projection.safe_intervals_for_point(query.goal)):
+                self.last_status = "infeasible_query"
+                return ShortestPathSolution(False, -1., time.perf_counter() - ts, [], [])
+            if np.array_equal(query.start, query.goal):
+                feasible = any(lo <= query.t_start <= hi and (not query.is_stay or hi >= t_max)
+                               for lo, hi in projection.safe_intervals_for_point(query.start))
+                projection.check_deadline()
+                if feasible:
+                    self.last_status = "success"
+                    return ShortestPathSolution(True, 0., time.perf_counter() - ts, [],
+                        [np.hstack([query.start, query.t_start, query.goal, query.t_start])],
+                        Interval(query.t_start, query.t_start), self.env.dim + 1)
+                return ShortestPathSolution(False, -1., time.perf_counter() - ts, [], [])
+            planner_cls = _ZetaStarSIPP if self.use_fov else _ZetaSIPP
+            planner = planner_cls(projection, query, t_max,
+                                  max(0., projection.deadline - time.perf_counter()), self.time_buffer)
+            try:
+                path = planner.search()
+            except ValueError:
+                self.last_status = "infeasible_query"
+                return ShortestPathSolution(False, -1., time.perf_counter() - ts, [], [])
+            projection.check_deadline()
+            self.last_path = path
+            if path:
+                solution = self._path_to_solution(path, query, time.perf_counter() - ts)
+                projection.check_deadline()
+                solution.time = time.perf_counter() - ts
+                self.last_status = "success"
+                return solution
+        except TimeoutError:
+            self.last_status = "timeout"
+        return ShortestPathSolution(False, -1., time.perf_counter() - ts, [], [])
 
     def _path_to_solution(self, path: Sequence[_Node], query: MPQuery, runtime: float) -> ShortestPathSolution:
         if not path:

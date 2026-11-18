@@ -6,40 +6,41 @@ by `baselines.ompl_strrt_star.OfficialOMPLSTRRTStar`.
 It requires official OMPL headers/libraries and pybind11. This repository does
 not vendor either dependency.
 
-Example build, from the repository root:
+With OMPL installed, build from the repository root using the active Python
+environment:
 
 ```bash
-/Users/jingtao/miniconda3/envs/gcs/bin/cmake \
+python -m pip install pybind11
+cmake \
   -S baselines/ompl_strrt_star_native \
-  -B /private/tmp/stgcs_ompl_strrt_build \
-  -G Ninja \
-  -DPython_EXECUTABLE=/Users/jingtao/miniconda3/envs/gcs/bin/python \
-  -DCMAKE_PREFIX_PATH=/Users/jingtao/miniconda3/envs/gcs
-/Users/jingtao/miniconda3/envs/gcs/bin/cmake --build /private/tmp/stgcs_ompl_strrt_build
+  -B build/ompl-strrt-star \
+  -DPYBIND11_FINDPYTHON=ON \
+  -DPython_EXECUTABLE="$(python -c 'import sys; print(sys.executable)')" \
+  -Dpybind11_DIR="$(python -m pybind11 --cmakedir)" \
+  -DCMAKE_PREFIX_PATH=/path/to/ompl \
+  -DCMAKE_BUILD_TYPE=Release
+cmake --build build/ompl-strrt-star -j 4
+python -c "import baselines._ompl_strrt_star_native"
 ```
 
-Once `baselines._ompl_strrt_star_native` is importable, run the ST performance
-comparison rows explicitly with:
+Replace `/path/to/ompl` with the OMPL installation prefix. CMake writes the
+extension into `baselines/`. Build the main C++ tools using the
+[C++ guide](../../stgcs_cplusplus/README.md), then run the ST-RRT* comparison:
 
 ```bash
-MPLCONFIGDIR=/private/tmp/mpl XDG_CACHE_HOME=/private/tmp \
-  /Users/jingtao/miniconda3/envs/gcs/bin/python \
-  -m experiments.st_runners.performance_comparison_run_search \
-  data/st_planning/manifest.json \
-  --planner ompl_strrt_star \
-  --budget 600 \
-  --output-root data/st_planning/performance_comparison/results_ompl_strrt_star
+python -m experiments.runners.st \
+  --executable stgcs_cplusplus/build/bin/stgcs_planner \
+  --work-dir build/strrt-example/work --output-root build/strrt-example/results \
+  --suite performance_comparison --planner strrt \
+  --performance-budget 30 --limit 1 --skip-scaling
 ```
 
-`ompl_strrt_star` expands to `OMPL ST-RRT*-C(first)` and
-`OMPL ST-RRT*-C(final)`. The legacy `strrt` planner key is an alias for this
-OMPL backend, so `--planner all` also uses the OMPL implementation.
+Each OMPL call produces `OMPL ST-RRT*-C(first)` and
+`OMPL ST-RRT*-C(final)` result rows.
 
 The adapter only records exact OMPL solutions as successful rows. OMPL
 approximate solutions are written as failures because they may not reach the
-spatial goal. If an older run already wrote `OMPL ST-RRT*-C(first).csv` or
-`OMPL ST-RRT*-C(final).csv`, remove those stale files or use a fresh
-`--output-root`; the runner resumes completed rows and will not overwrite them.
+spatial goal.
 By default, Python callers leave OMPL's time dimension unbounded so ST-RRT*
 uses its own time-bound expansion strategy. A finite `time_upper_bound` remains
 available for genuinely windowed queries. The native binding captures the first

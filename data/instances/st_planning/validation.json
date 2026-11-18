@@ -1,0 +1,1233 @@
+{
+  "tmax": 100.0,
+  "motion_duration": 20.0,
+  "complete": true,
+  "description": "Continuous witness, speed and ST-cell coverage checks for every saved instance; obstacle endpoints remain stationary after the motion duration.",
+  "motion_policy_checks": 150,
+  "input_reconstructions": 150,
+  "summary": {
+    "grid2d": {
+      "instances": 50,
+      "mean_vertices": 383.88,
+      "mean_edges": 2289.44,
+      "max_vertices": 435,
+      "max_edges": 2694
+    },
+    "maze": {
+      "instances": 50,
+      "mean_vertices": 284.88,
+      "mean_edges": 1653.28,
+      "max_vertices": 405,
+      "max_edges": 2470
+    },
+    "iris-2d": {
+      "instances": 50,
+      "mean_vertices": 364.52,
+      "mean_edges": 2106.78,
+      "max_vertices": 430,
+      "max_edges": 2628
+    }
+  },
+  "instances": [
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00000-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 215,
+      "edges": 1165,
+      "arrival": 12.291666666666668
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00001-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 264,
+      "edges": 1653,
+      "arrival": 13.958333333333336
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00002-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 352,
+      "edges": 2294,
+      "arrival": 14.020833333333332
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00003-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 347,
+      "edges": 1910,
+      "arrival": 13
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00005-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 268,
+      "edges": 1508,
+      "arrival": 13.75
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00006-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 266,
+      "edges": 1574,
+      "arrival": 13.687499999999998
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00007-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 227,
+      "edges": 1265,
+      "arrival": 14.625
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00008-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 269,
+      "edges": 1587,
+      "arrival": 14.895833333333336
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00010-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 243,
+      "edges": 1536,
+      "arrival": 13.354166666666664
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00011-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 238,
+      "edges": 1441,
+      "arrival": 14.687500000000002
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00012-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 208,
+      "edges": 1339,
+      "arrival": 15
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00013-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 318,
+      "edges": 1952,
+      "arrival": 13.645833333333334
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00014-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 282,
+      "edges": 1672,
+      "arrival": 14.41666666666667
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00015-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 291,
+      "edges": 1746,
+      "arrival": 7.8125
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00016-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 348,
+      "edges": 2024,
+      "arrival": 13.604166666666666
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00017-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 202,
+      "edges": 1269,
+      "arrival": 14.270833333333334
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00018-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 294,
+      "edges": 1725,
+      "arrival": 13.541666666666668
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00019-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 200,
+      "edges": 1085,
+      "arrival": 15
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00020-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 269,
+      "edges": 1581,
+      "arrival": 14.6875
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00021-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 381,
+      "edges": 2470,
+      "arrival": 13.437500000000002
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00001-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 276,
+      "edges": 1805,
+      "arrival": 14.153302538929058
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00003-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 412,
+      "edges": 2594,
+      "arrival": 10.20811954753222
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00004-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 406,
+      "edges": 2197,
+      "arrival": 12.57852590475709
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00005-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 404,
+      "edges": 2021,
+      "arrival": 11.672634999113962
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00010-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 374,
+      "edges": 2176,
+      "arrival": 13.283866166654743
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00014-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 326,
+      "edges": 1947,
+      "arrival": 9.835869536091865
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00019-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 422,
+      "edges": 2347,
+      "arrival": 13.063553343895563
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00022-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 368,
+      "edges": 2239,
+      "arrival": 12.724406431462658
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00028-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 396,
+      "edges": 2410,
+      "arrival": 13.25251435833635
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00030-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 394,
+      "edges": 2176,
+      "arrival": 9.746692227076792
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00033-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 397,
+      "edges": 2694,
+      "arrival": 12.191101886705077
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00036-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 400,
+      "edges": 2216,
+      "arrival": 12.299761000324715
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00038-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 435,
+      "edges": 2670,
+      "arrival": 12.55308275320854
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00045-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 388,
+      "edges": 2340,
+      "arrival": 8.155105860623994
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00048-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 429,
+      "edges": 2518,
+      "arrival": 12.576176267940872
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00050-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 324,
+      "edges": 1994,
+      "arrival": 14.672603692238111
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00052-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 401,
+      "edges": 2605,
+      "arrival": 6.574100218215093
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00054-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 362,
+      "edges": 2240,
+      "arrival": 13.212518903840174
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00061-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 334,
+      "edges": 2107,
+      "arrival": 13.85052079573497
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00062-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 397,
+      "edges": 2215,
+      "arrival": 12.87721725024867
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00007-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 327,
+      "edges": 1579,
+      "arrival": 12.614208490720973
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00017-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 338,
+      "edges": 2148,
+      "arrival": 10.993945860364263
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00020-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 415,
+      "edges": 2523,
+      "arrival": 8.917864502806365
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00030-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 318,
+      "edges": 1586,
+      "arrival": 10.178654311155702
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00031-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 380,
+      "edges": 2141,
+      "arrival": 10.976068086654985
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00057-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 394,
+      "edges": 2074,
+      "arrival": 10.784366838904786
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00074-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 264,
+      "edges": 1988,
+      "arrival": 9.773538102914447
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00075-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 424,
+      "edges": 2547,
+      "arrival": 10.509666649108487
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00101-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 406,
+      "edges": 2523,
+      "arrival": 12.641015189939635
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00002-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 370,
+      "edges": 2317,
+      "arrival": 10.263616076239838
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00003-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 416,
+      "edges": 2496,
+      "arrival": 6.844431439621477
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00004-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 370,
+      "edges": 1931,
+      "arrival": 12.920701252963635
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00009-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 408,
+      "edges": 2249,
+      "arrival": 12.344053213421056
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00011-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 331,
+      "edges": 1804,
+      "arrival": 9.682670607450998
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00014-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 408,
+      "edges": 2252,
+      "arrival": 7.0754342691057115
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00015-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 359,
+      "edges": 1846,
+      "arrival": 12.626482175238332
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00016-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 331,
+      "edges": 2179,
+      "arrival": 12.747511933624141
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00018-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 311,
+      "edges": 1739,
+      "arrival": 12.114158704174486
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00021-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 372,
+      "edges": 2066,
+      "arrival": 12.455743615773825
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00027-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 392,
+      "edges": 2628,
+      "arrival": 6.146762144293835
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00064-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 406,
+      "edges": 2264,
+      "arrival": 13.157915391732105
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00066-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 433,
+      "edges": 2543,
+      "arrival": 7.023930554437962
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00067-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 396,
+      "edges": 2686,
+      "arrival": 12.878982256987538
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00076-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 398,
+      "edges": 2220,
+      "arrival": 12.134565059805514
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00082-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 346,
+      "edges": 1985,
+      "arrival": 11.758326747173538
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00085-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 289,
+      "edges": 1826,
+      "arrival": 14.380797228661814
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00091-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 424,
+      "edges": 2537,
+      "arrival": 12.71305668239036
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00095-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 373,
+      "edges": 2279,
+      "arrival": 13.068064221113314
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00099-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 422,
+      "edges": 2560,
+      "arrival": 12.115033660852884
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00104-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 393,
+      "edges": 2448,
+      "arrival": 12.190584674977401
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00105-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 423,
+      "edges": 2652,
+      "arrival": 11.656743481351997
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00106-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 288,
+      "edges": 1988,
+      "arrival": 13.575170334546584
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00108-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 367,
+      "edges": 2262,
+      "arrival": 12.941257336638268
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00109-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 426,
+      "edges": 2427,
+      "arrival": 12.720705139037692
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00111-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 342,
+      "edges": 2002,
+      "arrival": 10.518957851334243
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00112-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 404,
+      "edges": 2290,
+      "arrival": 12.808927591019014
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00113-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 406,
+      "edges": 2472,
+      "arrival": 13.260452015186832
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00115-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 320,
+      "edges": 1718,
+      "arrival": 5.630183371218574
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00127-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 374,
+      "edges": 2631,
+      "arrival": 11.000664709941
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00135-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 367,
+      "edges": 2353,
+      "arrival": 12.933505322878936
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00137-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 418,
+      "edges": 2402,
+      "arrival": 12.491811459953189
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00138-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 408,
+      "edges": 2431,
+      "arrival": 13.128864393390856
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00140-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 381,
+      "edges": 2368,
+      "arrival": 13.50149751576491
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00141-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 375,
+      "edges": 2197,
+      "arrival": 12.280633662944528
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00142-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 388,
+      "edges": 2256,
+      "arrival": 12.552612008796446
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00144-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 338,
+      "edges": 2071,
+      "arrival": 13.42251474172551
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00146-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 405,
+      "edges": 2176,
+      "arrival": 12.454619481563796
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00149-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 417,
+      "edges": 2153,
+      "arrival": 11.784911903636225
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00150-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 415,
+      "edges": 2647,
+      "arrival": 13.125693075527419
+    },
+    {
+      "instance_id": "st-route-first-base-grid2d-s4-seed00151-scale1p11111-s0",
+      "domain": "grid2d",
+      "valid": true,
+      "vertices": 407,
+      "edges": 2117,
+      "arrival": 8.55376108477661
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00022-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 282,
+      "edges": 1640,
+      "arrival": 14.645833333333334
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00023-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 388,
+      "edges": 2446,
+      "arrival": 14.25
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00024-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 335,
+      "edges": 1871,
+      "arrival": 14.25
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00027-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 333,
+      "edges": 1992,
+      "arrival": 14.999999999999998
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00028-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 335,
+      "edges": 2098,
+      "arrival": 13.916666666666666
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00029-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 251,
+      "edges": 1465,
+      "arrival": 14
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00031-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 224,
+      "edges": 1319,
+      "arrival": 14.333333333333336
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00032-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 336,
+      "edges": 1931,
+      "arrival": 14.395833333333334
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00033-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 270,
+      "edges": 1581,
+      "arrival": 14.249999999999998
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00034-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 314,
+      "edges": 1794,
+      "arrival": 13.4375
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00035-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 307,
+      "edges": 1617,
+      "arrival": 11.937499999999998
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00036-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 328,
+      "edges": 1908,
+      "arrival": 13.125000000000002
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00037-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 405,
+      "edges": 2103,
+      "arrival": 13.770833333333336
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00038-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 265,
+      "edges": 1616,
+      "arrival": 14.25
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00040-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 352,
+      "edges": 2147,
+      "arrival": 13.895833333333332
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00041-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 241,
+      "edges": 1367,
+      "arrival": 13.312500000000002
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00042-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 360,
+      "edges": 1841,
+      "arrival": 13.9375
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00043-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 247,
+      "edges": 1316,
+      "arrival": 14.749999999999998
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00044-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 242,
+      "edges": 1306,
+      "arrival": 14.791666666666668
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00045-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 204,
+      "edges": 1059,
+      "arrival": 14.041666666666666
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00046-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 330,
+      "edges": 2068,
+      "arrival": 13
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00047-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 282,
+      "edges": 1709,
+      "arrival": 14.645833333333336
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00048-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 236,
+      "edges": 1284,
+      "arrival": 13.729166666666668
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00049-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 305,
+      "edges": 1680,
+      "arrival": 13.479166666666668
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00050-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 220,
+      "edges": 1122,
+      "arrival": 14.791666666666668
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00051-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 321,
+      "edges": 1809,
+      "arrival": 10.229166666666668
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00052-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 277,
+      "edges": 1571,
+      "arrival": 14.75
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00053-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 241,
+      "edges": 1416,
+      "arrival": 13.958333333333334
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00054-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 242,
+      "edges": 1244,
+      "arrival": 14.645833333333332
+    },
+    {
+      "instance_id": "st-route-first-base-maze-12x12-seed00055-scale0p416667-s0",
+      "domain": "maze",
+      "valid": true,
+      "vertices": 289,
+      "edges": 1548,
+      "arrival": 12.416666666666668
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00102-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 299,
+      "edges": 1483,
+      "arrival": 13.595868553563195
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00108-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 412,
+      "edges": 2303,
+      "arrival": 11.741328017520782
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00110-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 404,
+      "edges": 2177,
+      "arrival": 12.184773888636222
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00111-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 367,
+      "edges": 1892,
+      "arrival": 13.490603564021319
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00113-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 417,
+      "edges": 2253,
+      "arrival": 11.749484327885526
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00114-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 360,
+      "edges": 2469,
+      "arrival": 8.431720832038188
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00116-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 302,
+      "edges": 1702,
+      "arrival": 12.423425593228902
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00118-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 401,
+      "edges": 2598,
+      "arrival": 6.929758709149891
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00120-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 280,
+      "edges": 2171,
+      "arrival": 12.226578309168971
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00123-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 363,
+      "edges": 2051,
+      "arrival": 7.28851326913559
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00124-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 330,
+      "edges": 2065,
+      "arrival": 10.415094913114581
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00126-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 241,
+      "edges": 1472,
+      "arrival": 7.815806598406018
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00134-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 427,
+      "edges": 2526,
+      "arrival": 9.036546217736198
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00136-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 362,
+      "edges": 2238,
+      "arrival": 11.764498596272778
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00137-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 401,
+      "edges": 2575,
+      "arrival": 9.433760831912728
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00139-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 386,
+      "edges": 1986,
+      "arrival": 7.346758405301566
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00141-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 278,
+      "edges": 1514,
+      "arrival": 4.829661671342224
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00143-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 424,
+      "edges": 2620,
+      "arrival": 11.987460809038543
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00144-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 298,
+      "edges": 1626,
+      "arrival": 13.561874851574697
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00145-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 419,
+      "edges": 2423,
+      "arrival": 11.292936630591573
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00146-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 430,
+      "edges": 2342,
+      "arrival": 13.783402265722481
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00147-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 366,
+      "edges": 1927,
+      "arrival": 6.4215788958415905
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00150-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 361,
+      "edges": 1784,
+      "arrival": 9.256846082842092
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00151-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 304,
+      "edges": 1562,
+      "arrival": 9.309784931838134
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00153-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 401,
+      "edges": 2386,
+      "arrival": 12.18665953817385
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00155-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 357,
+      "edges": 2500,
+      "arrival": 10.537875775188365
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00156-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 388,
+      "edges": 1814,
+      "arrival": 11.775300522509191
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00158-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 383,
+      "edges": 1686,
+      "arrival": 12.686773635949947
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00160-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 370,
+      "edges": 2616,
+      "arrival": 5.226352563452127
+    },
+    {
+      "instance_id": "st-route-first-base-iris-2d-m6-stratified-c90-s5-seed00161-s0",
+      "domain": "iris-2d",
+      "valid": true,
+      "vertices": 361,
+      "edges": 1962,
+      "arrival": 11.871003120211032
+    }
+  ]
+}

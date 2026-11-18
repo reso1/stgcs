@@ -1,0 +1,35 @@
+{
+  "cases": [
+    {
+      "makespan": 4.2,
+      "name": "demo_r32_sphere_exchange",
+      "runtime": 5.346457208,
+      "settings": {
+        "clearance_margin": 0.0,
+        "collision_tolerance": 1e-06,
+        "displacement_jitter_weight": 0.0002,
+        "displacement_weight": 0.2,
+        "include_trajectory_knot_times": true,
+        "sample_dt_factor": 2.0,
+        "solver_eps": 1e-06,
+        "solver_max_iter": 1000000,
+        "stride_factor": 5.0,
+        "velocity_gradient_weight": 0.05,
+        "window_span_factor": 10.0
+      },
+      "settings_match_figure18": true,
+      "state": "complete",
+      "validation": {
+        "continuous_cspace_collision_free": true,
+        "continuous_sphere_pairwise_collision_free": true,
+        "endpoint_and_continuity_checks": true,
+        "maximum_displacement_velocity_bound_excess": 3.753009662765816e-08,
+        "pair_checks": 496,
+        "tolerance": 1e-06,
+        "trajectories": 32
+      }
+    }
+  ],
+  "state": "partial",
+  "workers": 1
+}

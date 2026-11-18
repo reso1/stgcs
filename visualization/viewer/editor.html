@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ST Planning Instance Creator</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --line: #d8dde6;
+      --text: #1f2937;
+      --muted: #667085;
+      --accent: #176b87;
+      --accent-soft: #e5f4f8;
+      --danger: #9f1239;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(390px, 460px) 1fr;
+      height: 100vh;
+    }
+    .controls {
+      overflow-y: auto;
+      border-right: 1px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+    }
+    .preview {
+      min-width: 0;
+      background: #111827;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 20px 0 10px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-size: 12px;
+      font-weight: 650;
+      color: #344054;
+    }
+    input, select {
+      width: 100%;
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 6px 8px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      font-size: 13px;
+    }
+    input[type="checkbox"] {
+      width: auto;
+      min-height: auto;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    button {
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      padding: 7px 10px;
+      min-height: 34px;
+      background: var(--accent);
+      color: #fff;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 650;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: #fff;
+      color: var(--accent);
+    }
+    button.danger {
+      border-color: var(--danger);
+      color: var(--danger);
+      background: #fff;
+    }
+    .obstacle {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 10px;
+      background: #fbfcfe;
+    }
+    .obstacle-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 650;
+    }
+    .status {
+      margin-top: 14px;
+      min-height: 42px;
+      padding: 10px;
+      border-radius: 6px;
+      background: var(--accent-soft);
+      border: 1px solid #b8dce7;
+      color: #164e63;
+      white-space: pre-wrap;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .status.error {
+      background: #fff1f2;
+      border-color: #fecdd3;
+      color: var(--danger);
+    }
+    .meta {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfcfe;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+    @media (max-width: 980px) {
+      body { overflow: auto; }
+      .layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 70vh;
+        height: auto;
+        min-height: 100vh;
+      }
+      .controls {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <main class="controls">
+      <h1>ST Planning Instance Creator</h1>
+
+      <h2>Base Instance</h2>
+      <div class="row">
+        <div>
+          <label for="domainSelect">Domain</label>
+          <select id="domainSelect"></select>
+        </div>
+        <div>
+          <label for="baseSelect">Base instance</label>
+          <select id="baseSelect"></select>
+        </div>
+      </div>
+      <div id="baseMeta" class="meta"></div>
+
+      <h2>Existing Instance</h2>
+      <div class="row">
+        <div>
+          <label for="existingSelect">Instance</label>
+          <select id="existingSelect"></select>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button id="refreshExistingButton" class="secondary" type="button">Refresh</button>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="loadExistingButton" class="secondary" type="button">Load Existing</button>
+      </div>
+
+      <h2>Query</h2>
+      <label for="instanceId">Created instance id</label>
+      <input id="instanceId" type="text">
+      <div class="row">
+        <div>
+          <label for="queryStart">Start</label>
+          <input id="queryStart" type="text" placeholder="0.0, 0.0">
+        </div>
+        <div>
+          <label for="queryGoal">Goal</label>
+          <input id="queryGoal" type="text" placeholder="1.0, 1.0">
+        </div>
+      </div>
+      <div class="row-3">
+        <div>
+          <label for="queryTStart">t_start</label>
+          <input id="queryTStart" type="number" step="0.01" value="0">
+        </div>
+        <div>
+          <label for="queryVLimit">vlimit</label>
+          <input id="queryVLimit" type="number" step="0.01" value="1">
+        </div>
+        <div>
+          <label for="timeHorizon">tmax</label>
+          <input id="timeHorizon" type="number" step="1" value="1000">
+        </div>
+      </div>
+      <label><input id="queryIsStay" type="checkbox" checked> stay at goal</label>
+
+      <h2>Dynamic Obstacles</h2>
+      <div id="obstacles"></div>
+      <div class="actions">
+        <button id="addObstacleButton" class="secondary" type="button">Add Obstacle</button>
+        <button id="clearObstacleButton" class="secondary" type="button">Clear Obstacles</button>
+      </div>
+
+      <h2>Export</h2>
+      <label for="outputPath">Destination manifest.json</label>
+      <input id="outputPath" type="text">
+      <div class="actions">
+        <button id="previewButton" type="button">Preview</button>
+        <button id="exportButton" class="secondary" type="button">Export</button>
+      </div>
+      <div id="status" class="status">Loading base manifests...</div>
+    </main>
+    <section class="preview">
+      <iframe id="previewFrame" title="Instance preview"></iframe>
+    </section>
+  </div>
+
+  <script>
+    const state = {
+      domains: {},
+      currentDraft: null,
+      obstacleId: 0,
+    };
+
+    const domainSelect = document.getElementById("domainSelect");
+    const baseSelect = document.getElementById("baseSelect");
+    const existingSelect = document.getElementById("existingSelect");
+    const baseMeta = document.getElementById("baseMeta");
+    const statusEl = document.getElementById("status");
+    const previewFrame = document.getElementById("previewFrame");
+    const obstaclesEl = document.getElementById("obstacles");
+
+    function setStatus(message, isError = false) {
+      statusEl.textContent = message;
+      statusEl.classList.toggle("error", Boolean(isError));
+    }
+
+    function pointText(values) {
+      return (values || []).map((value) => Number(value).toFixed(3).replace(/\.?0+$/, "")).join(", ");
+    }
+
+    function pointPlaceholder(dim) {
+      return Array.from({ length: dim }, () => "0.0").join(", ");
+    }
+
+    function currentDimension() {
+      return Number(state.currentDraft?.dimension || currentBaseRecord()?.space_dim || 2);
+    }
+
+    function updatePointInputHints(dim) {
+      const placeholder = pointPlaceholder(dim);
+      document.getElementById("queryStart").placeholder = placeholder;
+      document.getElementById("queryGoal").placeholder = placeholder;
+      obstaclesEl.querySelectorAll('[data-field="start"], [data-field="goal"]').forEach((input) => {
+        input.placeholder = placeholder;
+      });
+    }
+
+    function obstacleRow(spec = null) {
+      const id = state.obstacleId++;
+      const seg = spec?.segments?.[0] || { start: [], goal: [], t_start: 1, t_end: 4 };
+      const radius = spec?.radius ?? currentRobotRadius();
+      const wrapper = document.createElement("div");
+      wrapper.className = "obstacle";
+      wrapper.dataset.obstacleId = String(id);
+      wrapper.innerHTML = `
+        <div class="obstacle-head">
+          <span>Sphere obstacle</span>
+          <button class="danger" type="button" data-remove="${id}">Remove</button>
+        </div>
+        <div class="row">
+          <div>
+            <label>Start</label>
+            <input data-field="start" type="text" value="${pointText(seg.start)}">
+          </div>
+          <div>
+            <label>Goal</label>
+            <input data-field="goal" type="text" value="${pointText(seg.goal)}">
+          </div>
+        </div>
+        <div class="row-3">
+          <div>
+            <label>t_start</label>
+            <input data-field="t_start" type="number" step="0.01" value="${seg.t_start}">
+          </div>
+          <div>
+            <label>t_end</label>
+            <input data-field="t_end" type="number" step="0.01" value="${seg.t_end}">
+          </div>
+          <div>
+            <label>radius</label>
+            <input data-field="radius" type="number" step="0.01" value="${radius}">
+          </div>
+        </div>
+      `;
+      wrapper.querySelector("[data-remove]").addEventListener("click", () => wrapper.remove());
+      wrapper.querySelectorAll('[data-field="start"], [data-field="goal"]').forEach((input) => {
+        input.placeholder = pointPlaceholder(currentDimension());
+      });
+      return wrapper;
+    }
+
+    function currentDomainRecords() {
+      return state.domains[domainSelect.value] || [];
+    }
+
+    function currentBaseRecord() {
+      return currentDomainRecords().find((record) => record.instance_id === baseSelect.value) || null;
+    }
+
+    function currentRobotRadius() {
+      return Number(state.currentDraft?.robot_radius || 0.1);
+    }
+
+    function renderBaseMeta() {
+      const record = currentBaseRecord();
+      if (!record) {
+        baseMeta.textContent = "No base instance selected.";
+        return;
+      }
+      baseMeta.textContent =
+        `domain=${record.domain_key} dim=${record.space_dim} seed=${record.spatial_seed}\n` +
+        `stgcs=(${record.stgcs_num_vertices}V, ${record.stgcs_num_edges}E)\n` +
+        `env_params=${JSON.stringify(record.env_params)}`;
+    }
+
+    function populateDomains(payload) {
+      state.domains = {};
+      domainSelect.innerHTML = "";
+      payload.domains.forEach((domain) => {
+        state.domains[domain.domain_key] = domain.records;
+        const option = document.createElement("option");
+        option.value = domain.domain_key;
+        option.textContent = `${domain.domain_key} (${domain.records.length})`;
+        domainSelect.appendChild(option);
+      });
+      document.getElementById("outputPath").value = payload.default_output;
+      populateBaseSelect();
+    }
+
+    function populateBaseSelect() {
+      const records = currentDomainRecords();
+      baseSelect.innerHTML = "";
+      records.forEach((record) => {
+        const option = document.createElement("option");
+        option.value = record.instance_id;
+        option.textContent = record.instance_id;
+        baseSelect.appendChild(option);
+      });
+      renderBaseMeta();
+    }
+
+    function populateExistingSelect(records) {
+      existingSelect.innerHTML = "";
+      if (!records.length) {
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "No existing instances";
+        existingSelect.appendChild(option);
+        existingSelect.disabled = true;
+        return;
+      }
+      records.forEach((record) => {
+        const option = document.createElement("option");
+        option.value = record.instance_id;
+        option.textContent = `${record.instance_id} (${record.source_domain})`;
+        existingSelect.appendChild(option);
+      });
+      existingSelect.disabled = false;
+    }
+
+    async function loadDefaultDraft() {
+      const params = new URLSearchParams({
+        domain_key: domainSelect.value,
+        base_instance_id: baseSelect.value,
+      });
+      const response = await fetch(`/api/default-draft?${params.toString()}`);
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Could not build default draft.");
+      }
+      applyDraft(payload.draft);
+      await preview();
+    }
+
+    function applyDraft(draft) {
+      state.currentDraft = draft;
+      if (draft.domain_key && domainSelect.value !== draft.domain_key) {
+        domainSelect.value = draft.domain_key;
+        populateBaseSelect();
+      }
+      if (draft.base_instance_id && baseSelect.value !== draft.base_instance_id) {
+        baseSelect.value = draft.base_instance_id;
+        renderBaseMeta();
+      }
+      updatePointInputHints(Number(draft.dimension || currentDimension()));
+      document.getElementById("instanceId").value = draft.instance_id;
+      document.getElementById("queryStart").value = pointText(draft.query.start);
+      document.getElementById("queryGoal").value = pointText(draft.query.goal);
+      document.getElementById("queryTStart").value = draft.query.t_start;
+      document.getElementById("queryVLimit").value = draft.query.vlimit;
+      document.getElementById("queryIsStay").checked = Boolean(draft.query.is_stay);
+      document.getElementById("timeHorizon").value = draft.tmax;
+      obstaclesEl.innerHTML = "";
+      draft.dynamic_obstacles.forEach((spec) => obstaclesEl.appendChild(obstacleRow(spec)));
+    }
+
+    function collectDraft() {
+      const obstacleSpecs = Array.from(obstaclesEl.querySelectorAll(".obstacle")).map((row) => {
+        const field = (name) => row.querySelector(`[data-field="${name}"]`).value;
+        return {
+          type: "sphere",
+          radius: Number(field("radius")),
+          segments: [{
+            start: field("start"),
+            goal: field("goal"),
+            t_start: Number(field("t_start")),
+            t_end: Number(field("t_end")),
+          }],
+        };
+      });
+      return {
+        domain_key: domainSelect.value,
+        base_instance_id: baseSelect.value,
+        instance_id: document.getElementById("instanceId").value,
+        group: state.currentDraft?.group || "custom",
+        tmax: Number(document.getElementById("timeHorizon").value),
+        query: {
+          start: document.getElementById("queryStart").value,
+          goal: document.getElementById("queryGoal").value,
+          t_start: Number(document.getElementById("queryTStart").value),
+          is_stay: document.getElementById("queryIsStay").checked,
+          vlimit: Number(document.getElementById("queryVLimit").value),
+        },
+        dynamic_obstacles: obstacleSpecs,
+      };
+    }
+
+    async function postJson(path, body) {
+      const response = await fetch(path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || `Request failed: ${path}`);
+      }
+      return payload;
+    }
+
+    async function refreshExistingInstances(options = {}) {
+      try {
+        const outputPath = document.getElementById("outputPath").value;
+        const payload = await postJson("/api/existing-instances", { output_path: outputPath });
+        populateExistingSelect(payload.records);
+        if (!options.silent) {
+          setStatus(`Loaded ${payload.records.length} existing instance(s).\n${payload.manifest_path}`);
+        }
+        return payload.records;
+      } catch (error) {
+        populateExistingSelect([]);
+        if (!options.silent) {
+          setStatus(error.message, true);
+        }
+        return [];
+      }
+    }
+
+    async function loadExistingInstance() {
+      try {
+        if (existingSelect.disabled || !existingSelect.value) {
+          await refreshExistingInstances({ silent: true });
+        }
+        if (existingSelect.disabled || !existingSelect.value) {
+          throw new Error("No existing instance is available to load.");
+        }
+        const payload = await postJson("/api/load-existing", {
+          output_path: document.getElementById("outputPath").value,
+          instance_id: existingSelect.value,
+        });
+        applyDraft(payload.draft);
+        await preview({ throwOnError: true });
+        setStatus(`Loaded existing instance.\n${payload.draft.instance_id}`);
+      } catch (error) {
+        setStatus(error.message, true);
+      }
+    }
+
+    async function preview(options = {}) {
+      try {
+        setStatus("Building preview...");
+        const payload = await postJson("/api/preview", { draft: collectDraft() });
+        state.currentDraft = { ...(state.currentDraft || {}), ...payload.draft };
+        previewFrame.src = `/viewer.html?${new URLSearchParams({
+          manifest: "/api/manifest",
+          v: String(Date.now()),
+        }).toString()}`;
+        setStatus(
+          `Preview ready.\n${payload.record.instance_id}\n` +
+          `stgcs=(${payload.record.stgcs_num_vertices}V, ${payload.record.stgcs_num_edges}E)`,
+        );
+        return true;
+      } catch (error) {
+        setStatus(error.message, true);
+        if (options.throwOnError) {
+          throw error;
+        }
+        return false;
+      }
+    }
+
+    async function exportManifest() {
+      try {
+        await preview({ throwOnError: true });
+        const outputPath = document.getElementById("outputPath").value;
+        const payload = await postJson("/api/export", { output_path: outputPath });
+        await refreshExistingInstances({ silent: true });
+        setStatus(`Exported current instance.\n${payload.output_path}`);
+      } catch (error) {
+        setStatus(error.message, true);
+      }
+    }
+
+    document.getElementById("addObstacleButton").addEventListener("click", () => {
+      const draft = state.currentDraft;
+      const dim = draft?.dimension || 2;
+      const bounds = draft?.bounds || { min: Array(dim).fill(0), max: Array(dim).fill(1) };
+      const start = bounds.min.map((value, idx) => value + 0.35 * (bounds.max[idx] - value));
+      const goal = bounds.min.map((value, idx) => value + 0.65 * (bounds.max[idx] - value));
+      obstaclesEl.appendChild(obstacleRow({
+        type: "sphere",
+        radius: currentRobotRadius(),
+        segments: [{ start, goal, t_start: 1, t_end: 4 }],
+      }));
+    });
+    document.getElementById("clearObstacleButton").addEventListener("click", () => {
+      obstaclesEl.innerHTML = "";
+    });
+    document.getElementById("previewButton").addEventListener("click", preview);
+    document.getElementById("exportButton").addEventListener("click", exportManifest);
+    document.getElementById("refreshExistingButton").addEventListener("click", () => refreshExistingInstances());
+    document.getElementById("loadExistingButton").addEventListener("click", loadExistingInstance);
+    document.getElementById("outputPath").addEventListener("change", () => refreshExistingInstances());
+    domainSelect.addEventListener("change", async () => {
+      populateBaseSelect();
+      try { await loadDefaultDraft(); } catch (error) { setStatus(error.message, true); }
+    });
+    baseSelect.addEventListener("change", async () => {
+      renderBaseMeta();
+      try { await loadDefaultDraft(); } catch (error) { setStatus(error.message, true); }
+    });
+
+    async function init() {
+      try {
+        const response = await fetch("/api/domains");
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || "Could not load domains.");
+        }
+        populateDomains(payload);
+        await refreshExistingInstances({ silent: true });
+        await loadDefaultDraft();
+      } catch (error) {
+        setStatus(error.message, true);
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

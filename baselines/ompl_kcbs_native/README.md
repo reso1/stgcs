@@ -14,17 +14,25 @@ cmake --build /tmp/Multi-Robot-OMPL-KCBS-build
 cmake --install /tmp/Multi-Robot-OMPL-KCBS-build
 ```
 
-Then build the adapter from this repository root:
+Then build the adapter from the repository root using the active Python
+environment:
 
 ```bash
+python -m pip install pybind11
 cmake \
   -S baselines/ompl_kcbs_native \
-  -B /private/tmp/stgcs_ompl_kcbs_build \
-  -G Ninja \
-  -DPython_EXECUTABLE=/Users/jingtao/opt/miniconda3/envs/agmt/bin/python \
-  -DCMAKE_PREFIX_PATH=/tmp/Multi-Robot-OMPL-KCBS-install
-cmake --build /private/tmp/stgcs_ompl_kcbs_build
+  -B build/ompl-kcbs \
+  -DPYBIND11_FINDPYTHON=ON \
+  -DPython_EXECUTABLE="$(python -c 'import sys; print(sys.executable)')" \
+  -Dpybind11_DIR="$(python -m pybind11 --cmakedir)" \
+  -DCMAKE_PREFIX_PATH=/tmp/Multi-Robot-OMPL-KCBS-install \
+  -DCMAKE_BUILD_TYPE=Release
+cmake --build build/ompl-kcbs -j 4
+python -c "import baselines._ompl_kcbs_native"
 ```
+
+CMake writes the extension into `baselines/`. Select `--planner kcbs` in the
+[MRMP comparison runner](../../experiments/README.md#run-experiments).
 
 The adapter instantiates the official `ompl::multirobot::control::KCBS`
 planner. Each MRMP robot is modeled as a 2D disk with single-integrator

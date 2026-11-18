@@ -5,6 +5,7 @@
     "domain": "simple2d",
     "env_params": {
       "robot_radius": 0.1,
+      "tmax": 100.0,
       "vlimit": 1.0
     },
     "instance_id": "base-simple2d-seed00000",
@@ -13,6 +14,5 @@
     "stgcs_num_edges": 16,
     "stgcs_num_vertices": 8,
     "supports_sampling": true
-  },
-  "schema_version": 1
+  }
 }

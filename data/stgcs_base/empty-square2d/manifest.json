@@ -6,15 +6,14 @@
     "spatial_seed": 0,
     "env_params": {
       "name": "empty-square2d",
-      "square_size": 10.0,
+      "square_size": 10.5,
       "endpoint_margin": 0.5,
-      "min_query_distance": 3.25,
-      "max_query_distance": 6.5,
+      "min_query_distance": 3.0,
+      "max_query_distance": 6.0,
       "random_query_seed_offset": 7000,
       "vlimit": 1.0,
       "robot_radius": 0.15,
-      "tmax": 1000.0,
-      "sampling": "bounded-random-local-queries"
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 1,

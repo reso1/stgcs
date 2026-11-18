@@ -1,12 +1,12 @@
 [
   {
-    "base_instance_id": "base-fastpathplanning-village3d-s8-d0p35-bm0p001-bc1-csmerge2-seed01000",
+    "base_instance_id": "base-fastpathplanning-village3d-seed01000",
     "conflict_density": 1.0,
     "conflict_largest_component": 48,
     "independent_cost_sum": 272.305195239501,
     "independent_makespan": 9.418375393216268,
     "independent_runtime": 0.0,
-    "instance_id": "mrmp-fastpathplanning-village3d-random-s8-d0p35-bm0p001-bc1-csmerge2-seed01000-48-uav",
+    "instance_id": "mrmp-base-fastpathplanning-village3d-seed01000-48-robot-random",
     "num_agents": 48,
     "num_conflicting_agents": 48,
     "num_conflicting_pairs": 1128,
@@ -734,7 +734,6 @@
     ],
     "stgcs_num_edges": 728,
     "stgcs_num_vertices": 119,
-    "traffic_family": "fastpathplanning-village-random-exchange",
-    "traffic_tier": "48-uav"
+    "tmax": 100.0
   }
 ]

@@ -5,7 +5,7 @@ from typing import List
 
 import numpy as np
 
-from stgcs.interval import Interval
+from experiments.environment.interval import Interval
 
 
 @dataclass

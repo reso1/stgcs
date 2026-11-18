@@ -1,0 +1,20 @@
+{
+  "object_file": "base-grid2d-s4-seed00149-scale1p11111.npy",
+  "object_format": "numpy-object-array",
+  "record": {
+    "domain": "grid",
+    "env_params": {
+      "M": 4,
+      "N": 4,
+      "size": 4,
+      "spatial_scale": 1.1111111111111112,
+      "tmax": 100.0
+    },
+    "instance_id": "base-grid2d-s4-seed00149-scale1p11111",
+    "space_dim": 2,
+    "spatial_seed": 149,
+    "stgcs_num_edges": 28,
+    "stgcs_num_vertices": 12,
+    "supports_sampling": true
+  }
+}

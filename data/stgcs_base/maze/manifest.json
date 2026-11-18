@@ -1,6502 +1,802 @@
 [
   {
-    "instance_id": "base-maze-10x10-seed00000",
+    "instance_id": "base-maze-12x12-seed00000-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 0,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
+    "stgcs_num_edges": 26
   },
   {
-    "instance_id": "base-maze-10x10-seed00001",
+    "instance_id": "base-maze-12x12-seed00001-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 1,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 44
+    "stgcs_num_edges": 40
   },
   {
-    "instance_id": "base-maze-10x10-seed00002",
+    "instance_id": "base-maze-12x12-seed00002-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 2,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 40
+    "stgcs_num_vertices": 18,
+    "stgcs_num_edges": 46
   },
   {
-    "instance_id": "base-maze-10x10-seed00003",
+    "instance_id": "base-maze-12x12-seed00003-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 3,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
+    "stgcs_num_vertices": 18,
+    "stgcs_num_edges": 40
   },
   {
-    "instance_id": "base-maze-10x10-seed00004",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 4,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00005",
+    "instance_id": "base-maze-12x12-seed00005-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 5,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 44
   },
   {
-    "instance_id": "base-maze-10x10-seed00006",
+    "instance_id": "base-maze-12x12-seed00006-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 6,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 34
+    "stgcs_num_edges": 42
   },
   {
-    "instance_id": "base-maze-10x10-seed00007",
+    "instance_id": "base-maze-12x12-seed00007-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 7,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
+    "stgcs_num_vertices": 13,
+    "stgcs_num_edges": 28
   },
   {
-    "instance_id": "base-maze-10x10-seed00008",
+    "instance_id": "base-maze-12x12-seed00008-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 8,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 40
+    "stgcs_num_vertices": 23,
+    "stgcs_num_edges": 52
   },
   {
-    "instance_id": "base-maze-10x10-seed00009",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 9,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00010",
+    "instance_id": "base-maze-12x12-seed00010-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 10,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 14,
+    "stgcs_num_vertices": 13,
     "stgcs_num_edges": 30
   },
   {
-    "instance_id": "base-maze-10x10-seed00011",
+    "instance_id": "base-maze-12x12-seed00011-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 11,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 36
   },
   {
-    "instance_id": "base-maze-10x10-seed00012",
+    "instance_id": "base-maze-12x12-seed00012-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 12,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 36
+    "stgcs_num_edges": 42
   },
   {
-    "instance_id": "base-maze-10x10-seed00013",
+    "instance_id": "base-maze-12x12-seed00013-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 13,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 26
+    "stgcs_num_vertices": 17,
+    "stgcs_num_edges": 32
   },
   {
-    "instance_id": "base-maze-10x10-seed00014",
+    "instance_id": "base-maze-12x12-seed00014-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 14,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 46
   },
   {
-    "instance_id": "base-maze-10x10-seed00015",
+    "instance_id": "base-maze-12x12-seed00015-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 15,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 50
   },
   {
-    "instance_id": "base-maze-10x10-seed00016",
+    "instance_id": "base-maze-12x12-seed00016-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 16,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
+    "stgcs_num_vertices": 18,
+    "stgcs_num_edges": 44
   },
   {
-    "instance_id": "base-maze-10x10-seed00017",
+    "instance_id": "base-maze-12x12-seed00017-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 17,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 13,
+    "stgcs_num_vertices": 16,
     "stgcs_num_edges": 30
   },
   {
-    "instance_id": "base-maze-10x10-seed00018",
+    "instance_id": "base-maze-12x12-seed00018-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 18,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 36
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 44
   },
   {
-    "instance_id": "base-maze-10x10-seed00019",
+    "instance_id": "base-maze-12x12-seed00019-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 19,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 30
   },
   {
-    "instance_id": "base-maze-10x10-seed00020",
+    "instance_id": "base-maze-12x12-seed00020-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 20,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
+    "stgcs_num_vertices": 18,
+    "stgcs_num_edges": 42
   },
   {
-    "instance_id": "base-maze-10x10-seed00021",
+    "instance_id": "base-maze-12x12-seed00021-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 21,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 36
   },
   {
-    "instance_id": "base-maze-10x10-seed00022",
+    "instance_id": "base-maze-12x12-seed00022-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 22,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 42
+    "stgcs_num_vertices": 24,
+    "stgcs_num_edges": 52
   },
   {
-    "instance_id": "base-maze-10x10-seed00023",
+    "instance_id": "base-maze-12x12-seed00023-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 23,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 46
   },
   {
-    "instance_id": "base-maze-10x10-seed00024",
+    "instance_id": "base-maze-12x12-seed00024-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 24,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 40
   },
   {
-    "instance_id": "base-maze-10x10-seed00025",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 25,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00026",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 26,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00027",
+    "instance_id": "base-maze-12x12-seed00027-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 27,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 48
   },
   {
-    "instance_id": "base-maze-10x10-seed00028",
+    "instance_id": "base-maze-12x12-seed00028-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 28,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 14,
+    "stgcs_num_vertices": 13,
     "stgcs_num_edges": 32
   },
   {
-    "instance_id": "base-maze-10x10-seed00029",
+    "instance_id": "base-maze-12x12-seed00029-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 29,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
+    "stgcs_num_vertices": 22,
+    "stgcs_num_edges": 50
   },
   {
-    "instance_id": "base-maze-10x10-seed00030",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 30,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 56
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00031",
+    "instance_id": "base-maze-12x12-seed00031-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 31,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 24
+    "stgcs_num_vertices": 17,
+    "stgcs_num_edges": 36
   },
   {
-    "instance_id": "base-maze-10x10-seed00032",
+    "instance_id": "base-maze-12x12-seed00032-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 32,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
+    "stgcs_num_vertices": 21,
+    "stgcs_num_edges": 50
   },
   {
-    "instance_id": "base-maze-10x10-seed00033",
+    "instance_id": "base-maze-12x12-seed00033-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 33,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 44
   },
   {
-    "instance_id": "base-maze-10x10-seed00034",
+    "instance_id": "base-maze-12x12-seed00034-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 34,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
+    "stgcs_num_vertices": 21,
+    "stgcs_num_edges": 56
   },
   {
-    "instance_id": "base-maze-10x10-seed00035",
+    "instance_id": "base-maze-12x12-seed00035-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 35,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 38
   },
   {
-    "instance_id": "base-maze-10x10-seed00036",
+    "instance_id": "base-maze-12x12-seed00036-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 36,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
+    "stgcs_num_vertices": 17,
+    "stgcs_num_edges": 38
   },
   {
-    "instance_id": "base-maze-10x10-seed00037",
+    "instance_id": "base-maze-12x12-seed00037-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 37,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 40
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 44
   },
   {
-    "instance_id": "base-maze-10x10-seed00038",
+    "instance_id": "base-maze-12x12-seed00038-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 38,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 24
+    "stgcs_num_vertices": 19,
+    "stgcs_num_edges": 42
   },
   {
-    "instance_id": "base-maze-10x10-seed00039",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 39,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00040",
+    "instance_id": "base-maze-12x12-seed00040-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 40,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 46
   },
   {
-    "instance_id": "base-maze-10x10-seed00041",
+    "instance_id": "base-maze-12x12-seed00041-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 41,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
+    "stgcs_num_vertices": 20,
+    "stgcs_num_edges": 44
   },
   {
-    "instance_id": "base-maze-10x10-seed00042",
+    "instance_id": "base-maze-12x12-seed00042-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 42,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
+    "stgcs_num_vertices": 24,
+    "stgcs_num_edges": 56
   },
   {
-    "instance_id": "base-maze-10x10-seed00043",
+    "instance_id": "base-maze-12x12-seed00043-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 43,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
+    "stgcs_num_vertices": 12,
+    "stgcs_num_edges": 22
   },
   {
-    "instance_id": "base-maze-10x10-seed00044",
+    "instance_id": "base-maze-12x12-seed00044-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 44,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 32
+    "stgcs_num_vertices": 21,
+    "stgcs_num_edges": 44
   },
   {
-    "instance_id": "base-maze-10x10-seed00045",
+    "instance_id": "base-maze-12x12-seed00045-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 45,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
+    "stgcs_num_vertices": 17,
+    "stgcs_num_edges": 36
   },
   {
-    "instance_id": "base-maze-10x10-seed00046",
+    "instance_id": "base-maze-12x12-seed00046-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 46,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 52
+    "stgcs_num_vertices": 22,
+    "stgcs_num_edges": 58
   },
   {
-    "instance_id": "base-maze-10x10-seed00047",
+    "instance_id": "base-maze-12x12-seed00047-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 47,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 28
+    "stgcs_num_vertices": 21,
+    "stgcs_num_edges": 46
   },
   {
-    "instance_id": "base-maze-10x10-seed00048",
+    "instance_id": "base-maze-12x12-seed00048-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 48,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 22
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 28
   },
   {
-    "instance_id": "base-maze-10x10-seed00049",
+    "instance_id": "base-maze-12x12-seed00049-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 49,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
+    "stgcs_num_vertices": 22,
+    "stgcs_num_edges": 54
   },
   {
-    "instance_id": "base-maze-10x10-seed00050",
+    "instance_id": "base-maze-12x12-seed00050-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 50,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 32
   },
   {
-    "instance_id": "base-maze-10x10-seed00051",
+    "instance_id": "base-maze-12x12-seed00051-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 51,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 32
+    "stgcs_num_vertices": 15,
+    "stgcs_num_edges": 36
   },
   {
-    "instance_id": "base-maze-10x10-seed00052",
+    "instance_id": "base-maze-12x12-seed00052-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 52,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 40
+    "stgcs_num_edges": 44
   },
   {
-    "instance_id": "base-maze-10x10-seed00053",
+    "instance_id": "base-maze-12x12-seed00053-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 53,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
+    "stgcs_num_edges": 30
   },
   {
-    "instance_id": "base-maze-10x10-seed00054",
+    "instance_id": "base-maze-12x12-seed00054-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 54,
     "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
+    "stgcs_num_vertices": 16,
+    "stgcs_num_edges": 30
   },
   {
-    "instance_id": "base-maze-10x10-seed00055",
+    "instance_id": "base-maze-12x12-seed00055-scale0p416667",
     "domain": "maze",
     "space_dim": 2,
     "spatial_seed": 55,
     "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00056",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 56,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00057",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 57,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00058",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 58,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00059",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 59,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00060",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 60,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00061",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 61,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00062",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 62,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00063",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 63,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00064",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 64,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00065",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 65,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00066",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 66,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00067",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 67,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 48
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00068",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 68,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00069",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 69,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00070",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 70,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00071",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 71,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00072",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 72,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00073",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 73,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00074",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 74,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00075",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 75,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00076",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 76,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00077",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 77,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00078",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 78,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00079",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 79,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00080",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 80,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00081",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 81,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00082",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 82,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00083",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 83,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00084",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 84,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00085",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 85,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00086",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 86,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00087",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 87,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00088",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 88,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00089",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 89,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00090",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 90,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00091",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 91,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00092",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 92,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00093",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 93,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00094",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 94,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00095",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 95,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00096",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 96,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00097",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 97,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00098",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 98,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00099",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 99,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00100",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 100,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00101",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 101,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00102",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 102,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00103",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 103,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00104",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 104,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00105",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 105,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00106",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 106,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00107",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 107,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00108",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 108,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00109",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 109,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00110",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 110,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00111",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 111,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 58
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00112",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 112,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00113",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 113,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00114",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 114,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00115",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 115,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00116",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 116,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00117",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 117,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00118",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 118,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00119",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 119,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00120",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 120,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00121",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 121,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00122",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 122,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00123",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 123,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00124",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 124,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00125",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 125,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00126",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 126,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00127",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 127,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00128",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 128,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00129",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 129,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00130",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 130,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00131",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 131,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00132",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 132,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00133",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 133,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00134",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 134,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00135",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 135,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00136",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 136,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00137",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 137,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00138",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 138,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00139",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 139,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00140",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 140,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00141",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 141,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00142",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 142,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00143",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 143,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00144",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 144,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00145",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 145,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00146",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 146,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00147",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 147,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00148",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 148,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 46
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00149",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 149,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00150",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 150,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00151",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 151,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00152",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 152,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00153",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 153,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00154",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 154,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00155",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 155,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00156",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 156,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 56
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00157",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 157,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00158",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 158,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 46
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00159",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 159,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00160",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 160,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00161",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 161,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00162",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 162,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00163",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 163,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00164",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 164,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00165",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 165,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00166",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 166,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00167",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 167,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00168",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 168,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 48
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00169",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 169,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00170",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 170,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00171",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 171,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00172",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 172,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00173",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 173,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00174",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 174,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00175",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 175,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 46
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00176",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 176,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00177",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 177,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00178",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 178,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00179",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 179,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00180",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 180,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00181",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 181,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00182",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 182,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00183",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 183,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00184",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 184,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00185",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 185,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00186",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 186,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00187",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 187,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00188",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 188,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00189",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 189,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00190",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 190,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00191",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 191,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00192",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 192,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00193",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 193,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00194",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 194,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00195",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 195,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00196",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 196,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00197",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 197,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00198",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 198,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00199",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 199,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00200",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 200,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00201",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 201,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00202",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 202,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00203",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 203,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00204",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 204,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00205",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 205,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00206",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 206,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00207",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 207,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00208",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 208,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00209",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 209,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00210",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 210,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00211",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 211,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00212",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 212,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00213",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 213,
-    "env_params": {
-      "width": 10,
-      "height": 10
+      "width": 12,
+      "height": 12,
+      "spatial_scale": 0.4166666666666667,
+      "robot_radius": 0.10416666666666667,
+      "tmax": 100.0
     },
     "supports_sampling": true,
     "stgcs_num_vertices": 19,
     "stgcs_num_edges": 46
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00214",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 214,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00215",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 215,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00216",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 216,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00217",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 217,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00218",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 218,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00219",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 219,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00220",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 220,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 48
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00221",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 221,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00222",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 222,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00223",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 223,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00224",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 224,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00225",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 225,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00226",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 226,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00227",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 227,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00228",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 228,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00229",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 229,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00230",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 230,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00231",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 231,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00232",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 232,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00233",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 233,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00234",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 234,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00235",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 235,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00236",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 236,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00237",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 237,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00238",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 238,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00239",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 239,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00240",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 240,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00241",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 241,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00242",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 242,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00243",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 243,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00244",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 244,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00245",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 245,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 52
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00246",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 246,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00247",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 247,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00248",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 248,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00249",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 249,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00250",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 250,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00251",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 251,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00252",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 252,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00253",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 253,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00254",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 254,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00255",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 255,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00256",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 256,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00257",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 257,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 16
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00258",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 258,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00259",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 259,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00260",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 260,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00261",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 261,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00262",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 262,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00263",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 263,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 46
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00264",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 264,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00265",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 265,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00266",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 266,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00267",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 267,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00268",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 268,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00269",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 269,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00270",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 270,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00271",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 271,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00272",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 272,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00273",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 273,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00274",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 274,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00275",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 275,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00276",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 276,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00277",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 277,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00278",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 278,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00279",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 279,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00280",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 280,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00281",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 281,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00282",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 282,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00283",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 283,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00284",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 284,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00285",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 285,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00286",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 286,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00287",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 287,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00288",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 288,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00289",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 289,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00290",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 290,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00291",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 291,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00292",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 292,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00293",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 293,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00294",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 294,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00295",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 295,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00296",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 296,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00297",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 297,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00298",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 298,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 64
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00299",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 299,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00300",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 300,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00301",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 301,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00302",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 302,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00303",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 303,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00304",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 304,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 8,
-    "stgcs_num_edges": 14
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00305",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 305,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00306",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 306,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00307",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 307,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00308",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 308,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00309",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 309,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00310",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 310,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00311",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 311,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00312",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 312,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00313",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 313,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00314",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 314,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00315",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 315,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00316",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 316,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00317",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 317,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 9,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00318",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 318,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00319",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 319,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00320",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 320,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00321",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 321,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00322",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 322,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00323",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 323,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00324",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 324,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00325",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 325,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00326",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 326,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00327",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 327,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00328",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 328,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00329",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 329,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00330",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 330,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00331",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 331,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00332",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 332,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00333",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 333,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00334",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 334,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00335",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 335,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00336",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 336,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00337",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 337,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00338",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 338,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00339",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 339,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00340",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 340,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00341",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 341,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00342",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 342,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00343",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 343,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00344",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 344,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00345",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 345,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00346",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 346,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00347",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 347,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00348",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 348,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00349",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 349,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00350",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 350,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00351",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 351,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00352",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 352,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00353",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 353,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00354",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 354,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00355",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 355,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00356",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 356,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00357",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 357,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00358",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 358,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00359",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 359,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00360",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 360,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00361",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 361,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00362",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 362,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00363",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 363,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00364",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 364,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00365",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 365,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00366",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 366,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00367",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 367,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00368",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 368,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00369",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 369,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00370",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 370,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00371",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 371,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00372",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 372,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00373",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 373,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00374",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 374,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00375",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 375,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00376",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 376,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 50
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00377",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 377,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00378",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 378,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 48
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00379",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 379,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00380",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 380,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00381",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 381,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00382",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 382,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00383",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 383,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00384",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 384,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00385",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 385,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00386",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 386,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00387",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 387,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00388",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 388,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00389",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 389,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00390",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 390,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00391",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 391,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00392",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 392,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00393",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 393,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00394",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 394,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00395",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 395,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 50
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00396",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 396,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00397",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 397,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00398",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 398,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00399",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 399,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00400",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 400,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00401",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 401,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00402",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 402,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00403",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 403,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00404",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 404,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00405",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 405,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00406",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 406,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00407",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 407,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 50
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00408",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 408,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00409",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 409,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00410",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 410,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00411",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 411,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 44
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00412",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 412,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00413",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 413,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00414",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 414,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00415",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 415,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00416",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 416,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00417",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 417,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00418",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 418,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00419",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 419,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00420",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 420,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00421",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 421,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00422",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 422,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00423",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 423,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00424",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 424,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00425",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 425,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00426",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 426,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00427",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 427,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00428",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 428,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00429",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 429,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00430",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 430,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00431",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 431,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00432",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 432,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00433",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 433,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00434",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 434,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00435",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 435,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00436",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 436,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00437",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 437,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00438",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 438,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 21,
-    "stgcs_num_edges": 58
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00439",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 439,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 56
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00440",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 440,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00441",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 441,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00442",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 442,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00443",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 443,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00444",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 444,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00445",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 445,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00446",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 446,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00447",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 447,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00448",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 448,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00449",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 449,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00450",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 450,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00451",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 451,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00452",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 452,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00453",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 453,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00454",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 454,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00455",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 455,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 18
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00456",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 456,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 22,
-    "stgcs_num_edges": 52
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00457",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 457,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00458",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 458,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 10,
-    "stgcs_num_edges": 20
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00459",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 459,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00460",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 460,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00461",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 461,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00462",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 462,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00463",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 463,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00464",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 464,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00465",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 465,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00466",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 466,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00467",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 467,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00468",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 468,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 18,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00469",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 469,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00470",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 470,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00471",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 471,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00472",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 472,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00473",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 473,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00474",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 474,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00475",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 475,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00476",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 476,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 28
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00477",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 477,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00478",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 478,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00479",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 479,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00480",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 480,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00481",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 481,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00482",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 482,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00483",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 483,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00484",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 484,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 32
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00485",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 485,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 38
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00486",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 486,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 17,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00487",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 487,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 11,
-    "stgcs_num_edges": 26
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00488",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 488,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 34
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00489",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 489,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 19,
-    "stgcs_num_edges": 42
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00490",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 490,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 22
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00491",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 491,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00492",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 492,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 40
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00493",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 493,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 12,
-    "stgcs_num_edges": 24
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00494",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 494,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 20,
-    "stgcs_num_edges": 46
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00495",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 495,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 16,
-    "stgcs_num_edges": 36
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00496",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 496,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 15,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00497",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 497,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00498",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 498,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 14,
-    "stgcs_num_edges": 30
-  },
-  {
-    "instance_id": "base-maze-10x10-seed00499",
-    "domain": "maze",
-    "space_dim": 2,
-    "spatial_seed": 499,
-    "env_params": {
-      "width": 10,
-      "height": 10
-    },
-    "supports_sampling": true,
-    "stgcs_num_vertices": 13,
-    "stgcs_num_edges": 32
   }
 ]

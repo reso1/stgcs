@@ -21,6 +21,7 @@
 #include <chrono>
 #include <cstdint>
 #include <cmath>
+#include <functional>
 #include <limits>
 #include <memory>
 #include <optional>
@@ -808,6 +809,11 @@ public:
         rng_.setLocalSeed(seed == 0 ? 1 : seed);
     }
 
+    void setGoalValidityChecker(std::function<bool(const ob::State *)> checker)
+    {
+        goalValidityChecker_ = std::move(checker);
+    }
+
     void setMaxTimeBoundFactor(double factor)
     {
         if (!(std::isfinite(factor) && factor > 0.0))
@@ -951,6 +957,13 @@ public:
                 }
             }
 
+            // Check terminal occupancy only for goal roots. Passing through the
+            // goal and leaving again remains a valid intermediate motion.
+            if (goal_state != nullptr && goalValidityChecker_ && !goalValidityChecker_(goal_state))
+            {
+                force_goal_sample = true;
+                continue;
+            }
             if (goal_state != nullptr)
             {
                 auto *motion = new Motion(si_);
@@ -1196,6 +1209,7 @@ protected:
 
 private:
     double maxTimeBoundFactor_{std::numeric_limits<double>::infinity()};
+    std::function<bool(const ob::State *)> goalValidityChecker_;
 };
 
 py::dict solve_linf_strrt(py::dict environment_payload,
@@ -1245,6 +1259,9 @@ py::dict solve_linf_strrt(py::dict environment_payload,
         return std::make_shared<SeededSpaceTimeStateSampler>(state_space, local_seed);
     });
     const double time_upper_bound = option_double(options, "time_upper_bound", std::numeric_limits<double>::infinity());
+    const bool stay_at_goal = option_bool(options, "stay_at_goal", false);
+    if (stay_at_goal && !std::isfinite(time_upper_bound))
+        throw std::invalid_argument("stay_at_goal requires a finite time_upper_bound.");
     if (std::isfinite(time_upper_bound))
     {
         if (time_upper_bound < t0)
@@ -1254,8 +1271,9 @@ py::dict solve_linf_strrt(py::dict environment_payload,
     space->updateEpsilon();
 
     auto si = std::make_shared<ob::SpaceInformation>(space);
-    si->setStateValidityChecker([native_environment, extra_collision_checker, dim, t0, robot_radius](const ob::State *state) {
-        return env_state_valid(native_environment, extra_collision_checker, state, dim, t0, robot_radius);
+    si->setStateValidityChecker([native_environment, extra_collision_checker, dim, t0, robot_radius, space](const ob::State *state) {
+        return space->satisfiesBounds(state) &&
+               env_state_valid(native_environment, extra_collision_checker, state, dim, t0, robot_radius);
     });
     si->setMotionValidator(
         std::make_shared<EnvMotionValidator>(si, native_environment, extra_collision_checker, dim, robot_radius));
@@ -1273,6 +1291,16 @@ py::dict solve_linf_strrt(py::dict environment_payload,
 
     auto planner = std::make_shared<PatchedSTRRTstar>(si);
     planner->setLocalSeed(local_seed);
+    if (stay_at_goal && !extra_collision_checker.is_none())
+    {
+        planner->setGoalValidityChecker([extra_collision_checker, dim, time_upper_bound](const ob::State *state) {
+            const auto position = spatial_values(state, dim);
+            py::gil_scoped_acquire gil;
+            return !py::cast<bool>(extra_collision_checker(
+                py_array_from_vector(position), py_array_from_vector(position),
+                state_time(state), time_upper_bound));
+        });
+    }
     const double range = option_double(options, "range", 1.0);
     if (std::isfinite(range) && range > 0.0)
         planner->setRange(range);
@@ -1304,6 +1332,7 @@ py::dict solve_linf_strrt(py::dict environment_payload,
     };
 
     SolutionSnapshot first_snapshot;
+    SolutionSnapshot final_snapshot;
 
     const double budget = option_double(options, "max_runtime_in_secs", std::numeric_limits<double>::infinity());
     if (!(std::isfinite(budget) && budget > 0.0))
@@ -1312,16 +1341,20 @@ py::dict solve_linf_strrt(py::dict environment_payload,
 
     std::atomic_bool solution_found{false};
     pdef->setIntermediateSolutionCallback(
-        [&solution_found, &first_snapshot, dim, &goal, &vlimit, goal_tolerance, &elapsed](
+        [&solution_found, &first_snapshot, &final_snapshot, dim, &goal, &vlimit, goal_tolerance, &elapsed, budget](
             const ob::Planner *,
             const std::vector<const ob::State *> &states,
             const ob::Cost) {
-            if (solution_found.load())
+            const double runtime = elapsed();
+            if (runtime > budget)
                 return;
-            auto snapshot = solution_snapshot(states, dim, goal, vlimit, goal_tolerance, elapsed());
+            auto snapshot = solution_snapshot(states, dim, goal, vlimit, goal_tolerance, runtime);
             if (snapshot.is_success)
             {
-                first_snapshot = std::move(snapshot);
+                if (!solution_found.load())
+                    first_snapshot = snapshot;
+                if (!final_snapshot.is_success || snapshot.cost < final_snapshot.cost)
+                    final_snapshot = std::move(snapshot);
                 solution_found.store(true);
             }
         });
@@ -1339,23 +1372,9 @@ py::dict solve_linf_strrt(py::dict environment_payload,
     }
     pdef->setIntermediateSolutionCallback(ob::ReportIntermediateSolutionFn());
 
-    SolutionSnapshot final_snapshot;
-    final_snapshot.runtime = elapsed();
-    const auto path = pdef->getSolutionPath();
-    if (path && pdef->hasExactSolution())
-    {
-        auto geometric_path = std::dynamic_pointer_cast<og::PathGeometric>(path);
-        if (geometric_path)
-        {
-            std::vector<const ob::State *> states;
-            states.reserve(geometric_path->getStateCount());
-            for (std::size_t idx = 0; idx < geometric_path->getStateCount(); ++idx)
-                states.push_back(geometric_path->getState(idx));
-            final_snapshot = solution_snapshot(states, dim, goal, vlimit, goal_tolerance, elapsed());
-            if (!first_snapshot.is_success && final_snapshot.is_success)
-                first_snapshot = final_snapshot;
-        }
-    }
+    // The final measurement consumes the allotted search time; its path is the
+    // best exact solution captured before the deadline, excluding shutdown time.
+    final_snapshot.runtime = std::min(elapsed(), budget);
 
     py::dict result;
     result["first"] = solution_payload(first_snapshot);

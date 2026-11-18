@@ -7,8 +7,6 @@ import os
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from http import HTTPStatus
-from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Sequence
 
@@ -19,16 +17,17 @@ ROOT = Path(__file__).resolve().parents[1]
 os.environ.setdefault("MPLCONFIGDIR", "/private/tmp/stgcs-mpl-cache")
 os.environ.setdefault("XDG_CACHE_HOME", "/private/tmp/stgcs-xdg-cache")
 
-from benchmark.environment.env import Env
-from stgcs.bfs.dominance_check import GlobalUpperBoundDominanceCheck, PositionBasedDominanceCheck
-from stgcs.bfs.heuristics import MotionOnlyHeuristic
-from stgcs.pbs import ChildExpansionMode, PriorityBasedSearch
-from stgcs.st_planner import MPQuery, SearchPlanner
-from stgcs.trajectory import STTrajectory
-from demos.trajopt.optimization import GlobalTrajOptConfig, GlobalTrajOptResult, GlobalTrajectoryOptimizer
-from stgcs.mrmp_planner import windowed_pbs
-from visualization.viewer.solution_visualization import SolutionVisualizationService
-from visualization.viewer.static_assets import ViewerStaticAssets
+from experiments.environment.env import Env
+from stgcs_native.types import ChildExpansionMode
+from experiments.planners.mrmp import SearchPlannerSpec
+from experiments.native import STGCSPlannerClient, NativeGeometry
+from types import SimpleNamespace
+from stgcs_native.types import MPQuery
+from stgcs_native.types import STTrajectory
+from stgcs_native.trajopt import GlobalTrajOptConfig, GlobalTrajOptResult, GlobalTrajectoryOptimizer
+from visualization.solution_io import SolutionIO
+from functools import partial
+from visualization.viewer.server import ViewerServer
 
 
 @dataclass(frozen=True)
@@ -126,6 +125,10 @@ class SequentialMRMPDemo:
         )
         parser.add_argument("--output-dir", type=Path, default=None)
         parser.add_argument("--stage-timeout-secs", type=float, default=None)
+        parser.add_argument("--force-solve", action="store_true",
+                            help="Recompute MRMP and refresh trajectory optimization.")
+        parser.add_argument("--force-trajopt", action="store_true",
+                            help="Recompute trajectory optimization using the MRMP solution.")
         parser.add_argument("--targets-output", type=Path, default=None)
         parser.add_argument("--no-show-targets", action="store_true")
         parser.add_argument("--no-serve", action="store_true")
@@ -143,7 +146,7 @@ class SequentialMRMPDemo:
             cls.plot_query_targets(task, output_path=args.targets_output, show=not bool(args.no_show_targets))
             return
 
-        payload = cls.run_pipeline(task, paths)
+        payload = cls.run_pipeline(task, paths, force_solve=args.force_solve, force_trajopt=args.force_trajopt)
         print(f"MRMP solution: {paths['mrmp_json']}")
         print(f"Trajopt solution: {paths['trajopt_json']}")
         if args.no_serve:
@@ -158,7 +161,7 @@ class SequentialMRMPDemo:
                 flush=True,
             )
             return
-        cls.serve_manifest(task, payload, paths, host=str(args.host), port=int(args.port))
+        cls.serve_manifest(task, payload, host=str(args.host), port=int(args.port))
 
     @classmethod
     def resolved_paths(cls, args: argparse.Namespace, task: SequentialMRMPTask) -> dict[str, Path]:
@@ -488,72 +491,23 @@ class SequentialMRMPDemo:
         return metadata
 
     @classmethod
-    def low_level_planner_for_stgcs(cls, task: SequentialMRMPTask, stgcs: Any) -> SearchPlanner:
-        return SearchPlanner(
-            heur=MotionOnlyHeuristic(stgcs),
-            dc_list=[
-                GlobalUpperBoundDominanceCheck(float("inf"), 0.0, float(task.search_eps)),
-                PositionBasedDominanceCheck(),
-            ],
-            eps=float(task.search_eps),
-            runtime_limit_secs=float(task.stage_timeout_secs),
-        )
-
-    @classmethod
-    def plan_stage(
-        cls,
-        task: SequentialMRMPTask,
-        env: Env,
-        stgcs: Any,
-        st_planner: SearchPlanner,
-        stage_name: str,
-        queries: Sequence[MPQuery],
-    ) -> tuple[list[STTrajectory], float, float]:
-        if task.planner_coordination == cls.WINDOWED_PBS_COORDINATION:
-            return cls.plan_stage_with_windowed_pbs(task, stgcs, st_planner, stage_name, queries)
-        pbs = PriorityBasedSearch(
-            stgcs,
-            st_planner,
-            float(env.robot_radius),
-            child_expansion_mode=task.child_expansion_mode,
-        )
-        sol, runtime, success = pbs.run(list(queries), timeout_secs=float(task.stage_timeout_secs), verbose=False)
-        if not success or sol is None:
-            raise RuntimeError(f"Failed to find a solution for stage {stage_name!r}.")
-        stage_end_time = max(float(trajectory.xT[-1]) for trajectory in sol)
-        return [cls.pad_trajectory_to_time(trajectory, stage_end_time) for trajectory in sol], stage_end_time, runtime
-
-    @classmethod
-    def plan_stage_with_windowed_pbs(
-        cls,
-        task: SequentialMRMPTask,
-        stgcs: Any,
-        st_planner: SearchPlanner,
-        stage_name: str,
-        queries: Sequence[MPQuery],
-    ) -> tuple[list[STTrajectory], float, float]:
-        sol, result = windowed_pbs(
-            stgcs,
-            st_planner,
-            list(queries),
-            float(task.robot_radius),
-            window_span=cls.window_span(task),
-            execution_horizon_factor=float(task.window_beta),
-            timeout_secs=float(task.stage_timeout_secs),
-            dynamic_window_adjustment=bool(task.dynamic_window_adjustment),
-            child_expansion_mode=task.child_expansion_mode,
-            wpbs_verbose=False,
-        )
-        if not result.success or sol is None:
-            raise RuntimeError(f"Failed to find a solution for stage {stage_name!r} with windowed PBS.")
-        stage_end_time = max(float(trajectory.xT[-1]) for trajectory in sol)
-        return [cls.pad_trajectory_to_time(trajectory, stage_end_time) for trajectory in sol], stage_end_time, float(result.runtime[0])
+    def plan_stage(cls, task, env, stgcs, stage_name, queries):
+        spec = SearchPlannerSpec("h_mot", ("GUB", "delta_pos"), epsilon=task.search_eps)
+        solutions, entry = STGCSPlannerClient.plan(
+            SimpleNamespace(env=env, stgcs=stgcs), queries, spec,
+            task.stage_timeout_secs, task.child_expansion_rule,
+            task.window_alpha if task.planner_coordination == cls.WINDOWED_PBS_COORDINATION else 0.0,
+            task.window_beta, task.dynamic_window_adjustment)
+        if not entry.is_success:
+            raise RuntimeError(f"Native planner failed for stage {stage_name!r} after {entry.runtime:.3f}s "
+                               f"(budget {task.stage_timeout_secs:g}s).")
+        end = max(float(path.xT[-1]) for path in solutions)
+        return [cls.pad_trajectory_to_time(path, end) for path in solutions], end, entry.runtime
 
     @classmethod
     def solve_mrmp(cls, task: SequentialMRMPTask) -> dict[str, Any]:
         env = cls.build_env(task)
         stgcs = cls.build_stgcs(task, env)
-        st_planner = cls.low_level_planner_for_stgcs(task, stgcs)
         chunks_by_agent: list[list[STTrajectory]] = [[] for _ in range(task.num_agents)]
         stage_trajectories: dict[str, list[STTrajectory]] = {}
         stage_queries: dict[str, tuple[MPQuery, ...]] = {}
@@ -571,7 +525,6 @@ class SequentialMRMPDemo:
                 task,
                 env,
                 stgcs,
-                st_planner,
                 stage.name,
                 assignment.queries,
             )
@@ -805,7 +758,7 @@ class SequentialMRMPDemo:
             config=config,
             window_span=cls.global_trajopt_window_span(task),
             stride=cls.global_trajopt_stride(task),
-            stgcs=stgcs,
+            cells=NativeGeometry.cells(stgcs),
             env=None,
         )
         if not result.sampled_pairwise_collision_free:
@@ -821,22 +774,17 @@ class SequentialMRMPDemo:
         return padded, result, config, continuous_pairwise_ok
 
     @classmethod
-    def global_trajopt_time_scale(cls, task: SequentialMRMPTask) -> float:
-        return float(task.robot_radius) / float(task.vlimit)
-
-    @classmethod
     def global_trajopt_window_span(cls, task: SequentialMRMPTask) -> float:
-        return cls.GLOBAL_TRAJOPT_WINDOW_SPAN_FACTOR * cls.global_trajopt_time_scale(task)
+        return GlobalTrajOptConfig.scaled_time(cls.GLOBAL_TRAJOPT_WINDOW_SPAN_FACTOR, task.robot_radius, task.vlimit)
 
     @classmethod
     def global_trajopt_stride(cls, task: SequentialMRMPTask) -> float:
-        return cls.GLOBAL_TRAJOPT_STRIDE_FACTOR * cls.global_trajopt_time_scale(task)
+        return GlobalTrajOptConfig.scaled_time(cls.GLOBAL_TRAJOPT_STRIDE_FACTOR, task.robot_radius, task.vlimit)
 
     @classmethod
     def global_trajopt_config(cls, task: SequentialMRMPTask, progress: bool) -> GlobalTrajOptConfig:
-        time_scale = cls.global_trajopt_time_scale(task)
         return GlobalTrajOptConfig(
-            sample_dt=cls.GLOBAL_TRAJOPT_SAMPLE_DT_FACTOR * time_scale,
+            sample_dt=GlobalTrajOptConfig.scaled_time(cls.GLOBAL_TRAJOPT_SAMPLE_DT_FACTOR, task.robot_radius, task.vlimit),
             clearance_margin=cls.GLOBAL_TRAJOPT_CLEARANCE_MARGIN,
             solver_max_iter=cls.GLOBAL_TRAJOPT_SOLVER_MAX_ITER,
             solver_eps_abs=cls.GLOBAL_TRAJOPT_SOLVER_EPS,
@@ -853,20 +801,8 @@ class SequentialMRMPDemo:
         goal_stays: Sequence[bool],
         robot_radius: float,
     ) -> bool:
-        checker = PriorityBasedSearch(stgcs, None, float(robot_radius))
-        for agent_i in range(len(trajectories)):
-            for agent_j in range(agent_i + 1, len(trajectories)):
-                if checker.collision_checking(
-                    trajectories[agent_i].points,
-                    trajectories[agent_j].points,
-                    cc_to_t0=True,
-                    cc_to_tf=False,
-                    cc_to_tf_a=bool(goal_stays[agent_i]),
-                    cc_to_tf_b=bool(goal_stays[agent_j]),
-                    tolerance=cls.GLOBAL_TRAJOPT_COLLISION_TOLERANCE,
-                ):
-                    return False
-        return True
+        return GlobalTrajectoryOptimizer.pairwise_collision_free(
+            trajectories, robot_radius, goal_stays, cls.GLOBAL_TRAJOPT_COLLISION_TOLERANCE)
 
     @classmethod
     def mrmp_passthrough_stage_result_payload(
@@ -878,8 +814,8 @@ class SequentialMRMPDemo:
         wall_time: float,
     ) -> dict[str, Any]:
         stage_end_time = max(float(trajectory.xT[-1]) for trajectory in trajectories)
-        sample_times = GlobalTrajectoryOptimizer.sample_times(trajectories, config)
-        positions = GlobalTrajectoryOptimizer.sample_positions(trajectories, sample_times)
+        inspected = GlobalTrajectoryOptimizer.inspect(trajectories, config)
+        sample_times = inspected.times
         return {
             "stage": stage_name,
             "status": "SUCCESS",
@@ -891,8 +827,8 @@ class SequentialMRMPDemo:
             "num_sample_times": int(sample_times.size),
             "sampled_pairwise_collision_free": True,
             "continuous_pairwise_collision_free": bool(continuous_pairwise_collision_free),
-            "min_pairwise_distance": float(GlobalTrajectoryOptimizer.min_pairwise_distance(positions)),
-            "max_velocity_component": float(GlobalTrajectoryOptimizer.max_velocity_component(sample_times, positions)),
+            "min_pairwise_distance": float(inspected.min_pairwise_distance),
+            "max_velocity_component": float(inspected.max_velocity_component),
             "solver_message": "mrmp_passthrough",
             "trajopt_skipped": True,
             "skip_reason": "return_to_start_stage",
@@ -945,11 +881,11 @@ class SequentialMRMPDemo:
 
     @staticmethod
     def finite_float_or_none(value: float | int | None) -> float | None:
-        return SolutionVisualizationService.finite_float_or_none(value)
+        return SolutionIO.finite_float_or_none(value)
 
     @staticmethod
     def trajectory_to_viewer_json(trajectory: STTrajectory | None) -> dict[str, Any]:
-        return SolutionVisualizationService.trajectory_to_viewer_json(trajectory)
+        return SolutionIO.trajectory_to_viewer_json(trajectory)
 
     @classmethod
     def trajectory_to_payload(cls, trajectory: STTrajectory) -> dict[str, Any]:
@@ -1027,7 +963,7 @@ class SequentialMRMPDemo:
         planner_name = cls.planner_name_for_phase(task, phase)
         global_config = cls.global_trajopt_config(task, progress=False) if phase == "trajopt" else None
         return {
-            "schema_version": 1,
+
             "ok": True,
             "instance_id": task.instance_id,
             "demo": cls.DEMO_KEY,
@@ -1051,6 +987,7 @@ class SequentialMRMPDemo:
             "env": cls.env_payload(task),
             "planner": cls.planner_metadata(task),
             "global_trajopt": None if phase != "trajopt" else {
+                "backend": "stgcs_cplusplus",
                 "sample_dt_factor": cls.GLOBAL_TRAJOPT_SAMPLE_DT_FACTOR,
                 "window_span_factor": cls.GLOBAL_TRAJOPT_WINDOW_SPAN_FACTOR,
                 "stride_factor": cls.GLOBAL_TRAJOPT_STRIDE_FACTOR,
@@ -1259,7 +1196,7 @@ class SequentialMRMPDemo:
             "conflict_density": 0.0,
         }
         return {
-            "schema_version": 1,
+
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "source_kind": cls.DEMO_KEY,
             "instance_count": 1,
@@ -1279,15 +1216,19 @@ class SequentialMRMPDemo:
         return cls.build_viewer_manifest(task, saved_solutions=saved_solutions)
 
     @classmethod
-    def run_pipeline(cls, task: SequentialMRMPTask, paths: dict[str, Path]) -> dict[str, Any]:
-        mrmp_payload = cls.load_saved_solution_payload(task, paths["mrmp_json"], expected_phase="mrmp")
-        if mrmp_payload is None:
+    def run_pipeline(cls, task: SequentialMRMPTask, paths: dict[str, Path], *,
+                     force_solve: bool = False, force_trajopt: bool = False) -> dict[str, Any]:
+        mrmp_payload = None if force_solve else cls.load_saved_solution_payload(
+            task, paths["mrmp_json"], expected_phase="mrmp")
+        mrmp_recomputed = mrmp_payload is None
+        if mrmp_recomputed:
             mrmp_payload = cls.solve_mrmp(task)
             cls.write_json(paths["mrmp_json"], mrmp_payload)
         else:
             print(f"Loaded MRMP solution: {paths['mrmp_json']}")
 
-        trajopt_payload = cls.load_saved_solution_payload(task, paths["trajopt_json"], expected_phase="trajopt")
+        trajopt_payload = None if (mrmp_recomputed or force_trajopt) else cls.load_saved_solution_payload(
+            task, paths["trajopt_json"], expected_phase="trajopt")
         if trajopt_payload is None:
             trajopt_payload = cls.solve_trajopt_from_payload(task, mrmp_payload)
             cls.write_json(paths["trajopt_json"], trajopt_payload)
@@ -1386,113 +1327,16 @@ class SequentialMRMPDemo:
         }
 
     @classmethod
-    def serve_manifest(
-        cls,
-        task: SequentialMRMPTask,
-        payload: dict[str, Any],
-        paths: dict[str, Path],
-        host: str,
-        port: int,
-    ) -> None:
-        payload_bytes = json.dumps(payload).encode("utf-8")
-        planner_payload_bytes = json.dumps(cls.planner_payload(task)).encode("utf-8")
-        viewer_url = ViewerStaticAssets.viewer_url()
+    def saved_solution_request(cls, task, payload, request):
+        if request.get("instance_id") != task.instance_id:
+            raise ValueError(f"Unknown instance_id: {request.get('instance_id')!r}")
+        planner_key = str(request.get("planner_key", cls.mrmp_planner_key(task)))
+        for solution in payload.get("solutions", []):
+            if isinstance(solution, dict) and solution.get("planner_key") == planner_key:
+                return solution
+        raise ValueError(f"Unknown planner_key or missing saved solution: {planner_key!r}")
 
-        class Handler(SimpleHTTPRequestHandler):
-            def end_headers(self) -> None:
-                self.send_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
-                self.send_header("Pragma", "no-cache")
-                self.send_header("Expires", "0")
-                super().end_headers()
-
-            def do_HEAD(self) -> None:
-                parsed_path = self.path.split("?", 1)[0]
-                if ViewerStaticAssets.is_viewer_path(parsed_path):
-                    ViewerStaticAssets.write_html_response(self)
-                    return
-                if parsed_path == "/":
-                    self.send_response(HTTPStatus.FOUND)
-                    self.send_header("Location", viewer_url)
-                    self.end_headers()
-                    return
-                self.send_error(HTTPStatus.NOT_FOUND)
-
-            def do_GET(self) -> None:
-                parsed_path = self.path.split("?", 1)[0]
-                if ViewerStaticAssets.is_viewer_path(parsed_path):
-                    ViewerStaticAssets.write_html_response(self)
-                    return
-                if parsed_path == "/api/manifest":
-                    self.send_response(HTTPStatus.OK)
-                    self.send_header("Content-Type", "application/json; charset=utf-8")
-                    self.send_header("Content-Length", str(len(payload_bytes)))
-                    self.end_headers()
-                    self.wfile.write(payload_bytes)
-                    return
-                if parsed_path == "/api/solution-planners":
-                    self.send_response(HTTPStatus.OK)
-                    self.send_header("Content-Type", "application/json; charset=utf-8")
-                    self.send_header("Content-Length", str(len(planner_payload_bytes)))
-                    self.end_headers()
-                    self.wfile.write(planner_payload_bytes)
-                    return
-                if parsed_path == "/":
-                    self.send_response(HTTPStatus.FOUND)
-                    self.send_header("Location", viewer_url)
-                    self.end_headers()
-                    return
-                self.send_error(HTTPStatus.NOT_FOUND)
-
-            def do_POST(self) -> None:
-                parsed_path = self.path.split("?", 1)[0]
-                if parsed_path != "/api/solution":
-                    self.send_error(HTTPStatus.NOT_FOUND)
-                    return
-                try:
-                    content_length = int(self.headers.get("Content-Length", "0"))
-                    body = self.rfile.read(content_length) if content_length > 0 else b"{}"
-                    request = json.loads(body.decode("utf-8"))
-                    if request.get("instance_id") != task.instance_id:
-                        raise ValueError(f"Unknown instance_id: {request.get('instance_id')!r}")
-                    planner_key = str(request.get("planner_key", cls.mrmp_planner_key(task)))
-                    solutions = payload.get("solutions", [])
-                    response_payload = next(
-                        (
-                            solution
-                            for solution in solutions
-                            if isinstance(solution, dict) and solution.get("planner_key") == planner_key
-                        ),
-                        None,
-                    )
-                    if response_payload is None:
-                        raise ValueError(f"Unknown planner_key or missing saved solution: {planner_key!r}")
-                    status = HTTPStatus.OK
-                except Exception as exc:
-                    response_payload = {"ok": False, "error": str(exc)}
-                    status = HTTPStatus.BAD_REQUEST
-                response = json.dumps(response_payload).encode("utf-8")
-                self.send_response(status)
-                self.send_header("Content-Type", "application/json; charset=utf-8")
-                self.send_header("Content-Length", str(len(response)))
-                self.end_headers()
-                self.wfile.write(response)
-
-        server = ThreadingHTTPServer((host, port), Handler)
-        print(
-            json.dumps(
-                {
-                    "mrmp_output": str(paths["mrmp_json"]),
-                    "trajopt_output": str(paths["trajopt_json"]),
-                    "instance_id": task.instance_id,
-                    "url": f"http://{host}:{port}{viewer_url}",
-                },
-                indent=2,
-            ),
-            flush=True,
-        )
-        try:
-            server.serve_forever()
-        except KeyboardInterrupt:
-            pass
-        finally:
-            server.server_close()
+    @classmethod
+    def serve_manifest(cls, task, payload, host, port):
+        ViewerServer(payload, cls.planner_payload(task),
+                     partial(cls.saved_solution_request, task, payload)).serve(host, port)

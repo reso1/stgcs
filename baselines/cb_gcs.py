@@ -28,9 +28,9 @@ from shapely import constrained_delaunay_triangles
 from shapely.geometry import GeometryCollection, Point as ShapelyPoint, Polygon, box
 from shapely.ops import unary_union
 
-from stgcs.gcs_solver import make_Cartesian_power_hpoly, randomForwardPathSearch
-from stgcs.st_planner import MPQuery
-from stgcs.trajectory import STTrajectory
+from baselines.gcs_utils import make_Cartesian_power_hpoly, randomForwardPathSearch
+from stgcs_native.types import MPQuery
+from stgcs_native.types import STTrajectory
 
 
 @dataclass(frozen=True)

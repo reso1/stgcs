@@ -1,0 +1,3 @@
+add_executable(stgcs_trajopt_test global_trajopt_test.cc)
+target_link_libraries(stgcs_trajopt_test PRIVATE stgcs::stgcs)
+add_test(NAME stgcs_global_trajopt COMMAND stgcs_trajopt_test)

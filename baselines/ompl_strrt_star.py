@@ -9,9 +9,10 @@ from typing import Callable, Dict, List, Optional, Sequence
 import numpy as np
 
 from baselines.common import ShortestPathSolution
-from benchmark.environment.obstacle import ConcatDynamicSphere, DynamicSphere
-from stgcs.interval import Interval
-from stgcs.trajectory import STTrajectory
+from experiments.environment.obstacle import ConcatDynamicSphere, DynamicSphere
+from experiments.environment.collision import collision_geometries, collision_geometries_collide
+from experiments.environment.interval import Interval
+from stgcs_native.types import STTrajectory
 
 
 @dataclass(frozen=True)
@@ -27,6 +28,7 @@ class OfficialOMPLSTRRTStarOptions:
     optimum_approx_factor: Optional[float] = None
     goal_tolerance: float = 1e-7
     return_first_valid: bool = False
+    stay_at_goal: bool = False
 
 
 @dataclass(frozen=True)
@@ -44,7 +46,8 @@ class OfficialOMPLSTRRTStar:
     lower bound.
 
     Static 2D polygonal environment collision checking is performed in the
-    native OMPL motion validator. ``collision_checker`` is reserved for extra
+    native OMPL motion validator. Dynamic obstacles use the same swept
+    hypercube occupancy as ECD. ``collision_checker`` is reserved for extra
     time-dependent constraints, such as fixed-priority reservations.
     """
 
@@ -152,6 +155,7 @@ class OfficialOMPLSTRRTStar:
             ),
             "goal_tolerance": float(options.goal_tolerance),
             "return_first_valid": bool(options.return_first_valid),
+            "stay_at_goal": bool(options.stay_at_goal),
         }
 
     @staticmethod
@@ -194,54 +198,50 @@ class OfficialOMPLSTRRTStar:
         }
 
     @staticmethod
-    def _dynamic_obstacle_collision_checker(env) -> Optional[
+    def _dynamic_obstacle_collision_checker(env, t0: float = 0.0, tmax: float = 1e9) -> Optional[
         Callable[[np.ndarray, np.ndarray, float, float], bool]
     ]:
+        """Check complete segments against moving boxes, including endpoint holds."""
         dynamic_obstacles = tuple(getattr(env, "O_Dynamic", []))
         if not dynamic_obstacles:
             return None
         robot_radius = float(getattr(env, "robot_radius", 0.0))
 
+        obstacle_geometries = []
+        for obstacle in dynamic_obstacles:
+            if isinstance(obstacle, DynamicSphere):
+                pieces = [obstacle]
+            elif isinstance(obstacle, ConcatDynamicSphere):
+                pieces = obstacle.segments
+            else:
+                raise TypeError(f"Unsupported piecewise-linear obstacle: {type(obstacle).__name__}")
+            trajectory = [np.hstack([piece.x0, piece.itvl.start, piece.xt, piece.itvl.end])
+                          for piece in pieces]
+            reserve_start = not isinstance(obstacle, ConcatDynamicSphere) or obstacle.reserve_start
+            reserve_goal = not isinstance(obstacle, ConcatDynamicSphere) or obstacle.reserve_goal
+            obstacle_geometries.append(collision_geometries(
+                trajectory, cc_to_t0=reserve_start and t0 < pieces[0].itvl.start,
+                cc_to_tf=reserve_goal and tmax > pieces[-1].itvl.end, space_dim=int(env.dim),
+                robot_radius=float(obstacle.radius), t0=t0, tmax=tmax,
+                tolerance=0.0, collision_geometry_cache={},
+            ))
+
         def collision_checker(p: np.ndarray, q: np.ndarray, tp: float, tq: float) -> bool:
-            p = np.asarray(p, dtype=float)
-            q = np.asarray(q, dtype=float)
-            tp = float(tp)
-            tq = float(tq)
-            if tp > tq:
-                p, q, tp, tq = q, p, tq, tp
-            for obstacle in dynamic_obstacles:
-                if isinstance(obstacle, DynamicSphere):
-                    start_occ = DynamicSphere(
-                        obstacle.x0,
-                        obstacle.x0,
-                        obstacle.radius,
-                        Interval(0, obstacle.itvl.start),
-                    )
-                    end_occ = DynamicSphere(
-                        obstacle.xt,
-                        obstacle.xt,
-                        obstacle.radius,
-                        Interval(obstacle.itvl.end, 1e9),
-                    )
-                    if (
-                        obstacle.is_colliding_lineseg(p, q, tp, tq, robot_radius)
-                        or start_occ.is_colliding_lineseg(p, q, tp, tq, robot_radius)
-                        or end_occ.is_colliding_lineseg(p, q, tp, tq, robot_radius)
-                    ):
-                        return True
-                elif isinstance(obstacle, ConcatDynamicSphere):
-                    if obstacle.is_colliding_lineseg(p, q, tp, tq, robot_radius):
-                        return True
-                elif obstacle.is_colliding_lineseg(p, q, tp, tq, robot_radius):
-                    return True
-            return False
+            # Use the same swept hypercube geometry as ECD and MRMP conflict checks.
+            robot_geometry = collision_geometries(
+                [np.hstack([p, tp, q, tq])], cc_to_t0=False, cc_to_tf=False,
+                space_dim=int(env.dim), robot_radius=robot_radius, t0=t0, tmax=tmax,
+                tolerance=0.0, collision_geometry_cache={},
+            )
+            return any(collision_geometries_collide(robot_geometry, obstacle)
+                       for obstacle in obstacle_geometries)
 
         return collision_checker
 
-    def _extra_collision_checker(self) -> Optional[
+    def _extra_collision_checker(self, t0: float = 0.0, tmax: float = 1e9) -> Optional[
         Callable[[np.ndarray, np.ndarray, float, float], bool]
     ]:
-        dynamic_checker = self._dynamic_obstacle_collision_checker(self.env)
+        dynamic_checker = self._dynamic_obstacle_collision_checker(self.env, t0, tmax)
         if dynamic_checker is None:
             return self.collision_checker
         if self.collision_checker is None:
@@ -271,6 +271,8 @@ class OfficialOMPLSTRRTStar:
     ) -> OfficialOMPLSTRRTStarRunSnapshots:
         if not math.isfinite(float(options.max_runtime_in_secs)):
             raise ValueError("Official OMPL STRRT* requires a finite runtime limit.")
+        if options.stay_at_goal and options.time_upper_bound is None:
+            raise ValueError("stay_at_goal requires a finite time_upper_bound.")
         if options.time_upper_bound is not None:
             if not math.isfinite(float(options.time_upper_bound)):
                 raise ValueError("Official OMPL STRRT* time upper bound must be finite when provided.")
@@ -280,7 +282,9 @@ class OfficialOMPLSTRRTStar:
         ts = time.perf_counter()
         payload = native.solve_linf_strrt(
             self._environment_payload(self.env),
-            self._extra_collision_checker(),
+            self._extra_collision_checker(
+                t0, options.time_upper_bound if options.time_upper_bound is not None else 1e9,
+            ),
             np.asarray(start_pos, dtype=float),
             np.asarray(goal_pos, dtype=float),
             float(t0),

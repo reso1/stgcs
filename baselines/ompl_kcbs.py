@@ -10,8 +10,8 @@ from typing import Dict, List, Optional, Sequence
 
 import numpy as np
 
-from stgcs.st_planner import MPQuery
-from stgcs.trajectory import STTrajectory
+from stgcs_native.types import MPQuery
+from stgcs_native.types import STTrajectory
 
 
 @dataclass(frozen=True)
